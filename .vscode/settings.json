@@ -1,0 +1,36 @@
+{
+    
+    "java.configuration.updateBuildConfiguration": "interactive",
+
+    
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#111111",
+        "titleBar.border": "#ffffff",
+        "sideBar.background": "#111111",
+        "sideBar.border": "#ffffff",
+        "sideBar.foreground": "#ffffff",
+        "activityBar.background": "#111111",
+        "editor.background": "#1b1b1b",
+        "minimap.background": "#111111",
+    },
+    "editor.tokenColorCustomizations": {
+        "comments": "#6b7986de",
+        "variables": "#41a1c0",
+        "functions": "#a167e6",
+        "strings": "#d66464",
+        "types": "#67bcd5",
+        "keywords": "#dd4a8a",
+        "numbers": "#95d5bf"
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "parameter": "#d6ebfe",
+            "keyword": "#dd4a8a",
+        }
+    },
+
+    "cmake.sourceDirectory": "/Users/samuele/Development/flutter_projects/exercise/linux"
+    
+
+}
