@@ -1,28 +1,43 @@
 <?php
+/**
+  * La classe EPost contiene tutti gli attributi e metodi riguardanti i post. 
+  *  Contiene i seguenti attributi (e i relativi metodi):
+  * - idPost: è un identificativo del post stesso;
+  * - title: titolo del post;
+  * - description: descrizione del post;
+  * - category: categoria del post;
+  * - creation_time: data e ora del post;
+  * - isRemoved: post rimosso o no;
+  * - profile: oggetto EProfile relativo al profilo di colui che ha pubblicato il post;
+  * - images: insieme di immagini del post;
+  * - comments: insieme dei commenti del post;
+  * - likes: insieme dei like del post;
+*/
+
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 
- #[ORM\Entity]
- #[ORM\Table(name: "post")]
+#[ORM\Entity]
+#[ORM\Table(name: "post")]
 
- class EPost{
-
+class EPost{
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private int $idPost;
-
+    private ?int $idPost = null; //l’id può essere null finché Doctrine non lo assegna
+   
     #[ORM\Column(type: "string")]
-    private String $title;
+    private string $title;
 
     #[ORM\Column(type: "text")]
-    private String $description;
+    private string $description;
 
-    #[ORM\Column(type: "integer")]
-    private String $category;
+    #[ORM\Column(type: "string")]
+    private string $category;
 
     #[ORM\Column(type: "datetime")]
     private DateTime $creation_time;
@@ -30,85 +45,153 @@ use Doctrine\Common\Collections\Collection;
     #[ORM\Column(type: "boolean")]
     private bool $isRemoved;
 
-    //#[ORM\Column(type: "EImage")]
-    //private EImage $image;
+    #[ORM\ManyToOne(targetEntity: EProfile::class)]
+    #[ORM\JoinColumn(name: "idProfile", referencedColumnName: "idProfile")]
+    private EProfile $profile;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="EUser", inversedBy="posts")
-     * @ORM\JoinColumn(name="idUser", referencedColumnName="idUser")
-     */
-    //protected EUser $user;
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: EImage::class, cascade: ["persist", "remove"])]
+    private Collection $images;
 
-    /*
-
-    #[ORM\OneToMany(targetEntity: "EComment", mappedBy: "post", cascade: ["persist","remove"])] 
-    private ArrayCollection $comments;
-
-    #[ORM\OneToMany(targetEntity: "ELike", mappedBy: "post", cascade: ["persist","remove"])]
-    private ArrayCollection $likes;
-
-    */
-
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: EComment::class, cascade: ["persist", "remove"])]
+    private Collection $comments;
+   
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: ELike::class, cascade: ["persist", "remove"])]
+    private Collection $likes;
+   
     private static $entity = EPost::class;
 
     /** CONSTRUCTOR */
-    public function __construct($title, $description, $category){
+    public function __construct($title, $description, $category, EProfile $profile){
         $this->title = $title;
         $this->description = $description;
         $this->category = $category;
-        $this->isRemoved = false;
         $this->creation_time = new DateTime("now");
-        //$this->comments = new ArrayCollection();
-        //$this->likes = new ArrayCollection();
+        $this->isRemoved = false;
+        $this->profile = $profile;
+        $this->images = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();   
     }
 
+    
     /** GETTERS */
-    public static function getEntity(): String { return self::$entity; } 
+    public static function getEntity(): string { return self::$entity; }
 
-    public function getTime(): DateTime { return $this->creation_time; }
+    public function getIdPost(): ?int { return $this->idPost; }
 
-    public function getTimeStr(): String { return $this->creation_time->format('Y-m-d H:i:s'); }
+    public function getTitle(): string { return $this->title; }
 
-    public function getId(): int { return $this->idPost; }
+    public function getDescription(): string { return $this->description; }
 
-    //public function getUser(): EUser { return $this->user; }
+    public function getCategory(): string { return $this->category; }
 
-    public function getTitle(): String { return $this->title; }
+    public function getCreationTime(): DateTime { return $this->creation_time; }
 
-    public function getDescription(): String { return $this->description; }
-
-    public function getCategory(): String { return $this->category; }
+    public function getCreationTimeStr(): string { return $this->creation_time->format('Y-m-d H:i:s'); }
 
     public function getIsRemoved(): bool { return $this->isRemoved; }
 
-    //public function getImage(): EImage { return $this->image; }
+    public function getProfile(): EProfile { return $this->profile; }
+
+    public function getImages(): Collection { return $this->images; }
+
+    public function getComments(): Collection { return $this->comments; }
+
+    public function getLikes(): Collection { return $this->likes; }
 
     //public function getComments(): ArrayCollection { return $this->comments; }
-
     //public function getLikes(): ArrayCollection { return $this->likes; }
 
 
     /** SETTERS */    
-    //public function setUser(EUser $user): void { $this->user = $user; }
+    //Doctrine gestisce automaticamente l’id, il metodo setIdPost() non serve e può causare problemi
 
-    public function setTitle(String $title): void { $this->title = $title; }
+    public function setTitle(string $title): void { $this->title = $title; }
 
-    public function setDescription(String $description): void { $this->description = $description; }
+    public function setDescription(string $description): void { $this->description = $description; }
 
-    public function setCategory(String $category): void { $this->category = $category; }
+    public function setCategory(string $category): void { $this->category = $category; }
 
-    //public function setRemove(bool $removed): void { $this->removed = $rremoved; }
+    public function setCreationTime(DateTime $dateTime): void{ $this->creation_time = $dateTime; }
 
-    //public function setImage(EImage $image): void { $this->image = $image; }
+    public function setRemoved(bool $isRemoved): void { $this->isRemoved = $isRemoved; } 
 
-    /*public function addComment(EComment $comment): void { 
-        $this->comment[] = $comment;
-        $comment->setPost($this);
+    public function setProfile(EProfile $profile): void { $this->profile = $profile; }
+
+    public function addImage(EImage $image): void {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setPost($this);
+        }
+    }
+
+    public function addComment(EComment $comment): void {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setPost($this);
+        }
     }
 
     public function addLike(ELike $like): void {
-        $this->likes[] = $like;
-        $like->setPost($this);
-    }*/
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setPost($this);
+        }
+    }
+}
 
- }
+/**public function addImage(EImage $image): void {
+        $imageId = $image->getIdImage(); // Assuming you have a method to get the image ID
+        // Check if the image with the same ID exists in the images array
+        $imageExists = false;
+        foreach ($this->images as $existingImage) {
+            if ($existingImage->getIdImage() === $imageId) {
+                $imageExists = true;
+                break;
+            }
+        }
+        // If the image doesn't exist in the array, add it
+        if (!$imageExists) {
+            $this->images[] = $image;
+            $image->setPost($this);
+        }
+    }  
+    
+    public function addComment(EComment $comment): void {
+        $commentId = $comment->getIdComment(); // Assuming you have a method to get the comment ID
+        // Check if the comment with the same ID exists in the comment array
+        $commentExists = false;
+        foreach ($this->comments as $existingComment) {
+            if ($existingComment->getIdComment() === $commentId) {
+                $commentExists = true;
+                break;
+            }
+        }
+        // If the comment doesn't exist in the array, add it
+        if (!$commentExists) {
+            $this->comments[] = $comment;
+            $comment->setPost($this);
+        }
+    }
+    
+    public function addLike(ELike $like): void {
+        $likeId = $like->getIdLike(); // Assuming you have a method to get the like ID
+        // Check if the like with the same ID exists in the likes array
+        $likeExists = false;
+        foreach ($this->likes as $existingLike) {
+            if ($existingLike->getIdLike() === $likeId) {
+                $likeExists = true;
+                break;
+            }
+        }
+        // If the like doesn't exist in the array, add it
+        if (!$likeExists) {
+            $this->likes[] = $like;
+            $like->setPost($this);
+        }
+    } 
+ */
+
+
+
+    
