@@ -45,8 +45,8 @@ class EPost{
     #[ORM\Column(type: "boolean")]
     private bool $isRemoved;
 
-    #[ORM\ManyToOne(targetEntity: EProfile::class)]
-    #[ORM\JoinColumn(name: "idProfile", referencedColumnName: "idProfile")]
+    #[ORM\ManyToOne(targetEntity: EProfile::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser")]
     private EProfile $profile;
 
     #[ORM\OneToMany(mappedBy: "post", targetEntity: EImage::class, cascade: ["persist", "remove"])]

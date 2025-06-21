@@ -22,65 +22,42 @@ class USession {
     }
 
     /**
-     * Return session status.
-     * 
-     * @return int
+     * @param string Key and value you want to set in the session array
+     * @param mixed
      */
-    public function getStatus(): int {
-        return session_status();
+    public static function set(string $key, mixed $value): void {
+        $_SESSION[$key] = $value;
     }
 
     /**
-     * Get a session variable by its name.
-     * 
-     * @param string $name
-     * @return mixed
+     * @param string Key of the associated value you want to return
+     * @return mixed Value associated to the given key, null if not exist
      */
-    public static function getSessionVariable(string $name): mixed {
-        return $_SESSION[$name] ?? null;
+    public static function get(string $key): mixed {
+        return $_SESSION[$key] ?? null;
     }
 
     /**
-     * Set a session variable.
-     * 
-     * @param string $name
-     * @param mixed $value
+     * @param string Check if a value associated to given key exists
+     * @return bool
      */
-    public static function setSessionVariable(string $name, mixed $value): void {
-        $_SESSION[$name] = $value;
+    public static function has(string $key): bool {
+        return isset($_SESSION[$key]);
     }
 
     /**
-     * Unset a entire session.
+     * @param string Remove the association with the given key
      */
-    public static function unsetSession(): void {
+    public static function remove(string $key): void {
+        unset($_SESSION[$key]);
+    }
+
+    public static function unset(): void {
         session_unset();
     }
 
-    /**
-     * Destroy the session.
-     */
-    public static function destroySession(): void {
+    public static function destroy(): void {
         session_destroy();
-    }
-
-    /**
-     * Unset a specific session variable.
-     */
-    public static function unsetVariable(string $name): void {
-        if (isset($_SESSION[$name])) {
-            unset($_SESSION[$name]);
-        }
-    }
-
-    /**
-     * Check if a specific session variable is set.
-     * 
-     * @param string $name
-     * @return bool
-     */
-    public static function isSet(string $name): bool {
-        return isset($_SESSION[$name]);
     }
 
 }

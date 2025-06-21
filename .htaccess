@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /recipeek/
+
+    # CORS headers per chiamate JS
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    </IfModule>
+
+    # Ignora file esistenti
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Reindirizza tutto a index.php
+    RewriteRule ^ index.php 
+
+    # Redirect HTTPS (opzionale in locale)
+    # RewriteCond %{HTTPS} off
+    # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+

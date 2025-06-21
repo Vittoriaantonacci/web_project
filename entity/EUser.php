@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity]
-#[ORM\Table(name: "user")]
+#[ORM\Table(name: "users")]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "discr", type: "string")] //definisce la colonna che distinguerà tra EUser e EProfile
 #[ORM\DiscriminatorMap(["user" => EUser::class, "profile" => EProfile::class])] //associa i valori della colonna ai nomi delle classi

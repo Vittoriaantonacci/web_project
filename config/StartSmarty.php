@@ -1,14 +1,17 @@
 <?php
-require(__DIR__ . '/../../libs/Smarty/Smarty.class.php');
 
-/*
+use Smarty\Smarty;
+
+require(__DIR__ . '/../smarty/libs/Smarty.class.php');
+
+
 class StartSmarty{
     static function configuration(){
         $smarty=new Smarty();
-        $smarty->template_dir= __DIR__ . '/../../libs/Smarty/templates/';
-        $smarty->compile_dir= __DIR__ . '/../../libs/Smarty/templates_c/';
-        $smarty->config_dir= __DIR__ . '/../../libs/Smarty/configs/';
-        $smarty->cache_dir= __DIR__ . '/../../libs/Smarty/cache/';
+        $smarty->setTemplateDir(__DIR__ . '/../smarty/libs/templates/');
+        $smarty->setCompileDir(__DIR__ . '/../smarty/libs/templates_c/');
+        $smarty->setCacheDir(__DIR__ . '/../smarty/libs/cache/');
+        $smarty->setConfigDir(__DIR__ . '/../smarty/libs/configs/');
         return $smarty;
     }
-}*/
+}

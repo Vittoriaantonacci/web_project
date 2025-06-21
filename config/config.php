@@ -11,7 +11,7 @@ define('DB_PASS', '');
 
 //Web APP parameter for custom app
 define('MAX_VIP', 3);
-define('MAX_POST_EXPLORE', 10);
+define('HOME_POSTS_LIMIT', 10);
 define('MAX_WARNINGS', 3);
 define('MAX_IMAGE_SIZE', 5242880); // 5MB
 define('ALLOWED_IMAGE_TYPE',['image/jpeg', 'image/png', 'image/jpg']);

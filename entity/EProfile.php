@@ -13,14 +13,14 @@
 */
 
 require_once('vendor/autoload.php');
+require_once('EUser.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity]
-
-//#[ORM\Table(name: "profile")] va rimossa per usare l'ereditarietà JOINED
+#[ORM\Table(name: "profile")] 
 
 class EProfile extends EUser{
     

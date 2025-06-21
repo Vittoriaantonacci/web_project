@@ -24,7 +24,7 @@ class EImage{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idImage = null; //l’id può essere null finché Doctrine non lo assegna
+    private int $idImage; 
    
     #[ORM\Column(type: "string")]
     private string $name;
@@ -56,7 +56,7 @@ class EImage{
     /** GETTERS */
     public static function getEntity(): string { return self::$entity; }
 
-    public function getIdImage(): ?int { return $this->idImage; }
+    public function getIdImage(): int { return $this->idImage; }
 
     public function getName(): string { return $this->name; }
 

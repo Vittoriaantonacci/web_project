@@ -37,7 +37,7 @@ class EMealPlan{
     private string $tag;
     
     #[ORM\ManyToOne(targetEntity: EProfile::class)]
-    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idProfile", nullable: false)]
+    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idUser", nullable: false)]
     private EProfile $creator;
    
     #[ORM\Column(type: "datetime")]

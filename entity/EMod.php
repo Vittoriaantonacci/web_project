@@ -6,6 +6,8 @@
  * - permission:
 */
 
+
+/*
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,19 +18,19 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Table(name: "mod")]
 
 class EMod extends EUser{
-    
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
+
     #[ORM\Column(type: "string")]
     protected string $role;
     
     #[ORM\Column(type: "string")]
-    protected 
+    protected string $permission;
 
 
-    public $discr = "moderator";
+    public string $discr = "moderator";
 
     private static string $entity = EMod::class;
 
     public static function getEntity(): string { return self::$entity; }
  }
+
+*/
