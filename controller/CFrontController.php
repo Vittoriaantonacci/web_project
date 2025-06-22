@@ -2,13 +2,13 @@
 
 class CFrontController{
     
-    public function run($requestUrl){
+    public function run(){
         // Parse the request URI
-        // echo $requestUrl;
+        //echo $requestUrl;
         
+        $requestUrl = UServer::getInstance()->getRequestUrl();
         $requestUrl = trim($requestUrl, '/');
         $urlParts = explode('/', $requestUrl);
-
         array_shift($urlParts);
         //var_dump($urlParts);
 
@@ -16,7 +16,7 @@ class CFrontController{
         $controllerName = !empty($urlParts[0]) ? ucfirst($urlParts[0]) : 'User';
         //var_dump($controllerName);
         $methodName = !empty($urlParts[1]) ? $urlParts[1] : 'login';
-
+        //var_dump($methodName);
         // Load the controller class
         $controllerClass = 'C' . $controllerName;
         //var_dump($controllerClass);

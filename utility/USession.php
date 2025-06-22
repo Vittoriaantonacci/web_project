@@ -41,7 +41,7 @@ class USession {
      * @param string Check if a value associated to given key exists
      * @return bool
      */
-    public static function has(string $key): bool {
+    public static function isset(string $key): bool {
         return isset($_SESSION[$key]);
     }
 
@@ -50,6 +50,10 @@ class USession {
      */
     public static function remove(string $key): void {
         unset($_SESSION[$key]);
+    }
+
+    public static function status() {
+        return session_status();
     }
 
     public static function unset(): void {

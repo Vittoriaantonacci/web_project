@@ -23,9 +23,16 @@ class UServer {
     }
 
     /**
-     * Return the request method (GET, POST, etc.)
+     * @return string Return the request method (GET, POST, etc.)
      */
     public static function getRequestMethod(): string {
         return $_SERVER['REQUEST_METHOD'] ?? 'GET';
+    }
+
+    /**
+     * @return string Return the given url request
+     */
+    public static function getRequestUrl(): string {
+        return $_SERVER['REQUEST_URI'] ?? '/recipeek/User/login';
     }
 }

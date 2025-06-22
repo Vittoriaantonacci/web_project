@@ -9,9 +9,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once "foundation/FEntityManager.php";
 
 Installation::install();
-$fc = new CFrontController();
-//$fc->run($_SERVER['REQUEST_URI']);
-$fc->run("localhost/User/homePage");
+(new CFrontController())->run();
+//$fc->run("localhost/User/login");
 
 /*
 $newProfile = new EProfile(

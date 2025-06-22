@@ -29,7 +29,7 @@ class EUser{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    protected ?int $idUser = null;  //La proprietà $idUser è un ID autogenerato da Doctrine e non va inizializzata nel costruttore, generalmente è null fino al salvataggio.
+    protected int $idUser;
 
     #[ORM\Column(type: "string")]
     protected string $name;
@@ -49,7 +49,7 @@ class EUser{
     #[ORM\Column(type: "string")]
     protected string $password;
    
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: "string", unique: true)]
     protected string $username;
 
     private static  $entity = EUser::class;

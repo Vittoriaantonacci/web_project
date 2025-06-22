@@ -81,4 +81,33 @@ class FPersistentManager{
         return $result;
     }
 
+    /**
+     * Method that return an user with given username if exist, otherwise null
+     * @return mixed|null
+     */
+    public static function getUserByUsername($username) {
+        if(FEntityManager::getInstance()->existWithAttribute(EUser::class, "username", $username)) {
+            return FUser::getUserByUsername($username);
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Method that verify if username or email exists in database
+     * @return bool
+     */
+    public static function existUserAndEmail($username, $email){
+        return FEntityManager::getInstance()->existWithAttribute(EUser::class, "username", $username) ||
+                FEntityManager::getInstance()->existWithAttribute(EUser::class, "email", $email);
+    }
+
+    /**
+     * Method that create a new user and save it in db
+     */
+    public static function createUser($name, $surname, $birthDate, $gender, $email, $password, $username){
+        $newUser = new EProfile($name, $surname, (new DateTime($birthDate)), $gender, $email, hash("SHA256", $password), $username);
+        return FEntityManager::getInstance()->saveObj($newUser); 
+    }
+
 }

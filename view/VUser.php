@@ -19,4 +19,11 @@ class VUser{
         $this->smarty->display('home.tpl');
     }
 
+    public function login($error = null, $mode = 'login'){
+        $this->smarty->assign('error', $error);
+        $this->smarty->assign('mode', $mode);
+        $this->smarty->display('login.tpl');
+    }
+
+    public function error(){}
 }

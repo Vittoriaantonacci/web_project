@@ -3,31 +3,21 @@
 class CUser {
 
 
-    /** -------------------- USER CHECK METHODS -------------------- */
+    /** -------------------- USER STATUS METHODS -------------------- */
 
      /**
      * check if the user is logged (using session)
      * @return boolean
      */
     public static function isLogged(){
-        /*
-        $logged = false;
-
-        if(UCookie::isSet('PHPSESSID')){
+        if(UCookie::isset('PHPSESSID')){
             if(session_status() == PHP_SESSION_NONE){
                 USession::getInstance();
             }
         }
-        if(USession::isSetSessionElement('user')){
-            $logged = true;
-            self::isBanned();
-        }
-        if(!$logged){
-            header('Location: /Agora/User/login');
-            exit;
-        }
-        return true;
-        */
+        if(USession::isset('user')){
+            return true;
+        }      
         return true;
     }
 
@@ -53,13 +43,70 @@ class CUser {
 
     /** -------------------- LOGIN & REGISTRATION METHODS -------------------- */
 
-    public static function login() {}
+    // This methos is used to show login page and to handle the session
+    public static function login() {
+        if(UCookie::isSet('PHPSESSID')){
+            if(session_status() == PHP_SESSION_NONE){
+                USession::getInstance();
+            }
+        }
+        if(USession::isset('user')){
+            exit;
+        }
+        $view = new VUser();
+        $view->login();
+    }
 
-    public static function register() {}
+    // This methos is used to register a new user in database when the user fills the registration form
+    // if the user is already registered, it will redirect to the login page with an error message, otherwise it will create the user and redirect to the login page
+    public static function register() {
+        $view = new VUser();
 
-    public static function checkLogin() {}
+        if (!(FPersistentManager::getInstance()->existUserAndEmail(UHTTPMethods::post('username'), UHTTPMethods::post('email')))) {
+            $created = FPersistentManager::getInstance()->createUser(
+                UHTTPMethods::post('name'),
+                UHTTPMethods::post('surname'),
+                UHTTPMethods::post('birthDate'),
+                UHTTPMethods::post('gender'),
+                UHTTPMethods::post('email'),
+                UHTTPMethods::post('password'),
+                UHTTPMethods::post('username')
+            );
+            $created? $view->login() : $view->login("Error in creating new profile, please retry.", "register"); // error in creating user
+            return;
+        }
+        $view->login("Sorry, the username or the email already exists.", "register"); // uername or email already exists
+    }
 
-    public static function logout() {}
+    // this methos is used to check the login credentials of the user when the user submits the login form
+    public static function checkLogin() {
+        $view = new VUser();
+        
+        $user = FPersistentManager::getInstance()->getUserByUsername(UHTTPMethods::post('username'));
+        if($user != null){
+            if(password_verify(UHTTPMethods::post('password'), $user->getPassword())){
+                if($user->isBanned()){
+                    //$view->loginBan();
+                }elseif(USession::status() == PHP_SESSION_NONE){
+                    USession::getInstance();
+                    USession::set('user', $user->getId());
+                    header('Location: /recipeek/User/home');
+                }
+            }
+        }else{
+            $view->login("Sorry, the username or the password is incorrect.");
+        }
+    }
+
+    // this method is used to logout the user, it will remove the session and redirect to the login page
+    public static function logout() {
+        if(USession::isset('user')){
+            USession::remove('user');
+            USession::unset();
+            USession::destroy();
+        }
+        header('Location: /recipeek/User/login');
+    }
 
 
     /** -------------------- LOADING INFO METHODS --------------------  */

@@ -10,11 +10,12 @@
     </IfModule>
 
     # Ignora file esistenti
+    RewriteCond %{REQUEST_URI} !^/public/index\.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
     # Reindirizza tutto a index.php
-    RewriteRule ^ index.php 
+    RewriteRule ^(.*)$ index.php [QSA,L] 
 
     # Redirect HTTPS (opzionale in locale)
     # RewriteCond %{HTTPS} off

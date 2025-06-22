@@ -14,7 +14,7 @@
             <p><strong>Creato il:</strong> {$post[0]->getCreationTimeStr()}</p>
             <p><strong>Autore (profilo ID):</strong> {$post[0]->getProfile()->getIdUser()}</p>
 
-            <p><a href="/Agora/Post/visit/{$post[0]->getIdPost()}">Vai al post</a></p>
+            <p><a href="/recipeek/Post/visit/{$post[0]->getIdPost()}">Vai al post</a></p>
             <hr />
         </div>
     {/foreach}
