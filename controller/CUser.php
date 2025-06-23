@@ -90,7 +90,7 @@ class CUser {
                 }elseif(USession::status() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::set('user', $user->getId());
-                    header('Location: /recipeek/User/home');
+                    header('Location: /recipeek/User/homePage');
                 }
             }
         }else{
@@ -154,8 +154,5 @@ class CUser {
             //header('Location: /Agora/User/profile/' . $visitedUser->getUsername());
         }       
     }
-
-
-
 
 }

@@ -24,8 +24,6 @@ class CFrontController{
         //var_dump($controllerFile);
 
         if (file_exists($controllerFile)) {
-            require_once $controllerFile;
-
             // Check if the method exists in the controller
             if (method_exists($controllerClass, $methodName)) {
                 // Call the method
