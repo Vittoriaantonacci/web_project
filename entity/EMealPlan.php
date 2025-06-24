@@ -25,7 +25,7 @@ class EMealPlan{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idMealPlan = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idMealPlan = null;
    
     #[ORM\Column(type: "string")]
     private string $nameMealPlan;
@@ -47,17 +47,22 @@ class EMealPlan{
     #[ORM\JoinTable(name: "mealplan_recipes", joinColumns: [new ORM\JoinColumn(name: "mealplan_id", referencedColumnName: "idMealPlan")], inverseJoinColumns: [new ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe")])]
     private Collection $recipes;
 
+    #[ORM\OneToMany(mappedBy: "mealPlan", targetEntity: EMeal::class, cascade: ["persist", "remove"], orphanRemoval: true)]
+    private Collection $meals;
+
     private static $entity = EMealPlan::class;
 
-    /** CONSTRUCTOR */
+     /**CONSTRUCTOR */
     public function __construct($nameMealPlan, $description, $tag, EProfile $creator){
-        $this->nameMealPlan = $nameMealPlan; //l'ID viene generato automaticamente da Doctrine, non deve essere passato nel costruttore
+        $this->nameMealPlan = $nameMealPlan;
         $this->description = $description;
         $this->tag = $tag;
         $this->creator = $creator;
         $this->creation_time = new DateTime("now");
         $this->recipes = new ArrayCollection();  
+        $this->meals = new ArrayCollection();
     }
+
 
     /**GETTERS */
     public static function getEntity(): string { return self::$entity; }
@@ -78,10 +83,11 @@ class EMealPlan{
 
     public function getRecipes(): Collection { return $this->recipes; }
 
+    public function getMeals(): Collection { return $this->meals; }
+
 
     /**SETTERS */
-    //il metodo setIdMealPlan non è necessario e può introdurre errori se usato manualmente
-    
+    //Doctrine gestisce automaticamente l’id, il metodo setIdMealPlan() non serve e può causare problemi
     public function setNameMealPlan(string $nameMealPlan): void { $this->nameMealPlan = $nameMealPlan; }
 
     public function setDescription(string $description): void { $this->description = $description; }
@@ -92,36 +98,33 @@ class EMealPlan{
 
     public function setCreationTime(DateTime $dateTime): void { $this->creation_time = $dateTime; }
 
-    
     //Add a recipe, checking if it's not already present
     public function addRecipe(ERecipe $recipe): void {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes->add($recipe);
         }
     }
-    //Optionally, remove a recipe
+
+    //Remove a recipe
     public function removeRecipe(ERecipe $recipe): void {
         if ($this->recipes->contains($recipe)) {
             $this->recipes->removeElement($recipe);
         }
     }
-}
 
-/*
-public function addRecipe(ERecipe $recipe): void {
-        $recipeId = $recipe->getIdRecipe(); // Assuming you have a method to get the recipe ID
-        // Check if the recipe with the same ID exists in the recipe array
-        $recipeExists = false;
-        foreach ($this->recipes as $existingRecipe) {
-            if ($existingRecipe->getIdRecipe() === $recipeId) {
-                $recipeExists = true;
-                break;
-            }
+    //Add a meal, checking if it's not already present
+    public function addMeal(EMeal $meal): void {
+        if (!$this->meals->contains($meal)) {
+            $this->meals->add($meal);
+            $meal->setMealPlan($this);
         }
-        // If the recipe doesn't exist in the array, add it
-        if (!$recipeExists) {
-            $this->recipes[] = $recipe;
-            $recipe->setMealPlan($this);
+    }
+
+    //Remove a meal
+    public function removeMeal(EMeal $meal): void {
+        if ($this->meals->contains($meal)) {
+            $this->meals->removeElement($meal);
+            $meal->setMealPlan(null);
         }
-    }  
-*/
+    }
+}

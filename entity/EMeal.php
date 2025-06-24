@@ -8,6 +8,7 @@
   * - type: è il tipo di patto;
   * - recipe: è la ricetta del piatto;
   * - servings: nel piatto c'è la lista delle porzioni;
+  * - mealPlan: riferimento al piano alimentare a cui appartiene il pasto;
 */
 
 require_once('vendor/autoload.php');
@@ -38,10 +39,14 @@ class EMeal{
     
     #[ORM\ManyToOne(targetEntity: ERecipe::class, inversedBy: "ingredients")]
     #[ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe", nullable: false)]
-    private ?ERecipe $recipe = null; //il tipo dovrebbe essere nullable per poter inizializzare l’oggetto senza assegnargli subito una ricetta
+    private ?ERecipe $recipe = null;
   
     #[ORM\OneToMany(mappedBy: "meal", targetEntity: EServing::class, cascade: ["persist", "remove"], orphanRemoval: true)]
     private Collection $servings;
+
+    #[ORM\ManyToOne(targetEntity: EMealPlan::class, inversedBy: "meals")]
+    #[ORM\JoinColumn(name: "mealplan_id", referencedColumnName: "idMealPlan", nullable: true)]
+    private ?EMealPlan $mealPlan = null;
 
     private static $entity = EMeal::class;
 
@@ -68,6 +73,8 @@ class EMeal{
 
     public function getServings(): Collection { return $this->servings; }
 
+    public function getMealPlan(): ?EMealPlan { return $this->mealPlan; }
+
 
     /**SETTERS */
     //Doctrine gestisce automaticamente l’id, il metodo setIdMeal() non serve e può causare problemi
@@ -79,6 +86,8 @@ class EMeal{
     public function setType(string $type): void { $this->type = $type; }
 
     public function setRecipe(ERecipe $recipe): void { $this->recipe = $recipe; }
+
+    public function setMealPlan(?EMealPlan $mealPlan): void { $this->mealPlan = $mealPlan; }
 
     //metodo per aggiungere una porzione
     public function addServing(EServing $serving): void {
