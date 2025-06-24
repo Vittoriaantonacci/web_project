@@ -15,38 +15,6 @@ Installation::install();
 //var_dump($banana);
 //$fc->run("localhost/User/login");
 
-/*
-$newProfile = new EProfile(
-    name: "giovanih",
-    surname: "nsssstant",
-    birth_date: (new DateTime()),
-    gender: "fefe",
-    email: "djjieojioejmil@email.com",
-    password: hash("sha256", "fro1234"),
-    username: "giovanniiiih"
-);
-$newProfile->setNickname("giovanniih");
-
-$newPost = new EPost(
-    title: "eeehgia",
-    description: "dsciptifefeon",
-    category: "catfgry",
-    profile: $newProfile,
-);
-
-
-$entityManager = getEntityManager();
-
-
-$entityManager->persist($newPost);
-$entityManager->flush();
-
-
-$pc = new CUser();
-$pc->follow(2);
-
-*/
-
 
 echo "dai samuuuuuuuuu";
 

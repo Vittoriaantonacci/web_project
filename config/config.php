@@ -28,7 +28,7 @@ define('CLIENT_SECRET', '37fc59391801422e86757ddfdb5e33c4');
 
 
 // Stripe API
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 \Stripe\Stripe::setApiKey('sk_test_TUA_CHIAVE_SEGRETA'); // Cambia con la tua chiave segreta Stripe
 define('STRIPE_PUBLIC_KEY', 'pk_test_TUA_CHIAVE_PUBBLICA'); // Chiave pubblica per JS

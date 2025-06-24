@@ -7,6 +7,6 @@
 
 class FUser {
     public static function getUserByUsername($username){
-        return FEntityManager::getInstance()->getObjByValue(EUser::getEntity(), 'username', $username);
+        return FEntityManager::getInstance()->getObjByValue(EProfile::getEntity(), 'username', $username);
     }
 }
