@@ -16,7 +16,7 @@ class VUser{
         $this->smarty->assign('posts',$postInHome);
         //$this->smarty->assign('arrVip', $arrayVipUserPropicFollowNumb);
         
-        $this->smarty->display('home.tpl');
+        $this->smarty->display('homePage.tpl');
     }
 
     public function login($error = null, $mode = 'login'){

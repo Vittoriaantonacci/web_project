@@ -9,10 +9,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once "foundation/FEntityManager.php";
 
 Installation::install();
-//(new CFrontController())->run();
+(new CFrontController())->run();
 
-$banana = UApiClient::getInstance()->searchFood("banana");
-var_dump($banana);
+//$banana = UApiClient::getInstance()->searchFood("banana");
+//var_dump($banana);
 //$fc->run("localhost/User/login");
 
 /*

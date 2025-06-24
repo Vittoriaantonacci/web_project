@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-06-21 18:15:13
+/* Smarty version 5.5.1, created on 2025-06-24 00:25:34
   from 'file:home.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_6856da91ea5408_29427733',
+  'unifunc' => 'content_6859d45ecfbcf7_10065652',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '487d5a53c77086bcfd895926b69b0bfeff039cc4' => 
     array (
       0 => 'home.tpl',
-      1 => 1750522510,
+      1 => 1750526927,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6856da91ea5408_29427733 (\Smarty\Template $_smarty_tpl) {
+function content_6859d45ecfbcf7_10065652 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 ?><!DOCTYPE html>
 <html>
@@ -48,7 +48,7 @@ $foreach0DoElse = false;
             <p><strong>Autore (profilo ID):</strong> <?php echo $_smarty_tpl->getValue('post')[0]->getProfile()->getIdUser();?>
 </p>
 
-            <p><a href="/Agora/Post/visit/<?php echo $_smarty_tpl->getValue('post')[0]->getIdPost();?>
+            <p><a href="/recipeek/Post/visit/<?php echo $_smarty_tpl->getValue('post')[0]->getIdPost();?>
 ">Vai al post</a></p>
             <hr />
         </div>

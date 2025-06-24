@@ -34,9 +34,9 @@ class EImage{
     
     #[ORM\Column(type: "string")]
     private string $type;
-    
-    #[ORM\Column(type: "blob")]
-    private string $imageData;
+
+    #[ORM\Column(type: "string")]
+    private string $imagePath;
 
     #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "images")]
     #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost", nullable: false)]
@@ -45,11 +45,11 @@ class EImage{
     private static $entity = EImage::class;
 
     /** CONSTRUCTOR */
-    public function __construct($name, $size, $type, $imageData, EPost $post){
+    public function __construct($name, $size, $type, $imagePath, EPost $post){
         $this->name = $name;
         $this->size = $size;
         $this->type = $type;
-        $this->imageData = $imageData;
+        $this->imagePath = $imagePath;
         $this->post = $post;
     }
 
@@ -64,9 +64,7 @@ class EImage{
 
     public function getType(): string { return $this->type; }
 
-    public function getImageData() { return $this->imageData; }
-
-    public function getEncodedData(): string { return base64_encode($this->imageData); }
+    public function getImagePath(): string { return $this->imagePath; }
 
     public function getPost(): EPost { return $this->post; }
 
@@ -80,7 +78,7 @@ class EImage{
 
     public function setType(string $type): void { $this->type = $type; }
 
-    public function setImageData(string $data): void { $this->imageData = $data; }
+    public function setImagePath(string $path): void { $this->imagePath = $path; }
 
     public function setPost(EPost $post): void { $this->post = $post; }
 }

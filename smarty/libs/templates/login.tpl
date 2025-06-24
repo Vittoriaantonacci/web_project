@@ -1,136 +1,147 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Login / Registrazione</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 2rem; background-color: #f9f9f9; }
-        .form-container { 
-            width: 300px; 
-            height: 600px; 
-            margin: auto; 
-            background: white; 
-            padding: 2rem; 
-            border-radius: 10px; 
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
-            position: relative;
-            overflow: hidden;
-        }
-        h2 { text-align: center; margin-bottom: 1rem; }
-        input[type="text"], input[type="password"], input[type="email"] {
-            width: 100%; padding: 0.5rem; margin: 0.5rem 0 1rem; border: 1px solid #ccc; border-radius: 5px;
-        }
-        button {
-            width: 100%; padding: 0.7rem; background-color: #4CAF50; color: white; border: none; border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .switch-buttons {
-            width: 200px;
-            margin: 0 auto 2rem;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 2px solid #ccc;
-        }
-        .switch-buttons button {
-            background: none;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-            padding: 0.5rem 0;
-            cursor: pointer;
-            color: #555;
-            width: 100px;
-            transition: color 0.3s ease;
-        }
-        .switch-buttons button.active {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-        #btn-log {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background-color: #4CAF50;
-            transition: left 0.3s ease;
-        }
-        form {
-            position: absolute;
-            width: 90%;
-            top: 80px;
-            left: 0;
-            transition: left 0.4s ease;
-        }
-        #register {
-            left: 400px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accedi o Registrati</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-toggle-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: auto;
+    }
+
+    .form-panel {
+      width: 200%;
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .form-box {
+      width: 50%;
+      padding: 2rem;
+    }
+
+    .toggle-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .toggle-buttons button {
+      margin: 0 1rem;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-light">
 
-    <div class="form-container">
-        <div class="switch-buttons">
-            <button id="btn-login" class="active" onclick="login()">Log In</button>
-            <button id="btn-register" onclick="register()">Register</button>
-            <div id="btn-log"></div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <!-- Toggle buttons -->
+          <div class="toggle-buttons">
+            <button class="btn btn-outline-primary" onclick="showLogin()">Login</button>
+            <button class="btn btn-outline-success" onclick="showRegister()">Registrazione</button>
+          </div>
+
+          <!-- Form Wrapper -->
+          <div class="form-toggle-wrapper">
+            <div class="form-panel" id="formPanel">
+
+              <!-- Login Form -->
+              <div class="form-box" id="loginForm">
+                <h3 class="text-center mb-4">Accedi</h3>
+                {if $mode eq 'login' && $error}
+                  <div class="alert alert-danger">{$error}</div>
+                {/if}
+                <form method="post" action="/recipeek/User/login">
+                  <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Accedi</button>
+                </form>
+              </div>
+
+              <!-- Register Form -->
+              <div class="form-box" id="registerForm">
+                <h3 class="text-center mb-4">Registrati</h3>
+                {if $mode eq 'register' && $error}
+                  <div class="alert alert-danger">{$error}</div>
+                {/if}
+                <form method="post" action="/recipeek/User/register">
+                  <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" name="name" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Cognome</label>
+                    <input type="text" name="surname" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Data di nascita</label>
+                    <input type="date" name="birthDate" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Genere</label>
+                    <input type="text" name="gender" class="form-control" required>
+                  </div>
+                  <button type="submit" class="btn btn-success w-100">Registrati</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+
         </div>
-        {if $mode eq 'register'}
-        <script>
-            window.addEventListener("load", () => {
-                register(); // forza la vista sul form di registrazione
-            });
-        </script>
-        {/if}
-
-        <form id="login" method="post" action="/recipeek/User/checkLogin">
-            <h2>Login</h2>
-            <input type="text" name="username" placeholder="Username" required />
-            <input type="password" name="password" placeholder="Password" required />
-            <button type="submit">Accedi</button>
-        </form>
-
-        <form id="register" method="post" action="/recipeek/User/register">
-            <h2>Registrati</h2>
-            <input type="text" name="name" placeholder="Nome" required />
-            <input type="text" name="surname" placeholder="Cognome" required />
-            <input type="text" name="username" placeholder="Username" required />
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password" required />
-            <input type="date" name="birthDate" placeholder="Data di nascita" required />
-            <input type="text" name="gender" placeholder="Genere" required />
-            <button type="submit">Registrati</button>
-        </form>
-        
+      </div>
     </div>
-        {if isset($error)}
-            <p style="color: red; text-align: center;">{$error}</p>
-        {/if}
-    <script> 
-    const x = document.getElementById("login");
-    const y = document.getElementById("register");
-    const z = document.getElementById("btn-log");
-    const btnLogin = document.getElementById("btn-login");
-    const btnRegister = document.getElementById("btn-register");
+  </div>
+</div>
 
-    function register(){
-      x.style.left = "-400px";
-      y.style.left = "0px";
-      z.style.left = "100px";
-      btnRegister.classList.add("active");
-      btnLogin.classList.remove("active");
-    }
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    function login(){
-      x.style.left = "0px";
-      y.style.left = "400px";
-      z.style.left = "0px";
-      btnLogin.classList.add("active");
-      btnRegister.classList.remove("active");
-    }
-    </script>
+<!-- Form switch logic -->
+<script>
+  function showLogin() {
+    document.getElementById('formPanel').style.transform = 'translateX(0%)';
+  }
+
+  function showRegister() {
+    document.getElementById('formPanel').style.transform = 'translateX(-50%)';
+  }
+
+  // Se Smarty imposta il mode, attiva il pannello giusto
+  {if $mode eq 'register'}
+  window.addEventListener("load", () => {
+    showRegister();
+  });
+  {/if}
+</script>
 
 </body>
 </html>
