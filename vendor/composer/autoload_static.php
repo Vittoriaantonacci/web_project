@@ -39,6 +39,7 @@ class ComposerStaticInit3679967abbb7c8986588f0df80ec66c3
             'Symfony\\Component\\HttpFoundation\\' => 33,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Cache\\' => 24,
+            'Stripe\\' => 7,
         ),
         'R' => 
         array (
@@ -146,6 +147,10 @@ class ComposerStaticInit3679967abbb7c8986588f0df80ec66c3
         'Symfony\\Component\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/cache',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'React\\Stream\\' => 
         array (

@@ -5,7 +5,8 @@
     "symfony/cache": "^6.4.21",
     "doctrine/annotations": "^2.0.2",
     "doctrine/collections": "^2.3.0",
-    "cboden/ratchet": "^0.4.4"
+    "cboden/ratchet": "^0.4.4",
+    "stripe/stripe-php": "^17.3"
   },
   "config": {
     "platform": {
