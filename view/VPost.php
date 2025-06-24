@@ -1,11 +1,11 @@
 <?php
 
-class VPost{
+/*class VPost{
     
     /**
     * @var Smarty
     */
-    private $smarty;
+    /*private $smarty;
 
     public function __construct(){
  
@@ -19,4 +19,18 @@ class VPost{
         $this->smarty->display('prova.tpl');
     }
 
+}*/
+
+
+class VPost {
+    private $smarty;
+
+    public function __construct() {
+        $this->smarty = StartSmarty::configuration();
+    }
+
+    public function show(EPost $post) {
+        $this->smarty->assign('post', $post);
+        $this->smarty->display('post_info.tpl');  // usa il template che hai creato
+    }
 }
