@@ -11,6 +11,9 @@ require_once "foundation/FEntityManager.php";
 Installation::install();
 (new CFrontController())->run();
 
+//include_once "placeholder.php";
+//populateDatabase();
+
 //$banana = UApiClient::getInstance()->searchFood("banana");
 //var_dump($banana);
 //$fc->run("localhost/User/login");

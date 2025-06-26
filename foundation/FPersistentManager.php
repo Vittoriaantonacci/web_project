@@ -22,7 +22,7 @@ class FPersistentManager{
 
     /**  -------------------- CRUD METHODS  -------------------- */
 
-    private static function create($obj) {
+    public static function create($obj) {
         return FEntityManager::getInstance()->saveObj($obj);
     }
 
@@ -106,8 +106,12 @@ class FPersistentManager{
      * Method that create a new user and save it in db
      */
     public static function createUser($name, $surname, $birthDate, $gender, $email, $password, $username){
-        $newUser = new EProfile($name, $surname, (new DateTime($birthDate)), $gender, $email, hash("SHA256", $password), $username);
+        $newUser = new EProfile($name, $surname, (new DateTime($birthDate)), $gender, $email, $password, $username);
         return FEntityManager::getInstance()->saveObj($newUser); 
+    }
+
+    public static function getPostById($id) {
+        return FPost::getPostById($id);
     }
 
 }

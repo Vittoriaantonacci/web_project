@@ -18,7 +18,7 @@ class CUser {
         if(USession::isset('user')){
             return true;
         }      
-        return true;
+        return false;
     }
 
     /**
@@ -45,13 +45,15 @@ class CUser {
 
     // This methos is used to show login page and to handle the session
     public static function login() {
-        if(UCookie::isSet('PHPSESSID')){
+        if(USession::isset('user')){
+            // If the user is already logged in, redirect to the home page
+            header('Location: /recipeek/User/homePage');
+            exit;
+        }
+        if(UCookie::isset('PHPSESSID')){
             if(session_status() == PHP_SESSION_NONE){
                 USession::getInstance();
             }
-        }
-        if(USession::isset('user')){
-            exit;
         }
         $view = new VUser();
         $view->login();
@@ -80,26 +82,39 @@ class CUser {
 
     // this methos is used to check the login credentials of the user when the user submits the login form
     public static function checkLogin() {
-        $view = new VUser();
+        try {
+            $view = new VUser();
+            
+            $user = FPersistentManager::getInstance()->getUserByUsername(UHTTPMethods::post('username'));
         
-        $user = FPersistentManager::getInstance()->getUserByUsername(UHTTPMethods::post('username'));
-        if($user != null){
-            if(password_verify(UHTTPMethods::post('password'), $user->getPassword())){
-                if($user->isBanned()){
-                    //$view->loginBan();
-                }elseif(USession::status() == PHP_SESSION_NONE){
-                    USession::getInstance();
-                    USession::set('user', $user->getId());
-                    header('Location: /recipeek/User/homePage');
+            if ($user !== null) {
+                if (password_verify(UHTTPMethods::post('password'), $user->getPassword())) {
+                    if ($user->getIsBanned()) {
+                        $view->login("Account banned.");
+                    } else {
+                        if (USession::status() == PHP_SESSION_NONE) {
+                            USession::getInstance();
+                        }
+                        USession::set('user', $user->getIdUser());
+                        header('Location: /recipeek/User/homePage');
+                        exit;
+                    }
+                } else {
+                    $view->login("Password errata.");
                 }
+            } else {
+                $view->login("Username errato.");
             }
-        }else{
-            $view->login("Sorry, the username or the password is incorrect.");
+        
+        } catch (\Throwable $e) {
+            echo "<pre>ERRORE: " . $e->getMessage() . "</pre>";
+            // oppure loggalo su un file
         }
-    }
+    } 
 
     // this method is used to logout the user, it will remove the session and redirect to the login page
     public static function logout() {
+        USession::getInstance();
         if(USession::isset('user')){
             USession::remove('user');
             USession::unset();
@@ -129,31 +144,12 @@ class CUser {
             //$view->home($userAndPropic, $postInHome,$arrayVipUserPropicFollowNumb);
 
             $view->home($postInHome);
-        }
-    }
-
-    public static function profile(string $username) {
-        if (!self::isLogged()) {
+        }else{
             header('Location: /recipeek/User/login');
             exit;
         }
-    
-        $view = new VUser();
-    
-        // Recupera l'utente dal database tramite username
-        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
-    
-        // Se l'utente non esiste, mostra una pagina di errore
-        if ($profile === null) {
-            $view->error(); // oppure: echo "Profilo non trovato";
-            return;
-        }
-    
-        // Mostra il profilo nella view
-        $view->showProfile($profile);
     }
-
-
+    
     /** -------------------- MODIFY INFO METHODS --------------------  */
 
     /**
@@ -197,11 +193,6 @@ class CUser {
         $view->showProfile($profile);
     }*/
     
-    
-
-
-
-
 
     public static function profile() {
         if (!self::isLogged()) {
@@ -218,7 +209,7 @@ class CUser {
             new DateTime('1990-05-15'), // birth_date
             'M',                        // gender
             'mario.rossi@email.com',    // email
-            password_hash('password123', PASSWORD_DEFAULT), // password (hashed)
+            'password123', // password (hashed)
             'mariorossi'                // username / nickname
         );
     

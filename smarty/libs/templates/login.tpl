@@ -61,7 +61,7 @@
                 {if $mode eq 'login' && $error}
                   <div class="alert alert-danger">{$error}</div>
                 {/if}
-                <form method="post" action="/recipeek/User/login">
+                <form method="post" action="/recipeek/User/checkLogin">
                   <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input type="text" name="username" class="form-control" required>

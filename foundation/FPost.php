@@ -32,5 +32,9 @@ class FPost {
     public static function getPostByTitle(string $title){
         return FEntityManager::getInstance()->getObjListByStrPattern(EPost::getEntity(), 'title', $title);
     }
+
+    public static function getPostById(int $id){
+        return FEntityManager::getInstance()->getObjById(EPost::getEntity(), $id);
+    }
     
 }

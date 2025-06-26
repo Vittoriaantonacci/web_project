@@ -11,7 +11,7 @@ class CMealPlan {
     }
 
     // Mostra form con prodotti e ricette da selezionare
-    public function showCreateForm(array $error = null): void {
+    public function showCreateForm(?array $error): void {
         // Carica dati per select
         $products = $this->entityManager->getRepository(EImage::class)  // supponendo che i prodotti siano immagini o altra entità
             ->findAll();

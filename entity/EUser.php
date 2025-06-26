@@ -49,7 +49,7 @@ class EUser{
     #[ORM\Column(type: "string")]
     protected string $password;
    
-    #[ORM\Column(type: "string", unique: true)]
+    #[ORM\Column(type: "string")]
     protected string $username;
 
     private static  $entity = EUser::class;
@@ -88,8 +88,6 @@ class EUser{
 
 
     /**SETTERS */
-    //Doctrine gestisce automaticamente l’id, il metodo setIdUser() non serve e può causare problemi
-
     public function setName(string $name): void { $this->name = $name; }
 
     public function setSurname(string $surname): void { $this->surname = $surname; }

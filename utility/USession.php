@@ -57,10 +57,14 @@ class USession {
     }
 
     public static function unset(): void {
+        $_SESSION = []; 
         session_unset();
     }
 
     public static function destroy(): void {
+        if (ini_get("session.use_cookies")) {
+            UCookie::deleteSessionParams(session_name());
+        }
         session_destroy();
     }
 

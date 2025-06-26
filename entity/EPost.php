@@ -61,13 +61,12 @@ class EPost{
     private static $entity = EPost::class;
 
     /** CONSTRUCTOR */
-    public function __construct($title, $description, $category, EProfile $profile){
+    public function __construct($title, $description, $category){
         $this->title = $title;
         $this->description = $description;
         $this->category = $category;
         $this->creation_time = new DateTime("now");
         $this->isRemoved = false;
-        $this->profile = $profile;
         $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();   

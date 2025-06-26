@@ -28,7 +28,12 @@ class UCookie {
      * @param string The name of the cookie to delete.
      */
     public static function delete(string $name): void {
-        setcookie($name, '', time() - 3600, "/");
+        setcookie($name, '', time() - 42000, "/");
+    }
+
+    public static function deleteSessionParams(string $name) {
+        $cookieParams = session_get_cookie_params();
+        setcookie($name, '', time() - 42000, $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
     }
 
     /**

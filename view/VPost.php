@@ -31,6 +31,6 @@ class VPost {
 
     public function show(EPost $post) {
         $this->smarty->assign('post', $post);
-        $this->smarty->display('post_info.tpl');  // usa il template che hai creato
+        $this->smarty->display('post_info.tpl');  
     }
 }

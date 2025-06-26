@@ -16,7 +16,7 @@ use Doctrine\ORM\ORMSetup;
 function getEntityManager(): EntityManager {
 
     $paths = array(__DIR__ . "/entity");
-    $config = ORMSetup::createAttributeMetadataConfiguration($paths, true, __DIR__ . "/../var/proxies");
+    $config = ORMSetup::createAttributeMetadataConfiguration($paths, true, realpath(__DIR__ . '/var/proxies'));
     $config->setAutoGenerateProxyClasses(true);
 
     # Setting configuration params for doctrine (^php7.0-sqlite)

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-06-24 00:06:36
+/* Smarty version 5.5.1, created on 2025-06-25 11:25:27
   from 'file:login.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_6859cfec4a0a51_68135993',
+  'unifunc' => 'content_685bc0876f71e2_38279288',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8ac68559fa4878591241a4c01ed322b6238dcebb' => 
     array (
       0 => 'login.tpl',
-      1 => 1750716393,
+      1 => 1750843521,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6859cfec4a0a51_68135993 (\Smarty\Template $_smarty_tpl) {
+function content_685bc0876f71e2_38279288 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 ?><!DOCTYPE html>
 <html lang="it">
@@ -86,7 +86,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
                   <div class="alert alert-danger"><?php echo $_smarty_tpl->getValue('error');?>
 </div>
                 <?php }?>
-                <form method="post" action="/recipeek/User/login">
+                <form method="post" action="/recipeek/User/checkLogin">
                   <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input type="text" name="username" class="form-control" required>
@@ -110,6 +110,10 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
                   <div class="mb-3">
                     <label class="form-label">Nome</label>
                     <input type="text" name="name" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Cognome</label>
+                    <input type="text" name="surname" class="form-control" required>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Username</label>

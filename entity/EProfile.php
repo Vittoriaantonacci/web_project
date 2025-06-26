@@ -24,7 +24,7 @@ use Doctrine\Common\Collections\Collection;
 
 class EProfile extends EUser{
     
-    #[ORM\Column(type: "string", unique: true)]
+    #[ORM\Column(type: "string")]
     protected string $nickname;
    
     #[ORM\OneToOne(targetEntity: EImage::class, cascade: ['persist', 'remove'])]
@@ -38,6 +38,7 @@ class EProfile extends EUser{
     protected string $info;
    
     #[ORM\OneToMany(mappedBy: "profile", targetEntity: EPost::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost", nullable: true)]
     protected Collection $posts;
 
     #[ORM\Column(type: "boolean")]
@@ -46,8 +47,17 @@ class EProfile extends EUser{
     #[ORM\Column(type: "boolean")]
     protected bool $isBanned;
 
-    #[ORM\OneToMany(mappedBy: "creator", targetEntity: EMealPlan::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: EMealPlan::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idMealPlan", referencedColumnName: "idMealPlan", nullable: true)]
     protected Collection $meal_plans;
+
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: EComment::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idComment", referencedColumnName: "idComment", nullable: true)]
+    protected Collection $comment;
+
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: ELike::class, cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idLike", referencedColumnName: "idLike", nullable: true)]
+    protected Collection $likes;
 
     private static $entity = EProfile::class;
 
@@ -59,6 +69,8 @@ class EProfile extends EUser{
         $this->info = '';
         $this->posts = new ArrayCollection();
         $this->meal_plans = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+        $this->likes = new ArrayCollection();
         $this->vip = false;
         $this->isBanned = false;
     }
@@ -120,6 +132,22 @@ class EProfile extends EUser{
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
             $post->setProfile($this); 
+        }
+    }
+
+    //metodo aggiuntivo per aggiungere un commento al profilo
+    public function addComment(EComment $comment): void {
+        if (!$this->comment->contains($comment)) {
+            $this->comment->add($comment);
+            $comment->setProfile($this); 
+        }
+    }
+
+    //metodo aggiuntivo per aggiungere un like al profilo
+    public function addLike(ELike $like): void {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setUser($this);
         }
     }
 }

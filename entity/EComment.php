@@ -33,11 +33,11 @@ class EComment{
     #[ORM\Column(type: "boolean")]
     private bool $isRemoved;
    
-    #[ORM\ManyToOne(targetEntity: EUser::class)]
+    #[ORM\ManyToOne(targetEntity: EUser::class, inversedBy: "comment", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser")]
     private EUser $user;
     
-    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "comments")]
+    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "comments", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost")]
     private EPost $post;
     
@@ -50,11 +50,9 @@ class EComment{
     private static $entity = EComment::class;
 
     /** CONSTRUCTOR */
-    public function __construct($body, EUser $user, EPost $post)
+    public function __construct($body)
     {
         $this->body = $body;
-        $this->user = $user;
-        $this->post = $post;
         $this->creation_time = new DateTime("now");
         $this->isRemoved = false;
         $this->isPinned = false;
@@ -90,7 +88,7 @@ class EComment{
     
     public function setRemoved(bool $isRemoved): void { $this->isRemoved = $isRemoved; }
 
-    public function setUser(EUser $user): void { $this->user = $user; }
+    public function setProfile(EProfile $user): void { $this->user = $user; }
 
     public function setPost(EPost $post): void { $this->post = $post; }
 
