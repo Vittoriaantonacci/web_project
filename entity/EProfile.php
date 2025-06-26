@@ -10,7 +10,8 @@
   * - vip: abbonamento si o no, quindi un utente può essere vip o meno;
   * - isBanned: si o no;
   * - meal_plans: nel profilo c'è la lista dei piani alimentari (pasti);
-*/
+  * - favorites: lista di ricette favorite.
+  */
 
 require_once('vendor/autoload.php');
 require_once('EUser.php');
@@ -21,8 +22,7 @@ use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "profile")] 
-
-class EProfile extends EUser{
+class EProfile extends EUser {
     
     #[ORM\Column(type: "string")]
     protected string $nickname;
@@ -58,11 +58,18 @@ class EProfile extends EUser{
     #[ORM\OneToMany(mappedBy: "user", targetEntity: ELike::class, cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idLike", referencedColumnName: "idLike", nullable: true)]
     protected Collection $likes;
+    
+    #[ORM\ManyToMany(targetEntity: ERecipe::class)]
+    #[ORM\JoinTable(name: "profile_favorites",
+        joinColumns: [new ORM\JoinColumn(name: "profile_id", referencedColumnName: "id")],
+        inverseJoinColumns: [new ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe")]
+    )]
+    protected Collection $favorites;
 
     private static $entity = EProfile::class;
 
     /** CONSTRUCTOR */
-    public function __construct($name,$surname, $birth_date, $gender, $email, $password, $username) {
+    public function __construct($name, $surname, $birth_date, $gender, $email, $password, $username) {
         parent::__construct($name, $surname, $birth_date, $gender, $email, $password, $username);
         $this->nickname = '';
         $this->biography = '';
@@ -71,6 +78,7 @@ class EProfile extends EUser{
         $this->meal_plans = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
         $this->vip = false;
         $this->isBanned = false;
     }
@@ -94,15 +102,17 @@ class EProfile extends EUser{
 
     public function getMealPlans(): Collection { return $this->meal_plans; }
 
+    public function getFavorites(): Collection { return $this->favorites; }
 
-    /**SETTERS */
+
+    /** SETTERS */
     public function setNickname(string $nickname): void { $this->nickname = $nickname; }
 
     public function setProPic(?EImage $pro_pic): void { $this->pro_pic = $pro_pic; }
 
     public function setBiography(string $biography): void { $this->biography = $biography; }
 
-    public function setInfo(string $info):void { $this->info = $info; }
+    public function setInfo(string $info): void { $this->info = $info; }
 
     //public function setPost(EPost $posts): void { $this->posts = $posts; }
 
@@ -110,6 +120,7 @@ class EProfile extends EUser{
 
     public function setVip(bool $vip): void { $this->vip = $vip; }
 
+    //Method to add a meal plan to the profile
     public function addMealPlan(EMealPlan $meal_plan): void {
         $mealPlanId = $meal_plan->getIdMealPlan(); // Assuming you have a method to get the meal plan ID
         // Check if the meal plan with the same ID exists in the meal plans array
@@ -120,15 +131,15 @@ class EProfile extends EUser{
                 break;
             }
         }
-        // If the image doesn't exist in the array, add it
+        // If the meal plan doesn't exist in the collection, add it
         if (!$mealPlanExists) {
             $this->meal_plans->add($meal_plan);
             $meal_plan->setCreator($this);
         }
     }  
 
-    //metodo aggiuntivo per aggiungere un post al profilo
-     public function addPost(EPost $post): void {
+    //Method to add a post to the profile
+    public function addPost(EPost $post): void {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
             $post->setProfile($this); 
@@ -148,6 +159,20 @@ class EProfile extends EUser{
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
             $like->setUser($this);
+        }
+    }
+
+    //Method to add a recipe to the profile
+    public function addFavorite(ERecipe $recipe): void {
+        if (!$this->favorites->contains($recipe)) {
+            $this->favorites->add($recipe);
+        }
+    }
+
+    //Method to remove a Recipe from the profile
+    public function removeFavorite(ERecipe $recipe): void {
+        if ($this->favorites->contains($recipe)) {
+            $this->favorites->removeElement($recipe);
         }
     }
 }

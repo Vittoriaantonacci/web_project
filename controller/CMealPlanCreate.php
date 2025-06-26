@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php'; // EntityManager + Smarty
 
-class CMealPlan {
+class CMealPlanCreate {
     private $entityManager;
     private $smarty;
 
@@ -19,32 +19,36 @@ class CMealPlan {
         $recipes = $this->entityManager->getRepository(ERecipe::class)
             ->findAll();
 
+        // Assign variables to Smarty template
         $this->smarty->assign('products', $products);
         $this->smarty->assign('recipes', $recipes);
         $this->smarty->assign('error', $error);
 
+        // Display the create form template
         $this->smarty->display('mealplan_create.tpl');
     }
 
-    // Gestisce il POST per creare piano + pasti + porzioni
+    // Handle POST request to create meal plan with meals and servings
     public function createMealPlan(): void {
         try {
+            // Begin database transaction
             $this->entityManager->getConnection()->beginTransaction();
 
-            // Dati base piano
+            // Basic meal plan data from POST
             $name = $_POST['planName'] ?? '';
             $description = $_POST['description'] ?? '';
             $tag = $_POST['tag'] ?? '';
-            // Supponiamo $creator sia l'utente loggato (dummy qui)
-            $creator = $this->entityManager->find(EProfile::class, 1); // esempio
+            // Dummy example: find creator profile (replace with logged-in user)
+            $creator = $this->entityManager->find(EProfile::class, 1);
 
             if (empty($name)) {
-                throw new Exception("Il nome del piano è obbligatorio");
+                throw new Exception("Meal plan name is required");
             }
 
+            // Create new meal plan entity
             $mealPlan = new EMealPlan($name, $description, $tag, $creator);
 
-            // Dati pasti multipli
+            // Arrays from POST representing multiple meals and servings
             $meal_types = $_POST['meal_type'] ?? [];
             $meal_items = $_POST['meal_item'] ?? [];
             $serv_descs = $_POST['serving_description'] ?? [];
@@ -53,7 +57,7 @@ class CMealPlan {
             $serv_proteins = $_POST['serving_protein'] ?? [];
             $serv_fats = $_POST['serving_fat'] ?? [];
 
-            // Cicla su ogni pasto aggiunto
+            // Loop through each meal item submitted
             for ($i = 0; $i < count($meal_types); $i++) {
                 $type = $meal_types[$i];
                 $itemId = $meal_items[$i];
@@ -64,56 +68,54 @@ class CMealPlan {
                 $fat = floatval($serv_fats[$i]);
 
                 if ($type === 'product') {
-                    // Cerca prodotto (ipotizziamo EImage come prodotto)
+                    // Find product (assuming product is represented by EImage)
                     $product = $this->entityManager->find(EImage::class, $itemId);
-                    if (!$product) throw new Exception("Prodotto non trovato");
+                    if (!$product) throw new Exception("Product not found");
 
-                    // Crea nuovo EMeal legato al prodotto (immagine)
-                    $meal = new EMeal("Prodotto: ".$product->getNameImage(), "product");
+                    // Create new meal linked to the product (image)
+                    $meal = new EMeal("Product: " . $product->getNameImage(), "product");
                     $meal->setImageMeal($product);
-                    $mealPlan->addMeal($meal); // se hai aggiunto questo metodo in EMealPlan
+                    $mealPlan->addMeal($meal);
 
                 } elseif ($type === 'recipe') {
+                    // Find recipe entity
                     $recipe = $this->entityManager->find(ERecipe::class, $itemId);
-                    if (!$recipe) throw new Exception("Ricetta non trovata");
+                    if (!$recipe) throw new Exception("Recipe not found");
 
+                    // Create new meal linked to the recipe
                     $meal = new EMeal($recipe->getNameRecipe(), "recipe");
                     $meal->setRecipe($recipe);
-                    // L’immagine puoi impostarla da ricetta se disponibile
+                    // Set meal image from recipe if available
                     if ($recipe->getImageRecipe()) {
                         $meal->setImageMeal($recipe->getImageRecipe());
                     }
                     $mealPlan->addMeal($meal);
 
                 } else {
-                    throw new Exception("Tipo pasto non valido");
+                    throw new Exception("Invalid meal type");
                 }
 
-                // Crea la porzione associata
+                // Create serving associated with the meal
                 $serving = new EServing($servDesc, $cal, $carb, $prot, $fat);
                 $meal->addServing($serving);
             }
 
+            // Persist the meal plan entity and commit the transaction
             $this->entityManager->persist($mealPlan);
             $this->entityManager->flush();
             $this->entityManager->getConnection()->commit();
 
+            // Redirect to the meal plan detail page
             header('Location: /mealplan/view?id=' . $mealPlan->getIdMealPlan());
             exit;
 
         } catch (Exception $e) {
+            // Rollback transaction on error and show form with error message
             $this->entityManager->getConnection()->rollBack();
             $this->showCreateForm(['error' => $e->getMessage()]);
         }
     }
 }
 
-// Uso esempio:
-$controller = new CMealPlan($entityManager, $smarty);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller->createMealPlan();
-} else {
-    $controller->showCreateForm();
-}
 

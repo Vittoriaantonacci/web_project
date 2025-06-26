@@ -148,8 +148,64 @@ class CUser {
             header('Location: /recipeek/User/login');
             exit;
         }
-    }
+
+        if ($username === null) {
+        // esempio: carica l'utente loggato dalla sessione
+            $userId = USession::getInstance()->getSessionElement('user');
+            $user = FPersistentManager::getInstance()->retriveObj(EUser::getEntity(), $userId);
+            $username = $user->getUsername();
+        }
     
+        $view = new VUser();
+    
+        // Recupera l'utente dal database tramite username
+        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
+    
+        // Se l'utente non esiste, mostra una pagina di errore
+        if ($profile === null) {
+            $view->error(); // oppure: echo "Profilo non trovato";
+            return;
+        }
+    
+        // Mostra il profilo nella view
+        $view->showProfile($profile);
+    } */
+
+    public static function profile(?string $username = null) {
+    if (!self::isLogged()) {
+        header('Location: /recipeek/User/login');
+        exit;
+    }
+
+    $view = new VUser();
+
+    if ($username === null) {
+        // Prendi l'id utente dalla sessione
+        $userId = USession::getInstance()->getSessionElement('user');
+        if ($userId === null) {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+        // Usa getUserById invece di retriveObj
+        $profile = FPersistentManager::getInstance()->getUserById($userId);
+        if ($profile === null) {
+            $view->error();
+            return;
+        }
+    } else {
+        // Cerca l'utente tramite username
+        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
+        if ($profile === null) {
+            $view->error();
+            return;
+        }
+    }
+
+    $view->showProfile($profile);
+}
+
+
+
     /** -------------------- MODIFY INFO METHODS --------------------  */
 
     /**
@@ -193,6 +249,11 @@ class CUser {
         $view->showProfile($profile);
     }*/
     
+    
+
+
+
+/*
 
     public static function profile() {
         if (!self::isLogged()) {
@@ -220,5 +281,5 @@ class CUser {
         $profile->setIsBanned(false);
     
         $view->showProfile($profile);
-    }
+    } */
 }
