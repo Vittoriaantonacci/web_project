@@ -1,11 +1,10 @@
 <?php
-
 /**
  * USession - Utility class for managing superglobal array $_SESSION.
  */
 class USession {
     /**
-     * Siingleton instance of USession.
+     * Singleton instance of USession.
      */
     private static ?USession $instance = null;
 
@@ -35,6 +34,11 @@ class USession {
      */
     public static function get(string $key): mixed {
         return $_SESSION[$key] ?? null;
+    }
+
+    // Alias for backward compatibility
+    public static function getSessionElement(string $key): mixed {
+        return self::get($key);
     }
 
     /**
