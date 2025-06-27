@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Entity] 
 #[ORM\Table(name: "likes")]
 
-class ELike{
+class ELikes{
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,7 +35,7 @@ class ELike{
     #[ORM\Column(type: "datetime")]
     private DateTime $dateLike;
 
-    private static $entity = ELike::class;
+    private static $entity = ELikes::class;
 
     /** CONSTRUCTOR */
     public function __construct() {
@@ -58,6 +58,9 @@ class ELike{
 
     //metodo per ottenere l'username dell'autore del like
     public function getUsername(): string { return $this->user->getUsername(); }
+
+    //metodo per ottenere l'id dell'autore del like
+    public function getUserId(): int { return $this->user->getIdUser(); }
 
 
     /** SETTERS */  

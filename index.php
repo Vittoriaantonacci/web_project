@@ -18,6 +18,5 @@ Installation::install();
 //var_dump($banana);
 //$fc->run("localhost/User/login");
 
-
-echo "dai samuuuuuuuuu";
-
+//$posts = FPersistentManager::getInstance()->loadHomePage(4);
+//var_dump($posts[0][0]->getComments()[0]->getBody());

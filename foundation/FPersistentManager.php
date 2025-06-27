@@ -44,15 +44,28 @@ class FPersistentManager{
     public static function getUserById($id) {
         return self::read(EUser::getEntity(), $id);
     }
-    private static function getImageById($id) {
+    public static function getImageById($id) {
         return self::read(EImage::getEntity(), $id);
     }
+    public static function getPostById($id) {
+        return FPost::getPostById($id);
+    }
+    public static function getFollowers($userId) {
+        return FUserFollow::getFollowerUsers($userId);
+    }
 
-    private static function saveUser(EUser $user) {
+    public static function getFollowed($userId) {
+        return FUserFollow::getFollowedUsers($userId);
+    }
+
+    public static function saveUser(EProfile $user) {
         return self::create($user);
     }
     public static function saveFollow(EUserFollow $user) {
         return self::create($user);
+    }
+    public static function savePost(EPost $post) {
+        return self::create($post);
     }
 
 
@@ -62,19 +75,36 @@ class FPersistentManager{
      *  Method that returns a list of posts with associated propic image
      *  @param int userId refers to the user that load the home page
      */
-    public static function loadHomePage($userId) {
-        $followedUsers = FUserFollow::getFollowedUsers($userId); 
+    public static function loadForYouPage($userId) {
         $posts = [];
 
-        foreach ($followedUsers as $user) {
-            $posts[] = FPost::getHomePosts($user->getId());
-        }
+        $posts[] = FPost::getHomePosts($userId);
 
         $mergedPosts = array_merge(...$posts);
         usort($mergedPosts, ['FPost', 'compareByTime']);
 
         $result = [];
         foreach ($mergedPosts as $p) {
+            $result[] = [$p/*, self::getImageById($p->getProfile()->getProPic())*/]; 
+        }
+
+        return $result;
+    }
+
+    public static function loadHomePage($userId){
+
+        $followedUsers = FUserFollow::getFollowedUsers($userId);
+        foreach ($followedUsers as $followedUser) {
+            $user = self::getUserById($followedUser->getIdFollowed());
+            $posts = $user->getPosts()->toArray();
+        }
+        if (empty($posts)) {
+            return [];
+        }
+        usort($posts, ['FPost', 'compareByTime']);
+
+        $result = [];
+        foreach ($posts as $p) {
             $result[] = [$p/*, self::getImageById($p->getProfile()->getProPic())*/]; 
         }
 
@@ -110,8 +140,18 @@ class FPersistentManager{
         return FEntityManager::getInstance()->saveObj($newUser); 
     }
 
-    public static function getPostById($id) {
-        return FPost::getPostById($id);
+    public static function getProfileInfo($userID) {
+        $user = self::getUserById($userID);
+        $followers = FUserFollow::getFollowerUsers($userID);
+        $followed = FUserFollow::getFollowedUsers($userID);
+        //$posts = FPost::getUserPosts($userID);
+        return [
+            'user' => $user,
+            'followers' => $followers,
+            'followed' => $followed,
+            /*'posts' => $posts*/
+        ];
     }
+
 
 }

@@ -140,7 +140,7 @@ class FEntityManager{
             $query = (self::$entityManager->createQuery($dql))
                         ->setParameter('value1', $value1)
                         ->setParameter('value2', $value2);
-            return $query->getOneOrNullResult();
+            return $query->getResult();
 
         }catch(Exception $e){
             self::$entityManager->getConnection();

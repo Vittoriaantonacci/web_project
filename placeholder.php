@@ -43,7 +43,7 @@ function populateDatabase() {
             'Questo è un altro commento di prova'
         );
 
-        $like = new ELike();
+        $like = new ELikes();
 
         $user->addPost($post);
         $user->addComment($commento1);
@@ -59,3 +59,4 @@ function populateDatabase() {
         FPersistentManager::getInstance()->create($user3);
         FPersistentManager::getInstance()->create($post);
     }
+

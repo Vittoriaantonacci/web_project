@@ -7,6 +7,7 @@ class CFrontController{
         //echo $requestUrl;
         
         $requestUrl = UServer::getInstance()->getRequestUrl();
+        //$requestUrl = "/recipeek/User/homePage"; 
         $requestUrl = trim($requestUrl, '/');
         $urlParts = explode('/', $requestUrl);
         array_shift($urlParts);
@@ -31,11 +32,12 @@ class CFrontController{
                 call_user_func_array([$controllerClass, $methodName], $params);
             } else {
                 // Method not found, handle appropriately (e.g., show 404 page)
-                header('Location: /recipeek/User/home');  // in future can be redirect to an dedicated error page
+                CError::showError('Metodo non trovato');
+                
             }
         } else {
             // Controller not found, handle appropriately (e.g., show 404 page)
-            header('Location: /recipeek/User/home');
+            CError::showError('Controller non trovato');
         }
     }
 }

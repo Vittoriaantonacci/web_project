@@ -67,10 +67,10 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
+            return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'favorites', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
         }
 
-        return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
+        return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'favorites', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
     }
 
     /**
@@ -268,6 +268,17 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getFavorites(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFavorites', []);
+
+        return parent::getFavorites();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setNickname(string $nickname): void
     {
 
@@ -367,12 +378,34 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addLike(\ELike $like): void
+    public function addLike(\ELikes $like): void
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addLike', [$like]);
 
         parent::addLike($like);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addFavorite(\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFavorite', [$recipe]);
+
+        parent::addFavorite($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeFavorite(\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFavorite', [$recipe]);
+
+        parent::removeFavorite($recipe);
     }
 
     /**

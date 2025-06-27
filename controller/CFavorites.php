@@ -92,29 +92,3 @@ class CFavorites {
         }
     }
 }
-
-// Example usage:
-$controller = new CFavorites($entityManager, $smarty);
-
-$action = $_GET['action'] ?? 'list';
-$id = isset($_GET['id']) ? intval($_GET['id']) : null;
-
-switch ($action) {
-    case 'add':
-        if ($id !== null) {
-            $controller->addFavorite($id);
-        } else {
-            $controller->showFavorites();
-        }
-        break;
-    case 'remove':
-        if ($id !== null) {
-            $controller->removeFavorite($id);
-        } else {
-            $controller->showFavorites();
-        }
-        break;
-    default:
-        $controller->showFavorites();
-        break;
-}

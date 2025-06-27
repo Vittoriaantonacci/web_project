@@ -55,13 +55,13 @@ class EProfile extends EUser {
     #[ORM\JoinColumn(name: "idComment", referencedColumnName: "idComment", nullable: true)]
     protected Collection $comment;
 
-    #[ORM\OneToMany(mappedBy: "user", targetEntity: ELike::class, cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: ELikes::class, cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idLike", referencedColumnName: "idLike", nullable: true)]
     protected Collection $likes;
     
     #[ORM\ManyToMany(targetEntity: ERecipe::class)]
     #[ORM\JoinTable(name: "profile_favorites",
-        joinColumns: [new ORM\JoinColumn(name: "profile_id", referencedColumnName: "id")],
+        joinColumns: [new ORM\JoinColumn(name: "profile_id", referencedColumnName: "idUser")],
         inverseJoinColumns: [new ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe")]
     )]
     protected Collection $favorites;
@@ -81,6 +81,7 @@ class EProfile extends EUser {
         $this->favorites = new ArrayCollection();
         $this->vip = false;
         $this->isBanned = false;
+        $this->nickname = $username;
     }
 
     /** GETTERS */
@@ -155,7 +156,7 @@ class EProfile extends EUser {
     }
 
     //metodo aggiuntivo per aggiungere un like al profilo
-    public function addLike(ELike $like): void {
+    public function addLike(ELikes $like): void {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
             $like->setUser($this);

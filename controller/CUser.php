@@ -129,12 +129,12 @@ class CUser {
         if(CUser::isLogged()){
             $view = new VUser();
 
-            //$userId = USession::getInstance()->getSessionElement('user');
+            $userId = USession::getInstance()->get('user');
             //$userAndPropic = FPersistentManager::getInstance()->loadHomePage($userId);
-            $userId = 1;
+            
             //load all the posts of the users who you follow(post have user attribute) and the profile pic of the author of teh post
             $postInHome = FPersistentManager::getInstance()->loadHomePage($userId);
-            
+
             //load the VIP Users, their profile Images and the foillower number
             //$arrayVipUserPropicFollowNumb = FPersistentManager::getInstance()->loadVip();
 
@@ -148,7 +148,9 @@ class CUser {
             header('Location: /recipeek/User/login');
             exit;
         }
+    }   
 
+    /*public static function profilePage() {
         if ($username === null) {
         // esempio: carica l'utente loggato dalla sessione
             $userId = USession::getInstance()->getSessionElement('user');
@@ -169,7 +171,8 @@ class CUser {
     
         // Mostra il profilo nella view
         $view->showProfile($profile);
-    } */
+        
+    } 
 
     public static function profile(?string $username = null) {
     if (!self::isLogged()) {
@@ -201,10 +204,8 @@ class CUser {
         }
     }
 
-    $view->showProfile($profile);
-}
-
-
+        $view->showProfile($profile);
+    }*/
 
     /** -------------------- MODIFY INFO METHODS --------------------  */
 
@@ -226,60 +227,4 @@ class CUser {
             //header('Location: /Agora/User/profile/' . $visitedUser->getUsername());
         }       
     }
-
-
-    /*public static function profile(string $username) {
-        if (!self::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
-    
-        $view = new VUser();
-    
-        // Recupera l'utente dal database tramite username
-        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
-    
-        // Se l'utente non esiste, mostra una pagina di errore
-        if ($profile === null) {
-            $view->error(); // oppure: echo "Profilo non trovato";
-            return;
-        }
-    
-        // Mostra il profilo nella view
-        $view->showProfile($profile);
-    }*/
-    
-    
-
-
-
-/*
-
-    public static function profile() {
-        if (!self::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
-    
-        $view = new VUser();
-    
-        // Istanzio un profilo di prova
-        $profile = new EProfile(
-            'Mario',                    // name
-            'Rossi',                    // surname
-            new DateTime('1990-05-15'), // birth_date
-            'M',                        // gender
-            'mario.rossi@email.com',    // email
-            'password123', // password (hashed)
-            'mariorossi'                // username / nickname
-        );
-    
-        $profile->setNickname('MarioR');
-        $profile->setBiography('Sono un appassionato di fitness e cucina sana.');
-        $profile->setInfo('Mi piace sperimentare nuove ricette fit.');
-        $profile->setVip(true);
-        $profile->setIsBanned(false);
-    
-        $view->showProfile($profile);
-    } */
 }

@@ -4,7 +4,7 @@
     <title>Post di Test</title>
 </head>
 <body>
-    <h1>ok</h1>
-    <p>ok</p>
+    <h1>ciao</h1>
+    <p>{$error}</p>
 </body>
 </html>

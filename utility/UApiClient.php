@@ -64,4 +64,38 @@ class UApiClient{
 
         return json_decode($response, true);
     }
+
+
+    /**
+     * Create a Stripe payment intent
+     * @param int $amount Amount in cents
+     * @param string $currency Currency code (default 'eur')
+     * @param string $description Payment description (default 'Pagamento')
+     * @return array
+     */
+    function createStripePayment($amount, $currency = 'eur', $description = 'Pagamento') {
+        try {
+            // Qui dovresti fare \Stripe\Stripe::setApiKey('YOUR_STRIPE_SECRET_KEY'); ma io ho già impostato la chiave segreta nel file di configurazione
+
+            // Importante: amount deve essere in centesimi (es. 10.00€ = 1000)
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount' => $amount,
+                'currency' => $currency,
+                'description' => $description,
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                ],
+            ]);
+
+            return [
+                'clientSecret' => $paymentIntent->client_secret,
+                'status' => 'success',
+            ];
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ];
+        }
+    }  
 }

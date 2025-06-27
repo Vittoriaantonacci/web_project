@@ -50,14 +50,14 @@ class EPost{
     private EProfile $profile;
 
     #[ORM\OneToMany(mappedBy: "post", targetEntity: EImage::class, cascade: ["persist", "remove"])]
-    private Collection $images;
+    private $images;
 
     #[ORM\OneToMany(mappedBy: "post", targetEntity: EComment::class, cascade: ["persist", "remove"])]
-    private Collection $comments;
+    private $comments;
    
-    #[ORM\OneToMany(mappedBy: "post", targetEntity: ELike::class, cascade: ["persist", "remove"])]
-    private Collection $likes;
-   
+    #[ORM\OneToMany(mappedBy: "post", targetEntity: ELikes::class, cascade: ["persist", "remove"])]
+    private $likes;
+
     private static $entity = EPost::class;
 
     /** CONSTRUCTOR */
@@ -92,11 +92,23 @@ class EPost{
 
     public function getProfile(): EProfile { return $this->profile; }
 
-    public function getImages(): Collection { return $this->images; }
+    public function getImages() { return $this->images; }
 
-    public function getComments(): Collection { return $this->comments; }
+    public function getComments() { return $this->comments; }
 
-    public function getLikes(): Collection { return $this->likes; }
+    public function getLikes() { return $this->likes; }
+
+    public function getLikedByUser($idUser): bool {
+        if ($idUser === null) return false;
+        if (!$this->likes instanceof Collection || $this->likes->isEmpty()) return false;
+    
+        foreach ($this->likes as $like) {
+            if ($like->getUser()->getIdUser() === $idUser) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     //public function getComments(): ArrayCollection { return $this->comments; }
     //public function getLikes(): ArrayCollection { return $this->likes; }
@@ -131,66 +143,30 @@ class EPost{
         }
     }
 
-    public function addLike(ELike $like): void {
+    public function addLike(ELikes $like): void {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
             $like->setPost($this);
         }
     }
-}
 
-/**public function addImage(EImage $image): void {
-        $imageId = $image->getIdImage(); // Assuming you have a method to get the image ID
-        // Check if the image with the same ID exists in the images array
-        $imageExists = false;
-        foreach ($this->images as $existingImage) {
-            if ($existingImage->getIdImage() === $imageId) {
-                $imageExists = true;
-                break;
-            }
-        }
-        // If the image doesn't exist in the array, add it
-        if (!$imageExists) {
-            $this->images[] = $image;
-            $image->setPost($this);
-        }
-    }  
-    
-    public function addComment(EComment $comment): void {
-        $commentId = $comment->getIdComment(); // Assuming you have a method to get the comment ID
-        // Check if the comment with the same ID exists in the comment array
-        $commentExists = false;
-        foreach ($this->comments as $existingComment) {
-            if ($existingComment->getIdComment() === $commentId) {
-                $commentExists = true;
-                break;
-            }
-        }
-        // If the comment doesn't exist in the array, add it
-        if (!$commentExists) {
-            $this->comments[] = $comment;
-            $comment->setPost($this);
+    public function removeImage(EImage $image): void {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
         }
     }
-    
-    public function addLike(ELike $like): void {
-        $likeId = $like->getIdLike(); // Assuming you have a method to get the like ID
-        // Check if the like with the same ID exists in the likes array
-        $likeExists = false;
-        foreach ($this->likes as $existingLike) {
-            if ($existingLike->getIdLike() === $likeId) {
-                $likeExists = true;
-                break;
-            }
+    public function removeComment(EComment $comment): void {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);   
         }
-        // If the like doesn't exist in the array, add it
-        if (!$likeExists) {
-            $this->likes[] = $like;
-            $like->setPost($this);
-        }
-    } 
- */
+    }
 
+    public function removeLike(ELikes $like): void {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+        }
+    }
+}
 
 
     

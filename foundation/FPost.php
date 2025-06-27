@@ -7,10 +7,6 @@
 
 class FPost {
 
-    public static function getUserPosts(string $userId){
-        return FEntityManager::getInstance()->getObjList(EPost::getEntity(), 'userId', $userId);
-    }
-
     public static function compareByTime(EPost $post1, EPost $post2): int {
         return $post1->getCreationTime() <=> $post2->getCreationTime();
     }
@@ -36,5 +32,5 @@ class FPost {
     public static function getPostById(int $id){
         return FEntityManager::getInstance()->getObjById(EPost::getEntity(), $id);
     }
-    
+
 }

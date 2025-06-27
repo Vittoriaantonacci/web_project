@@ -28,9 +28,9 @@ class EUserFollow {
     /** GETTERS */
     public static function getEntity(): string { return self::$entity; }
 
-    public function getFollower() { return $this->idFollower; }
+    public function getIdFollower() { return $this->idFollower; }
 
-    public function getFollowed() { return $this->idFollowed; }
+    public function getIdFollowed() { return $this->idFollowed; }
 
     public function getId() { return $this->id; }
 

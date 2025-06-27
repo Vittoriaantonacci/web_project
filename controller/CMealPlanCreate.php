@@ -1,31 +1,19 @@
 <?php
 require_once 'bootstrap.php'; // EntityManager + Smarty
-
+/*
 class CMealPlanCreate {
-    private $entityManager;
-    private $smarty;
-
-    public function __construct($entityManager, $smarty) {
-        $this->entityManager = $entityManager;
-        $this->smarty = $smarty;
-    }
 
     // Mostra form con prodotti e ricette da selezionare
     public function showCreateForm(?array $error): void {
         // Carica dati per select
-        $products = $this->entityManager->getRepository(EImage::class)  // supponendo che i prodotti siano immagini o altra entità
-            ->findAll();
+        //$products = $this->entityManager->getRepository(EImage::class) 
+        //    ->findAll();
+//
+        //$recipes = $this->entityManager->getRepository(ERecipe::class)
+        //    ->findAll();
 
-        $recipes = $this->entityManager->getRepository(ERecipe::class)
-            ->findAll();
-
-        // Assign variables to Smarty template
-        $this->smarty->assign('products', $products);
-        $this->smarty->assign('recipes', $recipes);
-        $this->smarty->assign('error', $error);
-
-        // Display the create form template
-        $this->smarty->display('mealplan_create.tpl');
+        $view = new VMealPlan();
+        $view->createForm([], [], $error['error'] ?? null);
     }
 
     // Handle POST request to create meal plan with meals and servings
@@ -117,5 +105,5 @@ class CMealPlanCreate {
     }
 }
 
-
+*/
 
