@@ -33,9 +33,9 @@ class EComment{
     #[ORM\Column(type: "boolean")]
     private bool $isRemoved;
    
-    #[ORM\ManyToOne(targetEntity: EUser::class, inversedBy: "comment", cascade: ["persist", "remove"])]
+    #[ORM\ManyToOne(targetEntity: EProfile::class, inversedBy: "comment", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser")]
-    private EUser $user;
+    private EProfile $user;
     
     #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "comments", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost")]
@@ -67,7 +67,7 @@ class EComment{
 
     public function getIsRemoved(): bool { return $this->isRemoved; }
 
-    public function getUser(): EUser { return $this->user; }
+    public function getUser(): EProfile { return $this->user; }
 
     public function getPost(): EPost { return $this->post; }
 

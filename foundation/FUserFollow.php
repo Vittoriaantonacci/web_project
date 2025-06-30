@@ -11,11 +11,21 @@ class FUserFollow{
     }
 
     public static function getFollowedUsers($idUser){
-        return FEntityManager::getInstance()->getObjList(EUserFollow::getEntity(), 'idFollower', $idUser);
+        $followedId = FEntityManager::getInstance()->getObjList(EUserFollow::class, 'idFollower', $idUser);
+        $ris = [];
+        foreach ($followedId as $followed) {
+            array_push($ris, FPersistentManager::getInstance()->getUserById($followed->getIdFollowed()));
+        }
+        return $ris;
     }
 
     public static function getFollowerUsers($idUser){
-        return FEntityManager::getInstance()->getObjList(EUserFollow::getEntity(), 'idFollowed', $idUser);
+        $followersId = FEntityManager::getInstance()->getObjList(EUserFollow::class, 'idFollowed', $idUser);
+        $ris = [];
+        foreach ($followersId as $follower) {
+            array_push($ris, FPersistentManager::getInstance()->getUserById($follower->getIdFollower()));
+        }
+        return $ris;
     }
 
     public static function getTopUserFollower(){

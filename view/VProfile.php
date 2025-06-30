@@ -17,9 +17,4 @@ class VProfile {
         $this->smarty->display('profile.tpl');
     }
 
-    // Mostra messaggi di errore
-    public function displayError(string $msg) {
-        $this->smarty->assign('error', $msg);
-        $this->smarty->display('error.tpl');
-    }
 }

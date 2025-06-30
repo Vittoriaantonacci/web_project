@@ -1,0 +1,39 @@
+{extends file='layout.tpl'}
+
+{block name="title"}Crea Nuovo Post{/block}
+
+{block name="body"}
+<div class="container mt-4">
+    <div class="styled-card">
+        <h2 class="mb-4">Crea un nuovo post</h2>
+        <form method="post" action="/recipeek/Post/onCreate" enctype="multipart/form-data">
+            <!-- Titolo -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Titolo</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Inserisci il titolo del post" required />
+            </div>
+
+            <!-- Descrizione -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Descrizione</label>
+                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Scrivi una descrizione..." required></textarea>
+            </div>
+
+            <!-- Categoria -->
+            <div class="mb-3">
+                <label for="category" class="form-label">Categoria</label>
+                <input type="text" class="form-control" id="category" name="category" placeholder="Es. Dolce, Primo, Secondo..." required />
+            </div>
+
+            <!-- Immagine -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Immagine</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required />
+            </div>
+
+            <!-- Bottone invio -->
+            <button type="submit" class="btn btn-primary">➕ Crea</button>
+        </form>
+    </div>
+</div>
+{/block}

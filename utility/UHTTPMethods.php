@@ -32,6 +32,43 @@ class UHTTPMethods {
             return $result;
         }
     }
-    
 
+    public static function saveUploadedFile(string $inputName): ?array {
+        // Check if the file was uploaded without errors
+        if (!isset($_FILES[$inputName]) || $_FILES[$inputName]['error'] !== UPLOAD_ERR_OK) {
+            return ['error' => $_FILES[$inputName]['error'] ?? 'No file uploaded or upload error.'];
+        }
+
+        // Retrieve file information
+        $tmpPath = $_FILES[$inputName]['tmp_name'];
+        $originalName = $_FILES[$inputName]['name'];
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        $size = $_FILES[$inputName]['size'];
+
+        // Create a safe file name
+        $safeName = uniqid('img_', true) . '.' . strtolower($extension);
+        // Define the destination directory and path
+        $destinationDir = __DIR__ . '/../public/uploads/posts';
+        $destinationPath = $destinationDir . '/' . $safeName;
+
+        // Ensure the destination directory exists
+        if (!is_dir($destinationDir)) {
+            mkdir($destinationDir, 0777, true);
+        }
+
+        // Move the uploaded file to the destination directory
+        // and return the file information if successful
+        
+        if (move_uploaded_file($tmpPath, $destinationPath)) {
+            return [
+                'path' => '/uploads/' . $safeName,
+                'name' => $originalName,
+                'ext' => strtolower($extension),
+                'size' => $size
+            ];
+        }
+
+        return ['error' => is_uploaded_file($tmpPath) ? 'File is in tmp, move issue' : 'Invalid file upload.'];
+  
+    }
 }

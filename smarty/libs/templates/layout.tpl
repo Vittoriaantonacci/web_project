@@ -43,6 +43,8 @@
       <ul class="nav flex-column px-3">
         <li class="nav-item"><a class="nav-link" href="/recipeek/Profile/profile">👤 Profilo</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Post/create">➕ Nuovo Post</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Post/postSaved"> Your Posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/recipeSaved">➕ Your Recipes</a></li>
       </ul>
     </div>
   </div>
@@ -51,6 +53,7 @@
 <!-- JS Bootstrap + Custom -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/recipeek/public/assets/script.js"></script>
+{block name="script"}{/block}
 
 </body>
 </html>

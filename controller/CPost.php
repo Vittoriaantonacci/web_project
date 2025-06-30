@@ -28,8 +28,28 @@ class CPost {
         $vPost->show($post, $isLiked);
     }
 
+    public static function create() {
+        if (CUser::isLogged()) {
+            $vPost = new VPost();
+            $vPost->create();
+        } else {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+    }
 
-    /** -------------------- POST ELEMENT METHODS -------------------- */
+    public static function postSaved() {
+        if (CUser::isLogged()) {
+            $vPost = new VPost();
+            $vPost->postSaved();
+        } else {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+    }
+
+
+    /** -------------------- POST BEHAVIOR METHODS -------------------- */
 
     /**
      * create a comment taking info from the compiled form and associate it to the post
@@ -68,6 +88,39 @@ class CPost {
             FPersistentManager::getInstance()->saveUser($profile);
         }
     }
+
+    public static function onCreate() {
+        if (CUser::isLogged()) {
+            $title = UHTTPMethods::post('title');
+            $description = UHTTPMethods::post('description');
+            $category = UHTTPMethods::post('category');
+
+            $profile = FPersistentManager::getInstance()->getUserById(USession::getInstance()->get('user'));
+            $post = new EPost($title, $description, $category);
+            $post->setProfile($profile);
+
+            $imageData = UHTTPMethods::saveUploadedFile('image');
+
+            var_dump($imageData);
+            if ($imageData) {
+                $image = new EImage($imageData['name'],  $imageData['size'], $imageData['ext'], $imageData['path']);
+                $post->addImage($image);
+            } else {
+                $image = null; 
+            }
+
+            FPersistentManager::getInstance()->savePost($post);
+
+            header('Location: /recipeek/User/home');
+            exit;
+
+        } else {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+    }
+
+
 
 }
 

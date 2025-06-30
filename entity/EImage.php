@@ -38,19 +38,18 @@ class EImage{
     #[ORM\Column(type: "string")]
     private string $imagePath;
 
-    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "images")]
+    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "images", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost", nullable: false)]
     private EPost $post;
 
     private static $entity = EImage::class;
 
     /** CONSTRUCTOR */
-    public function __construct($name, $size, $type, $imagePath, EPost $post){
+    public function __construct($name, $size, $type, $imagePath){
         $this->name = $name;
         $this->size = $size;
         $this->type = $type;
         $this->imagePath = $imagePath;
-        $this->post = $post;
     }
 
     /** GETTERS */

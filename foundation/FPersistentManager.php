@@ -142,8 +142,14 @@ class FPersistentManager{
 
     public static function getProfileInfo($userID) {
         $user = self::getUserById($userID);
+        try{
         $followers = FUserFollow::getFollowerUsers($userID);
         $followed = FUserFollow::getFollowedUsers($userID);
+        }catch (\Exception $e) {
+            echo "ERROR " . $e->getMessage();
+            return [];
+        }
+
         //$posts = FPost::getUserPosts($userID);
         return [
             'user' => $user,

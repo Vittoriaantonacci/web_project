@@ -25,3 +25,6 @@ document.addEventListener('click', function(event) {
   toggleLeft.classList.toggle('d-none', sidebarLeft.classList.contains('show'));
   toggleRight.classList.toggle('d-none', sidebarRight.classList.contains('show'));
 });
+
+
+

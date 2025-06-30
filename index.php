@@ -20,3 +20,9 @@ Installation::install();
 
 //$posts = FPersistentManager::getInstance()->loadHomePage(4);
 //var_dump($posts[0][0]->getComments()[0]->getBody());
+
+/* $users = FEntityManager::getInstance()->getObjList(EUser::class, 'gender', 'M');
+
+foreach ($users as $user) {
+    echo $user->getUsername() . "<br>";
+} */
