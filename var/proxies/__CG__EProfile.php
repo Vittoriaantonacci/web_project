@@ -67,10 +67,10 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'favorites', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
+            return ['__isInitialized__', 'nickname', 'biography', 'info', 'vip', 'isBanned', '' . "\0" . 'EProfile' . "\0" . 'image', 'comment', 'likes', 'posts', 'mealPlans', 'recipes', 'savedRecipes', '' . "\0" . 'EProfile' . "\0" . 'savedMealPlans', '' . "\0" . 'EProfile' . "\0" . 'savedPosts', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
         }
 
-        return ['__isInitialized__', 'nickname', 'pro_pic', 'biography', 'info', 'posts', 'vip', 'isBanned', 'meal_plans', 'comment', 'likes', 'favorites', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
+        return ['__isInitialized__', 'nickname', 'biography', 'info', 'vip', 'isBanned', '' . "\0" . 'EProfile' . "\0" . 'image', 'comment', 'likes', 'posts', 'mealPlans', 'recipes', 'savedRecipes', '' . "\0" . 'EProfile' . "\0" . 'savedMealPlans', '' . "\0" . 'EProfile' . "\0" . 'savedPosts', 'idUser', 'name', 'surname', 'birthDate', 'gender', 'email', 'password', 'username'];
     }
 
     /**
@@ -235,6 +235,17 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getRecipes(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRecipes', []);
+
+        return parent::getRecipes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getIsBanned(): bool
     {
 
@@ -257,23 +268,34 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getMealPlans(): \Doctrine\Common\Collections\Collection
+    public function getSavedMealPlans(): \Doctrine\Common\Collections\Collection
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMealPlans', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSavedMealPlans', []);
 
-        return parent::getMealPlans();
+        return parent::getSavedMealPlans();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getFavorites(): \Doctrine\Common\Collections\Collection
+    public function getSavedPosts(): \Doctrine\Common\Collections\Collection
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFavorites', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSavedPosts', []);
 
-        return parent::getFavorites();
+        return parent::getSavedPosts();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSavedRecipes(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSavedRecipes', []);
+
+        return parent::getSavedRecipes();
     }
 
     /**
@@ -345,28 +367,6 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addMealPlan(\EMealPlan $meal_plan): void
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addMealPlan', [$meal_plan]);
-
-        parent::addMealPlan($meal_plan);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addPost(\EPost $post): void
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addPost', [$post]);
-
-        parent::addPost($post);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function addComment(\EComment $comment): void
     {
 
@@ -389,23 +389,111 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addFavorite(\ERecipe $recipe): void
+    public function addPost(\EPost $post): void
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFavorite', [$recipe]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addPost', [$post]);
 
-        parent::addFavorite($recipe);
+        parent::addPost($post);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function removeFavorite(\ERecipe $recipe): void
+    public function addMealPlan(\EMealPlan $mealPlan)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFavorite', [$recipe]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addMealPlan', [$mealPlan]);
 
-        parent::removeFavorite($recipe);
+        return parent::addMealPlan($mealPlan);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addRecipe(\ERecipe $recipe)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRecipe', [$recipe]);
+
+        return parent::addRecipe($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSavedRecipe(\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSavedRecipe', [$recipe]);
+
+        parent::addSavedRecipe($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSavedMealPlan(\EMealPlan $mealPlan): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSavedMealPlan', [$mealPlan]);
+
+        parent::addSavedMealPlan($mealPlan);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSavedPost(\EPost $post): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSavedPost', [$post]);
+
+        parent::addSavedPost($post);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removePost(\EPost $post): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removePost', [$post]);
+
+        parent::removePost($post);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeSavedMealPlan(\EMealPlan $mealPlan): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSavedMealPlan', [$mealPlan]);
+
+        parent::removeSavedMealPlan($mealPlan);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeSavedPost(\EPost $post): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSavedPost', [$post]);
+
+        parent::removeSavedPost($post);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeSavedRecipe(\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSavedRecipe', [$recipe]);
+
+        parent::removeSavedRecipe($recipe);
     }
 
     /**

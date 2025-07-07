@@ -38,10 +38,15 @@ class CPost {
         }
     }
 
-    public static function postSaved() {
+    public static function yourPosts() {
         if (CUser::isLogged()) {
+            // This method is called after a post is saved
+            $postCreated = FPersistentManager::getInstance()->getCreatedPosts(USession::getInstance()->get('user'));
+            $postSaved = FPersistentManager::getInstance()->getSavedPosts(USession::getInstance()->get('user'));
+
+
             $vPost = new VPost();
-            $vPost->postSaved();
+            $vPost->postSaved($postCreated, $postSaved);
         } else {
             header('Location: /recipeek/User/login');
             exit;
@@ -99,19 +104,16 @@ class CPost {
             $post = new EPost($title, $description, $category);
             $post->setProfile($profile);
 
-            $imageData = UHTTPMethods::saveUploadedFile('image');
+            $imageData = UHTTPMethods::saveUploadedFile('image', 'posts');
 
-            var_dump($imageData);
             if ($imageData) {
                 $image = new EImage($imageData['name'],  $imageData['size'], $imageData['ext'], $imageData['path']);
                 $post->addImage($image);
-            } else {
-                $image = null; 
             }
 
             FPersistentManager::getInstance()->savePost($post);
 
-            header('Location: /recipeek/User/home');
+            header('Location: /recipeek/User/homePage');
             exit;
 
         } else {

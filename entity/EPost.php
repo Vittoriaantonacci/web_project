@@ -50,13 +50,13 @@ class EPost{
     private EProfile $profile;
 
     #[ORM\OneToMany(mappedBy: "post", targetEntity: EImage::class, cascade: ["persist", "remove"])]
-    private $images;
+    private Collection $images;
 
     #[ORM\OneToMany(mappedBy: "post", targetEntity: EComment::class, cascade: ["persist", "remove"])]
-    private $comments;
+    private Collection $comments;
    
     #[ORM\OneToMany(mappedBy: "post", targetEntity: ELikes::class, cascade: ["persist", "remove"])]
-    private $likes;
+    private Collection $likes;
 
     private static $entity = EPost::class;
 
@@ -155,6 +155,7 @@ class EPost{
             $this->images->removeElement($image);
         }
     }
+    
     public function removeComment(EComment $comment): void {
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);   

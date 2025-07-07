@@ -14,8 +14,16 @@ Installation::install();
 //include_once "placeholder.php";
 //populateDatabase();
 
-//$banana = UApiClient::getInstance()->searchFood("banana");
+//CRecipe::loadMeal("Banana");
+/*
+$banana = UApiClient::getInstance()->searchFood("philadelphia");
 //var_dump($banana);
+
+$emeals = EMeal::fromFatSecretJson($banana);
+foreach ($emeals as $emeal) {
+    echo $emeal->toString();
+}
+
 //$fc->run("localhost/User/login");
 
 //$posts = FPersistentManager::getInstance()->loadHomePage(4);

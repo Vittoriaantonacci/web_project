@@ -27,7 +27,7 @@ class ERecipe {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idRecipe = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idRecipe = null; 
    
     #[ORM\Column(type: "string")]
     private string $nameRecipe;
@@ -37,10 +37,7 @@ class ERecipe {
     
     #[ORM\Column(type: "text")]
     private string $description;
-  
-    #[ORM\OneToMany(mappedBy: "recipe", targetEntity: EMeal::class, cascade: ["persist", "remove"], orphanRemoval: true)]
-    private Collection $ingredients;
-   
+
     #[ORM\Column(type: "integer")]
     private int $preparation_time;
     
@@ -51,20 +48,30 @@ class ERecipe {
     private int $grams_one_portion;
 
     #[ORM\OneToOne(targetEntity: EImage::class, cascade: ["persist", "remove"])]
-    #[ORM\JoinColumn(name: "image_id", referencedColumnName: "idImage", nullable: false)]
-    private EImage $image;
+    #[ORM\JoinColumn(name: "image_id", referencedColumnName: "idImage")]
+    private ?EImage $image = null;
+
+    #[ORM\ManyToOne(targetEntity: EProfile::class)]
+    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idUser")]
+    private EProfile $creator;
+
+    #[ORM\ManyToMany(targetEntity: EMeal::class, inversedBy: "recipes", cascade: ["persist"])]
+    #[ORM\JoinTable(name: "recipe_meal",
+        joinColumns: [new ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe")],
+        inverseJoinColumns: [new ORM\JoinColumn(name: "meal_id", referencedColumnName: "idMeal")]
+    )]
+    private Collection $ingredients;
 
     private static string $entity = ERecipe::class;
 
     /**CONSTRUCTOR */
-    public function __construct($nameRecipe, $infos, $description, $preparation_time, $cooking_time, $grams_one_portion, EImage $image) {
+    public function __construct($nameRecipe, $infos, $description, $preparation_time, $cooking_time, $grams_one_portion) {
         $this->nameRecipe = $nameRecipe;
         $this->infos = $infos;
         $this->description = $description;
         $this->preparation_time = $preparation_time;
         $this->cooking_time = $cooking_time;
         $this->grams_one_portion = $grams_one_portion;
-        $this->image = $image;
         $this->ingredients = new ArrayCollection();
     }
 
@@ -90,10 +97,12 @@ class ERecipe {
 
     public function getImage(): EImage { return $this->image; }
 
+    public function getCreator(): EProfile { return $this->creator; }
 
-    /**SETTERS */
-    //Doctrine gestisce automaticamente l’id, il metodo setIdRecipe() non serve e può causare problemi
     
+
+
+    /**SETTERS */    
     public function setNameRecipe(string $nameRecipe): void { $this->nameRecipe = $nameRecipe; }
 
     public function setInfos(string $infos): void { $this->infos = $infos; }
@@ -106,20 +115,22 @@ class ERecipe {
 
     public function setGramsOnePortion(int $grams): void { $this->grams_one_portion = $grams; }
 
-    public function setImage(EImage $image): void { $this->image = $image; }
+    public function setCreator(EProfile $profile): void { $this->creator = $profile; }
+
+    public function addImage(EImage $image): void {
+            $this->image = $image;
+            $image->setRecipe($this);
+    }
     
-    //metodo per aggiungere un ingrediente
     public function addIngredient(EMeal $ingredient): void {
         if (!$this->ingredients->contains($ingredient)){
             $this->ingredients->add($ingredient);
-            $ingredient->setRecipe($this); //associa la ricetta
+            $ingredient->addRecipe($this); 
         }
     }
-
-    //metodo per rimuovere un ingrediente
     public function removeIngredient(EMeal $ingredient): void {
         if ($this->ingredients->contains($ingredient)) {
             $this->ingredients->removeElement($ingredient);
         }
-    }   
+    }
 }

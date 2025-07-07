@@ -67,10 +67,10 @@ class EImage extends \EImage implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'EImage' . "\0" . 'idImage', '' . "\0" . 'EImage' . "\0" . 'name', '' . "\0" . 'EImage' . "\0" . 'size', '' . "\0" . 'EImage' . "\0" . 'type', '' . "\0" . 'EImage' . "\0" . 'imagePath', '' . "\0" . 'EImage' . "\0" . 'post'];
+            return ['__isInitialized__', '' . "\0" . 'EImage' . "\0" . 'idImage', '' . "\0" . 'EImage' . "\0" . 'name', '' . "\0" . 'EImage' . "\0" . 'size', '' . "\0" . 'EImage' . "\0" . 'type', '' . "\0" . 'EImage' . "\0" . 'imagePath', '' . "\0" . 'EImage' . "\0" . 'post', '' . "\0" . 'EImage' . "\0" . 'meal', '' . "\0" . 'EImage' . "\0" . 'recipe', '' . "\0" . 'EImage' . "\0" . 'profile'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'EImage' . "\0" . 'idImage', '' . "\0" . 'EImage' . "\0" . 'name', '' . "\0" . 'EImage' . "\0" . 'size', '' . "\0" . 'EImage' . "\0" . 'type', '' . "\0" . 'EImage' . "\0" . 'imagePath', '' . "\0" . 'EImage' . "\0" . 'post'];
+        return ['__isInitialized__', '' . "\0" . 'EImage' . "\0" . 'idImage', '' . "\0" . 'EImage' . "\0" . 'name', '' . "\0" . 'EImage' . "\0" . 'size', '' . "\0" . 'EImage' . "\0" . 'type', '' . "\0" . 'EImage' . "\0" . 'imagePath', '' . "\0" . 'EImage' . "\0" . 'post', '' . "\0" . 'EImage' . "\0" . 'meal', '' . "\0" . 'EImage' . "\0" . 'recipe', '' . "\0" . 'EImage' . "\0" . 'profile'];
     }
 
     /**
@@ -239,12 +239,45 @@ class EImage extends \EImage implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPost(): \EPost
+    public function getPost(): ?\EPost
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPost', []);
 
         return parent::getPost();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMeal(): ?\EMeal
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMeal', []);
+
+        return parent::getMeal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRecipe(): ?\ERecipe
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRecipe', []);
+
+        return parent::getRecipe();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProfile(): ?\EProfile
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfile', []);
+
+        return parent::getProfile();
     }
 
     /**
@@ -294,12 +327,45 @@ class EImage extends \EImage implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setPost(\EPost $post): void
+    public function setPost(?\EPost $post): void
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPost', [$post]);
 
         parent::setPost($post);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setMeal(?\EMeal $meal): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMeal', [$meal]);
+
+        parent::setMeal($meal);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRecipe(?\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRecipe', [$recipe]);
+
+        parent::setRecipe($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProfile(?\EProfile $profile): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfile', [$profile]);
+
+        parent::setProfile($profile);
     }
 
 }

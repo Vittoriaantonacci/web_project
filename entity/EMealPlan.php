@@ -35,19 +35,19 @@ class EMealPlan{
     
     #[ORM\Column(type: "string")]
     private string $tag;
-    
-    #[ORM\ManyToOne(targetEntity: EProfile::class)]
-    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idUser", nullable: false)]
-    private EProfile $creator;
-   
+
     #[ORM\Column(type: "datetime")]
     private DateTime $creation_time;
     
-    #[ORM\ManyToMany(targetEntity: ERecipe::class)]
-    #[ORM\JoinTable(name: "mealplan_recipes", joinColumns: [new ORM\JoinColumn(name: "mealplan_id", referencedColumnName: "idMealPlan")], inverseJoinColumns: [new ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe")])]
-    private Collection $recipes;
-
-    #[ORM\OneToMany(mappedBy: "mealPlan", targetEntity: EMeal::class, cascade: ["persist", "remove"], orphanRemoval: true)]
+    #[ORM\ManyToOne(targetEntity: EProfile::class)]
+    #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idUser")]
+    private EProfile $creator;
+   
+    #[ORM\ManyToMany(targetEntity: EMeal::class, inversedBy: "mealPlans", cascade: ["persist"])]
+    #[ORM\JoinTable(name: "mealplan_meals",
+        joinColumns: [new ORM\JoinColumn(name: "idMealPlan", referencedColumnName: "idMealPlan")],
+        inverseJoinColumns: [new ORM\JoinColumn(name: "idMeal", referencedColumnName: "idMeal")]
+    )]
     private Collection $meals;
 
     private static $entity = EMealPlan::class;
@@ -59,7 +59,6 @@ class EMealPlan{
         $this->tag = $tag;
         $this->creator = $creator;
         $this->creation_time = new DateTime("now");
-        $this->recipes = new ArrayCollection();  
         $this->meals = new ArrayCollection();
     }
 
@@ -81,8 +80,6 @@ class EMealPlan{
 
     public function getTimeStr(): string { return $this->creation_time->format('Y-m-d H:i:s'); }
 
-    public function getRecipes(): Collection { return $this->recipes; }
-
     public function getMeals(): Collection { return $this->meals; }
 
 
@@ -98,33 +95,17 @@ class EMealPlan{
 
     public function setCreationTime(DateTime $dateTime): void { $this->creation_time = $dateTime; }
 
-    //Add a recipe, checking if it's not already present
-    public function addRecipe(ERecipe $recipe): void {
-        if (!$this->recipes->contains($recipe)) {
-            $this->recipes->add($recipe);
-        }
-    }
-
-    //Remove a recipe
-    public function removeRecipe(ERecipe $recipe): void {
-        if ($this->recipes->contains($recipe)) {
-            $this->recipes->removeElement($recipe);
-        }
-    }
-
-    //Add a meal, checking if it's not already present
     public function addMeal(EMeal $meal): void {
         if (!$this->meals->contains($meal)) {
             $this->meals->add($meal);
-            $meal->setMealPlan($this);
+            $meal->addMealPlan($this);
         }
     }
 
-    //Remove a meal
     public function removeMeal(EMeal $meal): void {
         if ($this->meals->contains($meal)) {
             $this->meals->removeElement($meal);
-            $meal->setMealPlan(null);
+            $meal->removeMealPlan($this);
         }
     }
 }

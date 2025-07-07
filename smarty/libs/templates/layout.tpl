@@ -43,8 +43,9 @@
       <ul class="nav flex-column px-3">
         <li class="nav-item"><a class="nav-link" href="/recipeek/Profile/profile">👤 Profilo</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Post/create">➕ Nuovo Post</a></li>
-        <li class="nav-item"><a class="nav-link" href="/recipeek/Post/postSaved"> Your Posts</a></li>
-        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/recipeSaved">➕ Your Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Post/yourPosts"> Your Posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/yourRecipes">➕ Your Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/create">➕ New Recipe</a></li>
       </ul>
     </div>
   </div>

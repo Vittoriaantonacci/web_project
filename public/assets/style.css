@@ -12,16 +12,24 @@ body {
   box-shadow: 2px 0 5px rgba(0,0,0,0.3);
   flex-shrink: 0;
   min-width: 200px;
-  min-height: 1500px;
   max-width: 300px;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 .sidebar-right {
   background-color: #1e1e1e;
   border-radius: 1rem 0 0 1rem;
   flex-shrink: 0;
   min-width: 200px;
-  min-height: 1500px;
   max-width: 300px;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 .nav-link {
   color: #e0e0e0;

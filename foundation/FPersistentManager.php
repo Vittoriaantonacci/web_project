@@ -50,6 +50,13 @@ class FPersistentManager{
     public static function getPostById($id) {
         return FPost::getPostById($id);
     }
+    public static function getMealById($id) {
+        return self::read(EMeal::getEntity(), $id);
+    }
+    public static function getRecipeById($id) {
+        return self::read(ERecipe::getEntity(), $id);
+    }
+
     public static function getFollowers($userId) {
         return FUserFollow::getFollowerUsers($userId);
     }
@@ -61,11 +68,14 @@ class FPersistentManager{
     public static function saveUser(EProfile $user) {
         return self::create($user);
     }
-    public static function saveFollow(EUserFollow $user) {
-        return self::create($user);
+    public static function saveFollow(EUserFollow $userFollow) {
+        return self::create($userFollow);
     }
     public static function savePost(EPost $post) {
         return self::create($post);
+    }
+    public static function saveRecipe(ERecipe $recipe) {
+        return self::create($recipe);
     }
 
 
@@ -92,23 +102,20 @@ class FPersistentManager{
     }
 
     public static function loadHomePage($userId){
+        try{
+            $followedUsers = FUserFollow::getFollowedUsers($userId);
 
-        $followedUsers = FUserFollow::getFollowedUsers($userId);
-        foreach ($followedUsers as $followedUser) {
-            $user = self::getUserById($followedUser->getIdFollowed());
-            $posts = $user->getPosts()->toArray();
-        }
-        if (empty($posts)) {
+            $allPosts = [];
+            foreach ($followedUsers as $followed) {
+                $allPosts = array_merge($allPosts, $followed->getPosts()->toArray());
+            }
+            usort($allPosts, ['FPost', 'compareByTime']);
+        }catch (\Exception $e) {
+            echo "ERROR " . $e->getMessage();
             return [];
         }
-        usort($posts, ['FPost', 'compareByTime']);
 
-        $result = [];
-        foreach ($posts as $p) {
-            $result[] = [$p/*, self::getImageById($p->getProfile()->getProPic())*/]; 
-        }
-
-        return $result;
+        return $allPosts;
     }
 
     /**
@@ -150,14 +157,37 @@ class FPersistentManager{
             return [];
         }
 
-        //$posts = FPost::getUserPosts($userID);
         return [
             'user' => $user,
             'followers' => $followers,
             'followed' => $followed,
-            /*'posts' => $posts*/
         ];
     }
 
+    public static function getCreatedPosts($userId) {
+        return FPersistentManager::getUserById($userId)->getPosts()->toArray();
+    }
+
+    public static function getCreatedRecipes($userId) {
+        return FPersistentManager::getUserById($userId)->getRecipes()->toArray();
+    }
+
+    public static function getSavedPosts($userId) {
+        return FPersistentManager::getUserById($userId)->getSavedPosts()->toArray();
+    }
+
+    public static function getSavedRecipes($userId) {
+        return FPersistentManager::getUserById($userId)->getSavedRecipes()->toArray();
+    }
+
+    public static function getGenericMeals() {
+        return FEntityManager::getInstance()->getObjList(EMeal::getEntity(), "type", "Generic");
+    }
+
+    public static function addMeal(EMeal $meal){
+        if (!FEntityManager::getInstance()->existWithAttribute(EMeal::getEntity(), "nameMeal", $meal->getName())){
+            self::create($meal);
+        }
+    }
 
 }

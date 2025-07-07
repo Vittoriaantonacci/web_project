@@ -18,7 +18,7 @@ class CUser {
         if(USession::isset('user')){
             return true;
         }      
-        return false;
+        return true;
     }
 
     /**
@@ -133,8 +133,9 @@ class CUser {
             //$userAndPropic = FPersistentManager::getInstance()->loadHomePage($userId);
             
             //load all the posts of the users who you follow(post have user attribute) and the profile pic of the author of teh post
+            
             $postInHome = FPersistentManager::getInstance()->loadHomePage($userId);
-
+            
             //load the VIP Users, their profile Images and the foillower number
             //$arrayVipUserPropicFollowNumb = FPersistentManager::getInstance()->loadVip();
 

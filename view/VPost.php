@@ -17,13 +17,10 @@ class VPost {
         $this->smarty->display('new_post.tpl');
     }
 
-    public function postSaved() {
+    public function postSaved($createdPosts, $savedPosts) {
         try{
-            $post = FPersistentManager::getInstance()->getPostById(1);
-            $altroPost = FPersistentManager::getInstance()->getPostById(3);
-            
-            $this->smarty->assign('savedPost', array($post));
-            $this->smarty->assign('yourPost', array($post, $altroPost));
+            $this->smarty->assign('savedPost', $savedPosts);
+            $this->smarty->assign('yourPost', $createdPosts);
             $this->smarty->display('post_sec.tpl');
         } catch (Exception $e) {
             $this->smarty->assign('error', $e->getMessage());

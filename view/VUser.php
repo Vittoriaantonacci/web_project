@@ -25,7 +25,6 @@ class VUser{
         $this->smarty->display('login.tpl');
     }
 
-    public function error(){}
 
     public function showProfile(EProfile $profile) {
         $this->smarty->assign('profile', $profile);

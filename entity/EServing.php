@@ -25,7 +25,7 @@ class EServing {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idServing = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idServing = null; 
     
     #[ORM\Column(type: "text")]
     private string $description;
@@ -42,8 +42,8 @@ class EServing {
     #[ORM\Column(type: "float")]
     private float $fat;
     
-    #[ORM\ManyToOne(targetEntity: EMeal::class, inversedBy: "servings")]
-    #[ORM\JoinColumn(name: "meal_id", referencedColumnName: "idMeal", nullable: false)]
+    #[ORM\OneToOne(inversedBy: "serving", targetEntity: EMeal::class)]
+    #[ORM\JoinColumn(name: "meal_id", referencedColumnName: "idMeal")]
     private ?EMeal $meal = null;
 
     private static string $entity = EServing::class;
@@ -73,12 +73,12 @@ class EServing {
 
     public function getFat(): float { return $this->fat; }
 
-    public function getMeal(): ?EMeal { return $this->meal; }   
+    public function getMeal(): ?EMeal {
+        return $this->meal;
+    }
 
 
     /**SETTERS */
-    //Doctrine gestisce automaticamente l’id, il metodo setIdServing() non serve e può causare problemi
-
     public function setDescription(string $description): void { $this->description = $description; }
 
     public function setCalories(float $calories): void { $this->calories = $calories; }
@@ -90,4 +90,15 @@ class EServing {
     public function setFat(float $fat): void { $this->fat = $fat; }
 
     public function setMeal(?EMeal $meal): void { $this->meal = $meal; }
+
+    public function toString(): string {
+        return sprintf(
+            "%s | Calorie: %.2f | Carboidrati: %.2fg | Proteine: %.2fg | Grassi: %.2fg",
+            $this->description,
+            $this->calories,
+            $this->carbohydrate,
+            $this->protein,
+            $this->fat
+        );
+    }
 }

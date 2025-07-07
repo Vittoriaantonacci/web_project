@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-06-27 10:39:49
+/* Smarty version 5.5.1, created on 2025-06-30 17:09:48
   from 'file:homePage.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_685e58d59fb0b9_58378701',
+  'unifunc' => 'content_6862a8bceac570_47825844',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14fda0aa01694e2fec01347e05de3cf4898ce0f4' => 
     array (
       0 => 'homePage.tpl',
-      1 => 1751013587,
+      1 => 1751295726,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_685e58d59fb0b9_58378701 (\Smarty\Template $_smarty_tpl) {
+function content_6862a8bceac570_47825844 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1891464635685e58d59eb2d9_09413799', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_9755898176862a8bce90434_67738774', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1232613215685e58d59f08c8_14942850', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_12178054396862a8bce9a8c5_22627005', "body");
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_1891464635685e58d59eb2d9_09413799 extends \Smarty\Runtime\Block
+class Block_9755898176862a8bce90434_67738774 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -46,7 +46,7 @@ Home - Recipeek<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1232613215685e58d59f08c8_14942850 extends \Smarty\Runtime\Block
+class Block_12178054396862a8bce9a8c5_22627005 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -72,15 +72,15 @@ $foreach0DoElse = false;
 ?>
   <div class="card post-card">
     <div class="card-body">
-      <h5 class="card-title"><?php echo $_smarty_tpl->getValue('post')[0]->getTitle();?>
+      <h5 class="card-title"><?php echo $_smarty_tpl->getValue('post')->getTitle();?>
 </h5>
-      <h6 class="card-subtitle mb-2 text-muted">di <?php echo $_smarty_tpl->getValue('post')[0]->getProfile()->getUsername();?>
+      <h6 class="card-subtitle mb-2 text-muted">di <?php echo $_smarty_tpl->getValue('post')->getProfile()->getUsername();?>
 </h6>
-      <p class="card-text"><?php echo $_smarty_tpl->getValue('post')[0]->getDescription();?>
+      <p class="card-text"><?php echo $_smarty_tpl->getValue('post')->getDescription();?>
 </p>
-      <p class="text-muted small">Creato il: <?php echo $_smarty_tpl->getValue('post')[0]->getCreationTimeStr();?>
+      <p class="text-muted small">Creato il: <?php echo $_smarty_tpl->getValue('post')->getCreationTimeStr();?>
 </p>
-      <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')[0]->getIdPost();?>
+      <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
 " class="btn btn-sm btn-outline-primary">Visualizza</a>
     </div>
   </div>

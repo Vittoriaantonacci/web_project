@@ -12,13 +12,10 @@
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity] 
 #[ORM\Table(name: "image")]
-
 class EImage{
 
     #[ORM\Id]
@@ -39,8 +36,20 @@ class EImage{
     private string $imagePath;
 
     #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "images", cascade: ["persist", "remove"])]
-    #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost", nullable: false)]
-    private EPost $post;
+    #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost", nullable: true)]
+    private ?EPost $post = null;
+
+    #[ORM\OneToOne(targetEntity: EMeal::class, inversedBy: "image", cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idMeal", referencedColumnName: "idMeal", nullable: true)]
+    private ?EMeal $meal = null;
+
+    #[ORM\OneToOne(targetEntity: ERecipe::class, inversedBy: "image", cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idRecipe", referencedColumnName: "idRecipe", nullable: true)]
+    private ?ERecipe $recipe = null;
+
+    #[ORM\OneToOne(targetEntity: EProfile::class, inversedBy: "image", cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser", nullable: true)]
+    private ?EProfile $profile = null;
 
     private static $entity = EImage::class;
 
@@ -65,12 +74,16 @@ class EImage{
 
     public function getImagePath(): string { return $this->imagePath; }
 
-    public function getPost(): EPost { return $this->post; }
+    public function getPost(): ?EPost { return $this->post; }
+
+    public function getMeal(): ?EMeal { return $this->meal; }
+
+    public function getRecipe(): ?ERecipe { return $this->recipe; }
+
+    public function getProfile(): ?EProfile { return $this->profile; }
 
 
     /** SETTERS */  
-    //Doctrine gestisce automaticamente l’id, il metodo setIdImage() non serve e può causare problemi
-
     public function setName(string $name): void { $this->name = $name; }
 
     public function setSize(int $size): void { $this->size = $size; }
@@ -79,5 +92,11 @@ class EImage{
 
     public function setImagePath(string $path): void { $this->imagePath = $path; }
 
-    public function setPost(EPost $post): void { $this->post = $post; }
+    public function setPost(?EPost $post): void { $this->post = $post; }
+
+    public function setMeal(?EMeal $meal): void { $this->meal = $meal; }
+
+    public function setRecipe(?ERecipe $recipe): void { $this->recipe = $recipe; }
+
+    public function setProfile(?EProfile $profile): void { $this->profile = $profile; }
 }

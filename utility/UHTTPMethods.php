@@ -33,7 +33,7 @@ class UHTTPMethods {
         }
     }
 
-    public static function saveUploadedFile(string $inputName): ?array {
+    public static function saveUploadedFile(string $inputName, string $dest): ?array {
         // Check if the file was uploaded without errors
         if (!isset($_FILES[$inputName]) || $_FILES[$inputName]['error'] !== UPLOAD_ERR_OK) {
             return ['error' => $_FILES[$inputName]['error'] ?? 'No file uploaded or upload error.'];
@@ -48,7 +48,7 @@ class UHTTPMethods {
         // Create a safe file name
         $safeName = uniqid('img_', true) . '.' . strtolower($extension);
         // Define the destination directory and path
-        $destinationDir = __DIR__ . '/../public/uploads/posts';
+        $destinationDir = __DIR__ . '/../public/uploads/' . $dest;
         $destinationPath = $destinationDir . '/' . $safeName;
 
         // Ensure the destination directory exists
@@ -61,7 +61,7 @@ class UHTTPMethods {
         
         if (move_uploaded_file($tmpPath, $destinationPath)) {
             return [
-                'path' => '/uploads/' . $safeName,
+                'path' => $safeName,
                 'name' => $originalName,
                 'ext' => strtolower($extension),
                 'size' => $size

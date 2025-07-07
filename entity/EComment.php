@@ -25,7 +25,7 @@ class EComment{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idComment = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idComment = null; 
    
     #[ORM\Column(type: "text")]
     private string $body;

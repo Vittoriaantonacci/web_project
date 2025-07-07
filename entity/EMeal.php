@@ -25,28 +25,26 @@ class EMeal{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idMeal = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idMeal = null; 
     
     #[ORM\Column(type: "string")]
     private string $nameMeal;
-   
-    #[ORM\OneToOne(targetEntity: EImage::class, cascade: ["persist", "remove"])]
-    #[ORM\JoinColumn(name: "image_id", referencedColumnName: "idImage", nullable: false)]
-    private EImage $imageMeal;
-   
+
     #[ORM\Column(type: "string")]
     private string $type;
-    
-    #[ORM\ManyToOne(targetEntity: ERecipe::class, inversedBy: "ingredients")]
-    #[ORM\JoinColumn(name: "recipe_id", referencedColumnName: "idRecipe", nullable: false)]
-    private ?ERecipe $recipe = null;
-  
-    #[ORM\OneToMany(mappedBy: "meal", targetEntity: EServing::class, cascade: ["persist", "remove"], orphanRemoval: true)]
-    private Collection $servings;
+   
+    #[ORM\OneToOne(inversedBy: "meal", targetEntity: EImage::class, cascade: ["persist"])]
+    #[ORM\JoinColumn(name: "image_id", referencedColumnName: "idImage")]
+    private ?EImage $image = null;
 
-    #[ORM\ManyToOne(targetEntity: EMealPlan::class, inversedBy: "meals")]
-    #[ORM\JoinColumn(name: "mealplan_id", referencedColumnName: "idMealPlan", nullable: true)]
-    private ?EMealPlan $mealPlan = null;
+    #[ORM\OneToOne(mappedBy: "meal", targetEntity: EServing::class, cascade: ["persist", "remove"])]
+    private ?EServing $serving = null;
+    
+    #[ORM\ManyToMany(targetEntity: ERecipe::class, mappedBy: "ingredients")]
+    private Collection $recipes;
+
+    #[ORM\ManyToMany(targetEntity: EMealPlan::class, mappedBy: "meals")]
+    private Collection $mealPlans;
 
     private static $entity = EMeal::class;
 
@@ -54,54 +52,120 @@ class EMeal{
     public function __construct($nameMeal, $type){
         $this->nameMeal = $nameMeal;
         $this->type = $type;
-        $this->servings = new ArrayCollection();  
+        $this->mealPlans = new ArrayCollection(); 
+        $this->recipes = new ArrayCollection(); 
     }
 
 
     /**GETTERS */
     public static function getEntity(): string { return self::$entity; }
     
-    public function getIdMeal(): ?int { return $this->idMeal; }
+    public function getId(): ?int { return $this->idMeal; }
 
-    public function getNameMeal(): string { return $this->nameMeal; }
+    public function getName(): string { return $this->nameMeal; }
 
-    public function getImageMeal(): EImage { return $this->imageMeal; }
+    public function getImage(): EImage { return $this->image; }
 
     public function getType(): string { return $this->type; }
 
-    public function getRecipe(): ?ERecipe { return $this->recipe; }
+    public function getRecipes() { return $this->recipes; }
 
-    public function getServings(): Collection { return $this->servings; }
+    public function getServing(): ?EServing {
+        return $this->serving;
+    }
 
-    public function getMealPlan(): ?EMealPlan { return $this->mealPlan; }
+    public function getMealPlans(): Collection { return $this->mealPlans; }
 
 
     /**SETTERS */
     //Doctrine gestisce automaticamente l’id, il metodo setIdMeal() non serve e può causare problemi
     
-    public function setNameMeal(string $nameMeal): void { $this->nameMeal = $nameMeal; }
+    public function setName(string $nameMeal): void { $this->nameMeal = $nameMeal; }
 
-    public function setImageMeal(EImage $imageMeal): void { $this->imageMeal = $imageMeal; }
+    public function setImage(EImage $imageMeal): void { $this->image = $imageMeal; }
 
     public function setType(string $type): void { $this->type = $type; }
 
-    public function setRecipe(ERecipe $recipe): void { $this->recipe = $recipe; }
-
-    public function setMealPlan(?EMealPlan $mealPlan): void { $this->mealPlan = $mealPlan; }
-
-    //metodo per aggiungere una porzione
-    public function addServing(EServing $serving): void {
-        if (!$this->servings->contains($serving)){
-            $this->servings->add($serving);
-            $serving->setMeal($this);
+    public function addMealPlan(EMealPlan $mealPlan): void {
+        if (!$this->mealPlans->contains($mealPlan)){
+            $this->mealPlans->add($mealPlan);
+            $mealPlan->addMeal($this);
         }
-    }  
+    }
 
-    //metodo per rimuovere una porzione
-    public function removeServing(EServing $serving): void {
-        if ($this->servings->contains($serving)) {
-            $this->servings->removeElement($serving);
-            $serving->setMeal(null); //scollega la porzione dal pasto
+    public function removeMealPlan(EMealPlan $mealPlan): void {
+        if (!$this->mealPlans->contains($mealPlan)){
+            $this->mealPlans->removeElement($mealPlan);
+            $mealPlan->removeMeal($this);
         }
+    }
+
+    public function setServing(EServing $serving): void {
+        $this->serving = $serving;
+        $serving->setMeal($this);
+    }
+
+    public function addRecipe(ERecipe $recipe): void {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes->add($recipe);
+            $recipe->addIngredient($this);
+        }
+    }
+
+
+    public function toString(): string {
+        $output = "Nome: " . $this->nameMeal . "\n";
+        $output .= "Tipo: " . $this->type . "\n";
+        $output .= "Servings:\n";
+        if ($this->serving) {
+            $output .= "- " . $this->serving->toString() . "\n";
+        }
+        return $output;
+    }
+
+    public static function fromFatSecretJson($data) {
+        $meals = [];
+
+        foreach ($data['foods']['food'] as $food) {
+            $name = $food['food_name'];
+            //$brand = $food['brand_name'];
+            $type = $food['food_type'] ?? 'Unknown';
+            $description = $food['food_description'];
+            // Split description: "Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g"
+            $parts = explode('-', $description, 2);
+            $info = trim($parts[0]);
+            $nutrientsPart = $parts[1] ?? '';
+            $nutrients = array_map('trim', explode('|', $nutrientsPart));
+            foreach ($nutrients as $n) {
+                if (str_contains($n, 'Calories')) {
+                    preg_match('/([\d.]+)/', $n, $matches);
+                    $cal = (float)($matches[1] ?? 0);
+                } elseif (str_contains($n, 'Fat')) {
+                    preg_match('/([\d.]+)/', $n, $matches);
+                    $fat = (float)($matches[1] ?? 0);
+                } elseif (str_contains($n, 'Carbs')) {
+                    preg_match('/([\d.]+)/', $n, $matches);
+                    $carb = (float)($matches[1] ?? 0);
+                } elseif (str_contains($n, 'Protein')) {
+                    preg_match('/([\d.]+)/', $n, $matches);
+                    $protein = (float)($matches[1] ?? 0);
+                }
+            }
+            $serving = new EServing(
+                $info,
+                $cal,
+                $carb,
+                $protein,
+                $fat
+            );
+            $meal = new EMeal(
+                $name,
+                $type
+            );
+            $meal->setServing($serving);
+            $meals[] = $meal; 
+        }
+
+        return $meals;
     }
 }
