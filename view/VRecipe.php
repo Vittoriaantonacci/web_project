@@ -12,8 +12,9 @@ class VRecipe {
      * Show a page with all infos about a recipe
      * @param ERecipe $recipe
      */
-    public function detail(ERecipe $recipe) {
+    public function detail(ERecipe $recipe, ?bool $isSaved = null)  {
         $this->smarty->assign('recipe', $recipe);
+        $this->smarty->assign('isSaved', $isSaved);
         
         $this->smarty->display('recipe.tpl');
     }

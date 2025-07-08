@@ -3,26 +3,20 @@
 class CFrontController{
     
     public function run(){
-        // Parse the request URI
-        //echo $requestUrl;
-        
         $requestUrl = UServer::getInstance()->getRequestUrl();
-        //$requestUrl = "/recipeek/Recipe/yourRecipes"; 
+        //$requestUrl = "/recipeek/Profile/visitProfile/7"; 
+
         $requestUrl = trim($requestUrl, '/');
         $urlParts = explode('/', $requestUrl);
         array_shift($urlParts);
-        //var_dump($urlParts);
 
         // Extract controller and method names
         $controllerName = !empty($urlParts[0]) ? ucfirst($urlParts[0]) : 'User';
-        //var_dump($controllerName);
         $methodName = !empty($urlParts[1]) ? $urlParts[1] : 'login';
-        //var_dump($methodName);
+
         // Load the controller class
         $controllerClass = 'C' . $controllerName;
-        //var_dump($controllerClass);
         $controllerFile = __DIR__ . "/{$controllerClass}.php";
-        //var_dump($controllerFile);
 
         if (file_exists($controllerFile)) {
             // Check if the method exists in the controller

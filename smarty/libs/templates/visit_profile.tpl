@@ -18,6 +18,15 @@
                 {if $profile->getSurname()}{$profile->getSurname()|escape}{else}vuoto{/if}
             </p>
             <p><strong>Biografia:</strong> {if $profile->getBiography()}{$profile->getBiography()|escape}{else}vuoto{/if}</p>
+            {if $isFollowed !== null}
+                <div class="mt-2">
+                    <button class="btn btn-follow {if $isFollowed}btn-danger{else}btn-outline-danger{/if}"
+                            data-action="{if $isFollowed}unfollow{else}follow{/if}"
+                            data-user-id="{$profile->getIdUser()}">
+                        🤝 {if $isFollowed}Non seguire più{else}Segui{/if}
+                    </button>
+                </div>
+            {/if}
         </div>
     </div>
 
@@ -66,17 +75,54 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <form action="/mealplan/create" method="get">
-                <button type="submit" class="btn btn-outline-primary w-100">Crea Meal Plan</button>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form action="/mealplan/list" method="get">
-                <input type="hidden" name="user" value="{$profile->getIdUser()}" />
-                <button type="submit" class="btn btn-outline-success w-100">Visualizza i miei Meal Plan</button>
-            </form>
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white d-flex justify-content-center">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('recipes')">Ricette</button>
+                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('mealplans')">Piani Alimentari</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="recipes-section">
+                        {if isset($recipes) && $recipes|@count > 0}
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                {foreach from=$recipes item=recipe}
+                                    <div class="col">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipe/{$recipe->getIdRecipe()}'">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{$recipe->getNameRecipe()|escape}</h5>
+                                                <p class="card-text">{$recipe->getDescription()|escape}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        {else}
+                            <p class="text-muted">Nessuna ricetta disponibile.</p>
+                        {/if}
+                    </div>
+                    <div id="mealplans-section" style="display: none;">
+                        {if isset($mealPlans) && $mealPlans|@count > 0}
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                {foreach from=$mealPlans item=mealPlan}
+                                    <div class="col">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/mealplan/{$mealPlan->getIdMealPlan()}'">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{$mealPlan->getNameMealPlan()|escape}</h5>
+                                                <p class="card-text">{$mealPlan->getDescription()|escape}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        {else}
+                            <p class="text-muted">Nessun piano alimentare disponibile.</p>
+                        {/if}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -91,6 +137,17 @@
         } else {
             followed.style.display = 'none';
             followers.style.display = 'block';
+        }
+    }
+    function toggleContentTab(tab) {
+        const recipes = document.getElementById('recipes-section');
+        const mealplans = document.getElementById('mealplans-section');
+        if (tab === 'recipes') {
+            recipes.style.display = 'block';
+            mealplans.style.display = 'none';
+        } else {
+            recipes.style.display = 'none';
+            mealplans.style.display = 'block';
         }
     }
 </script>

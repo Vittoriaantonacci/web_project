@@ -2,6 +2,11 @@
 
 class CRecipe {
 
+    /** -------------------- RECIPE MANAGEMENT METHODS -------------------- */
+
+    /**
+     * It shows the form to create a recipe
+     */
     public static function create() {
         if (!CUser::isLogged()) {
             header('Location: /recipeek/User/login');
@@ -12,18 +17,31 @@ class CRecipe {
         $view->create();
     }
 
+    /**
+     * It shows recipe details
+     */
     public static function view($idRecipe) {
         if (!CUser::isLogged()) {
             header('Location: /recipeek/User/login');
             exit;
         }
+        $pm = FPersistentManager::getInstance();
 
-        $recipe = FPersistentManager::getInstance()->getRecipeById($idRecipe);
+        $recipe = $pm->getRecipeById($idRecipe);
+        $idUser = USession::getInstance()->get('user');
+
+        $isSaved = null;
+        if ($recipe->getCreator()->getIdUser() != $idUser) {
+            $isSaved = $pm->isRecipeSaved($idUser, $idRecipe);
+        }
 
         $view = new VRecipe();
-        $view->detail($recipe);
+        $view->detail($recipe, $isSaved);
     }
 
+    /**
+     * It create the view with saved and created recipes (when click on your recipe section)
+     */
     public static function yourRecipes() {
         if (!CUser::isLogged()) {
             header('Location: /recipeek/User/login');
@@ -37,6 +55,12 @@ class CRecipe {
         $view->yourRecipe($createdRecipes, $savedRecipes);
     }
 
+        
+    /** -------------------- RECIPE BEHAVIOR METHODS -------------------- */
+
+    /**
+     * It create the Recipe entity with form compiled data and save it on db
+     */
     public static function onCreate() {
 
         $title = UHTTPMethods::post('nameRecipe');
@@ -77,6 +101,9 @@ class CRecipe {
 
     }
 
+    /**
+     * This method was called in the ingredient selection when it needs to perform an API call
+     */
     public static function loadMeal() {
         $input = UHTTPMethods::get('q');
 
@@ -100,5 +127,15 @@ class CRecipe {
         }, $meal_list);
         header('Content-Type: application/json');
         echo json_encode($results);*/
+    }
+
+    /**
+     * 
+     */
+    public static function addSave(){
+        $userId = USession::getInstance()->get('user');
+        $idRecipe = UHTTPMethods::post('recipeId');
+
+        FPersistentManager::getInstance()->addSavedRecipe($userId, $idRecipe);
     }
 }

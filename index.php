@@ -15,22 +15,11 @@ Installation::install();
 //populateDatabase();
 
 //CRecipe::loadMeal("Banana");
-/*
-$banana = UApiClient::getInstance()->searchFood("philadelphia");
-//var_dump($banana);
 
-$emeals = EMeal::fromFatSecretJson($banana);
-foreach ($emeals as $emeal) {
-    echo $emeal->toString();
-}
 
-//$fc->run("localhost/User/login");
 
-//$posts = FPersistentManager::getInstance()->loadHomePage(4);
-//var_dump($posts[0][0]->getComments()[0]->getBody());
 
-/* $users = FEntityManager::getInstance()->getObjList(EUser::class, 'gender', 'M');
 
-foreach ($users as $user) {
-    echo $user->getUsername() . "<br>";
-} */
+
+
+

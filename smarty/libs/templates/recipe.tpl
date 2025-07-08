@@ -17,10 +17,15 @@
                         <p class="mb-0 fw-bold">{$recipe->getCreator()->getNickname()|escape}</p>
                         <p class="text-muted">@{$recipe->getCreator()->getUsername()|escape}</p>
                     </div>
-                    <form method="post" action="/recipeek/Recipe/save">
-                        <input type="hidden" name="id" value="{$recipe->getIdRecipe()}">
-                        <button type="submit" class="btn btn-success">Salva ricetta</button>
-                    </form>
+                    {if $isSaved !== null}
+                        <div class="mt-3">
+                            <button class="btn btn-save {if $isSaved}btn-warning{else}btn-outline-warning{/if}"
+                                    data-action="{if $isSaved}removeSave{else}addSave{/if}"
+                                    data-recipe-id="{$recipe->getIdRecipe()}">
+                                🔖 {if $isSaved}Rimuovi dai salvati{else}Salva ricetta{/if}
+                            </button>
+                        </div>
+                    {/if}
                 </div>
             {/if}
         </div>
@@ -59,4 +64,8 @@
         <p class="fs-5">{$recipe->getInfos()|escape}</p>
     </div>
 </div>
+{/block}
+
+{block name = 'script'}
+<script src="/recipeek/public/assets/btn_state.js"></script>
 {/block}

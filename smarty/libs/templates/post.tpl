@@ -13,19 +13,25 @@
         <p class="text-muted small">Creato il: {$post->getCreationTimeStr()|escape}</p>
     </div>
 </div>
+
+{if $isLiked !== null}
 <div class="mt-3">
-    {if $isLiked}
-        <form method="post" action="/recipeek/Post/removeLike">
-            <input type="hidden" name="postId" value="{$post->getIdPost()}" />
-            <button class="btn btn-danger">❤️ Rimuovi Like</button>
-        </form>
-    {else}
-        <form method="post" action="/recipeek/Post/addLike">
-            <input type="hidden" name="postId" value="{$post->getIdPost()}" />
-            <button class="btn btn-outline-danger">🤍 Metti Like</button>
-        </form>
-    {/if}
+    <button class="btn btn-like {if $isLiked}btn-danger{else}btn-outline-danger{/if}"
+            data-action="{if $isLiked}removeLike{else}addLike{/if}"
+            data-post-id="{$post->getIdPost()}">
+        {if $isLiked}❤️ Rimuovi Like{else}🤍 Metti Like{/if}
+    </button>
 </div>
+{/if}
+{if $isSaved !== null}
+    <div class="mt-3">
+        <button class="btn btn-save {if $isSaved}btn-warning{else}btn-outline-warning{/if}"
+                data-action="{if $isSaved}removeSave{else}addSave{/if}"
+                data-post-id="{$post->getIdPost()}">
+            🔖 {if $isSaved}Rimuovi dai salvati{else}Salva post{/if}
+        </button>
+    </div>
+{/if}
 
 <div class="card mt-4">
     <div class="card-header">Commenti</div>
@@ -53,4 +59,8 @@
     </div>
 </div>
 
+{/block}
+
+{block name = 'script'}
+<script src="/recipeek/public/assets/btn_state.js"></script>
 {/block}

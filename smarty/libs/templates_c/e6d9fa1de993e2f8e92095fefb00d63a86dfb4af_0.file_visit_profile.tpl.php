@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 16:49:50
-  from 'file:profile.tpl' */
+/* Smarty version 5.5.1, created on 2025-07-08 16:56:10
+  from 'file:visit_profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d300ec3a8d1_28753597',
+  'unifunc' => 'content_686d318a200406_94773488',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'c5262a9793f6fbf2faf777e10adee16d65b1458e' => 
+    'e6d9fa1de993e2f8e92095fefb00d63a86dfb4af' => 
     array (
-      0 => 'profile.tpl',
-      1 => 1751985733,
+      0 => 'visit_profile.tpl',
+      1 => 1751986555,
       2 => 'file',
     ),
   ),
@@ -20,20 +20,20 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d300ec3a8d1_28753597 (\Smarty\Template $_smarty_tpl) {
+function content_686d318a200406_94773488 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1678227132686d300ebfe929_85965884', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_716752099686d318a1c1f90_75334983', "body");
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_1678227132686d300ebfe929_85965884 extends \Smarty\Runtime\Block
+class Block_716752099686d318a1c1f90_75334983 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -67,6 +67,16 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getSurname(), E
             <p><strong>Biografia:</strong> <?php if ($_smarty_tpl->getValue('profile')->getBiography()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getBiography(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?></p>
+            <?php if ($_smarty_tpl->getValue('isFollowed') !== null) {?>
+                <div class="mt-2">
+                    <button class="btn btn-follow <?php if ($_smarty_tpl->getValue('isFollowed')) {?>btn-danger<?php } else { ?>btn-outline-danger<?php }?>"
+                            data-action="<?php if ($_smarty_tpl->getValue('isFollowed')) {?>unfollow<?php } else { ?>follow<?php }?>"
+                            data-user-id="<?php echo $_smarty_tpl->getValue('profile')->getIdUser();?>
+">
+                        🤝 <?php if ($_smarty_tpl->getValue('isFollowed')) {?>Non seguire più<?php } else { ?>Segui<?php }?>
+                    </button>
+                </div>
+            <?php }?>
         </div>
     </div>
 
@@ -139,18 +149,74 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <form action="/mealplan/create" method="get">
-                <button type="submit" class="btn btn-outline-primary w-100">Crea Meal Plan</button>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form action="/mealplan/list" method="get">
-                <input type="hidden" name="user" value="<?php echo $_smarty_tpl->getValue('profile')->getIdUser();?>
-" />
-                <button type="submit" class="btn btn-outline-success w-100">Visualizza i miei Meal Plan</button>
-            </form>
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white d-flex justify-content-center">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('recipes')">Ricette</button>
+                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('mealplans')">Piani Alimentari</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="recipes-section">
+                        <?php if ((true && ($_smarty_tpl->hasVariable('recipes') && null !== ($_smarty_tpl->getValue('recipes') ?? null))) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('recipes')) > 0) {?>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('recipes'), 'recipe');
+$foreach2DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('recipe')->value) {
+$foreach2DoElse = false;
+?>
+                                    <div class="col">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipe/<?php echo $_smarty_tpl->getValue('recipe')->getIdRecipe();?>
+'">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('recipe')->getNameRecipe(), ENT_QUOTES, 'UTF-8', true);?>
+</h5>
+                                                <p class="card-text"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('recipe')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
+</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                            </div>
+                        <?php } else { ?>
+                            <p class="text-muted">Nessuna ricetta disponibile.</p>
+                        <?php }?>
+                    </div>
+                    <div id="mealplans-section" style="display: none;">
+                        <?php if ((true && ($_smarty_tpl->hasVariable('mealPlans') && null !== ($_smarty_tpl->getValue('mealPlans') ?? null))) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('mealPlans')) > 0) {?>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('mealPlans'), 'mealPlan');
+$foreach3DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('mealPlan')->value) {
+$foreach3DoElse = false;
+?>
+                                    <div class="col">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/mealplan/<?php echo $_smarty_tpl->getValue('mealPlan')->getIdMealPlan();?>
+'">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('mealPlan')->getNameMealPlan(), ENT_QUOTES, 'UTF-8', true);?>
+</h5>
+                                                <p class="card-text"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('mealPlan')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
+</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                            </div>
+                        <?php } else { ?>
+                            <p class="text-muted">Nessun piano alimentare disponibile.</p>
+                        <?php }?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -166,6 +232,17 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
         } else {
             followed.style.display = 'none';
             followers.style.display = 'block';
+        }
+    }
+    function toggleContentTab(tab) {
+        const recipes = document.getElementById('recipes-section');
+        const mealplans = document.getElementById('mealplans-section');
+        if (tab === 'recipes') {
+            recipes.style.display = 'block';
+            mealplans.style.display = 'none';
+        } else {
+            recipes.style.display = 'none';
+            mealplans.style.display = 'block';
         }
     }
 <?php echo '</script'; ?>

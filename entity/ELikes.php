@@ -56,16 +56,12 @@ class ELikes{
 
     public function getTimeStr(): string { return $this->dateLike->format('Y-m-d H:i:s'); }
 
-    //metodo per ottenere l'username dell'autore del like
     public function getUsername(): string { return $this->user->getUsername(); }
 
-    //metodo per ottenere l'id dell'autore del like
     public function getUserId(): int { return $this->user->getIdUser(); }
 
 
     /** SETTERS */  
-    //Doctrine gestisce automaticamente l’id, il metodo setIdLike() non serve e può causare problemi
-
     public function setUser(EUser $user): void { $this->user = $user; }
 
     public function setPost(EPost $post): void { $this->post = $post; }

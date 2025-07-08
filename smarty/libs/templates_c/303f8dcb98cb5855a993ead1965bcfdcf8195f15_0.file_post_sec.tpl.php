@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-06-29 13:55:28
+/* Smarty version 5.5.1, created on 2025-07-07 18:57:43
   from 'file:post_sec.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686129b07ec580_44161675',
+  'unifunc' => 'content_686bfc87306923_28773870',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '303f8dcb98cb5855a993ead1965bcfdcf8195f15' => 
     array (
       0 => 'post_sec.tpl',
-      1 => 1751198117,
+      1 => 1751907446,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686129b07ec580_44161675 (\Smarty\Template $_smarty_tpl) {
+function content_686bfc87306923_28773870 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_971040446686129b07be023_12130218', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1416959198686bfc872d8a73_18426079', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_382131153686129b07c8779_60080792', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_370515912686bfc872e46a6_57236265', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_641715101686129b07eb005_33197464', "script");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_146056477686bfc87305aa2_27074870', "script");
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_971040446686129b07be023_12130218 extends \Smarty\Runtime\Block
+class Block_1416959198686bfc872d8a73_18426079 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -51,7 +51,7 @@ I tuoi Post<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_382131153686129b07c8779_60080792 extends \Smarty\Runtime\Block
+class Block_370515912686bfc872e46a6_57236265 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -74,14 +74,17 @@ $foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('post')->value) {
 $foreach0DoElse = false;
 ?>
-                    <div class="styled-card mb-3">
-                        <h5><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QUOTES, 'UTF-8', true);?>
+                    <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
+" class="text-decoration-none text-dark">
+                        <div class="styled-card mb-3">
+                            <h5><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QUOTES, 'UTF-8', true);?>
 </h5>
-                        <p><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
+                            <p><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                        <p class="text-muted small">Categoria: <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getCategory(), ENT_QUOTES, 'UTF-8', true);?>
+                            <p class="text-muted small">Categoria: <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getCategory(), ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                    </div>
+                        </div>
+                    </a>
                 <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
@@ -99,14 +102,17 @@ $foreach1DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('post')->value) {
 $foreach1DoElse = false;
 ?>
-                    <div class="styled-card mb-3">
-                        <h5><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QUOTES, 'UTF-8', true);?>
+                    <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
+" class="text-decoration-none text-dark">
+                        <div class="styled-card mb-3">
+                            <h5><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QUOTES, 'UTF-8', true);?>
 </h5>
-                        <p><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
+                            <p><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                        <p class="text-muted small">Categoria: <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getCategory(), ENT_QUOTES, 'UTF-8', true);?>
+                            <p class="text-muted small">Categoria: <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getCategory(), ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                    </div>
+                        </div>
+                    </a>
                 <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
@@ -121,7 +127,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block "script"} */
-class Block_641715101686129b07eb005_33197464 extends \Smarty\Runtime\Block
+class Block_146056477686bfc87305aa2_27074870 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

@@ -7,7 +7,8 @@ class VPost {
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function show(EPost $post, bool $isLiked = false): void {
+    public function show(EPost $post, ?bool $isLiked = null, ?bool $isSaved = null): void {
+        $this->smarty->assign('isSaved', $isSaved);
         $this->smarty->assign('isLiked', $isLiked);
         $this->smarty->assign('post', $post);
         $this->smarty->display('post.tpl');  
@@ -18,14 +19,9 @@ class VPost {
     }
 
     public function postSaved($createdPosts, $savedPosts) {
-        try{
             $this->smarty->assign('savedPost', $savedPosts);
             $this->smarty->assign('yourPost', $createdPosts);
             $this->smarty->display('post_sec.tpl');
-        } catch (Exception $e) {
-            $this->smarty->assign('error', $e->getMessage());
-            $this->smarty->display('error.tpl');
-        }
     }
 
 }

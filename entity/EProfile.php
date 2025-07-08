@@ -120,6 +120,8 @@ class EProfile extends EUser {
 
     public function getRecipes(): Collection { return $this->recipes; }
 
+    public function getMealPlans(): Collection { return $this->mealPlans; }
+
     public function getIsBanned(): bool { return $this->isBanned; }
 
     public function getVip(): bool { return $this->vip; }

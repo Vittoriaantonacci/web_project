@@ -9,23 +9,20 @@ class CPost {
      * 
      */
     public static function view($idPost) {
+        $pm = FPersistentManager::getInstance();
+        $idUser = USession::getInstance()->get('user');
         
-        $post = FPersistentManager::getInstance()->getPostById($idPost);
-        
-        if (!$post) {
-            header('Location: /recipeek/User/home');
-            exit;
+        $post = $pm->getPostById($idPost);
+
+        $isLiked = null;
+        $isSaved = null;
+        if ($idUser != $post->getProfile()->getIdUser()) {
+            $isLiked = $pm->isLiked($idUser, $idPost);
+            $isSaved = $pm->isPostSaved($idUser, $idPost);
         }
         
-        //$isLiked = $post->getLikedByUser(null);
-        //$isLiked = $post->getLikes()->exists(function($like) {
-        //    return $like->getUser()->getIdUser() === USession::getInstance()->get('user');
-        //});
-        $isLiked = true;
-        
-
         $vPost = new VPost();
-        $vPost->show($post, $isLiked);
+        $vPost->show($post, $isLiked, $isSaved);
     }
 
     public static function create() {
@@ -61,37 +58,53 @@ class CPost {
      * @param int $idPost Refers to id of the post
      */
     public static function addComment($idPost){
-        if(CUser::isLogged()){
-            $userId = USession::getInstance()->get('user');
-            $profile = FPersistentManager::getInstance()->getUserById($userId);
-            $post = FPersistentManager::getInstance()->getPostById($idPost);
-
-            $comment = new EComment(UHTTPMethods::post('body'));
-            $profile->addComment($comment);
-            $post->addComment($comment);
-
-            FPersistentManager::getInstance()->savePost($post);
-            FPersistentManager::getInstance()->saveUser($profile);
+        if (!CUser::isLogged()) {
+            header('Location: /recipeek/User/login');
+            exit;
         }
+
+        $userId = USession::getInstance()->get('user');
+        $profile = FPersistentManager::getInstance()->getUserById($userId);
+        $post = FPersistentManager::getInstance()->getPostById($idPost);
+
+        $comment = new EComment(UHTTPMethods::post('body'));
+
+        $profile->addComment($comment);
+        $post->addComment($comment);
+
+        FPersistentManager::getInstance()->savePost($post);
+        FPersistentManager::getInstance()->saveUser($profile);
+
+        header('Location: /recipeek/Post/view/' . $idPost);
+        exit;
+
     }
 
     /**
-     * create a like taking info from the compiled form and associate it to the post
-     * @param int $idPost Refers to id of the post
+     * Create a like object and associates it to profile and post realted
      */
-    public static function addLike($idPost) {
-        if (CUser::isLogged()) {
-            $userId = USession::getInstance()->get('user');
-            $profile = FPersistentManager::getInstance()->getUserById($userId);
-            $post = FPersistentManager::getInstance()->getPostById($idPost);
+    public static function addLike() {
+        $idPost = UHTTPMethods::post('postId');
+        $idUser = USession::getInstance()->get('user');
 
-            $like = new ELikes();
-            $post->addLike($like);
-            $profile->addLike($like);
+        FPersistentManager::getInstance()->addLike($idUser, $idPost);
+    }
 
-            FPersistentManager::getInstance()->savePost($post);
-            FPersistentManager::getInstance()->saveUser($profile);
-        }
+    public static function removeLike() {
+        $idPost = UHTTPMethods::post('postId');
+        $idUser = USession::getInstance()->get('user');
+    }
+
+    public static function addSave() {
+        $idPost = UHTTPMethods::post('postId');
+        $idUser = USession::getInstance()->get('user');
+
+        FPersistentManager::getInstance()->addSavedPost($idUser, $idPost);
+    }
+
+    public static function removeSave() {
+        $idPost = UHTTPMethods::post('postId');
+        $idUser = USession::getInstance()->get('user');
     }
 
     public static function onCreate() {

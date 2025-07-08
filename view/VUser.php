@@ -10,11 +10,9 @@ class VUser{
 
     }
 
-    public function home($postInHome){     
-        //$this->smarty->assign('user', $userAndPropic[0][0]);
-        //$this->smarty->assign('userPic', $userAndPropic[0][1]);
+    public function home($postInHome, $postForYou){     
         $this->smarty->assign('posts',$postInHome);
-        //$this->smarty->assign('arrVip', $arrayVipUserPropicFollowNumb);
+        $this->smarty->assign('yourPosts', $postForYou);
         
         $this->smarty->display('homePage.tpl');
     }

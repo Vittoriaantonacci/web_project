@@ -246,6 +246,17 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getMealPlans(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMealPlans', []);
+
+        return parent::getMealPlans();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getIsBanned(): bool
     {
 

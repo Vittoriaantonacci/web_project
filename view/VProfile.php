@@ -17,4 +17,13 @@ class VProfile {
         $this->smarty->display('profile.tpl');
     }
 
+    public function visitProfile($profile, $followed, $followers) {
+        $this->smarty->assign('profile', $profile);
+        $this->smarty->assign('followed', $followed);
+        $this->smarty->assign('followers', $followers);
+        $this->smarty->assign('recipes', $profile->getRecipes()->toArray());
+        $this->smarty->assign('mealPlans', $profile->getMealPlans()->toArray());
+        $this->smarty->display('visit_profile.tpl');
+    }
+
 }

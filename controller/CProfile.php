@@ -7,8 +7,6 @@ class CProfile {
      * @return void
      */
     public static function profile() {
-        $view = new VProfile();
-        
         $profileInfos = FPersistentManager::getInstance()->getProfileInfo(USession::getInstance()->get('user'));
 
         if (!$profileInfos) {
@@ -16,6 +14,19 @@ class CProfile {
             return;
         }
 
+        $view = new VProfile();
         $view->displayProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers']);
+    }
+
+    public static function visitProfile($idProfile) {
+        $profileInfos = FPersistentManager::getInstance()->getProfileInfo($idProfile);
+
+        if (!$profileInfos) {
+            CError::showError('Profilo non trovato');
+            return;
+        }
+
+        $view = new VProfile();
+        $view->visitProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers']);
     }
 }

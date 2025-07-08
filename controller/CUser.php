@@ -127,24 +127,13 @@ class CUser {
     /** -------------------- LOADING INFO METHODS --------------------  */
     public static function homePage(){
         if(CUser::isLogged()){
-            $view = new VUser();
-
             $userId = USession::getInstance()->get('user');
-            //$userAndPropic = FPersistentManager::getInstance()->loadHomePage($userId);
-            
-            //load all the posts of the users who you follow(post have user attribute) and the profile pic of the author of teh post
             
             $postInHome = FPersistentManager::getInstance()->loadHomePage($userId);
+            $postForYou = FPersistentManager::getInstance()->loadForYouPage($userId);
             
-            //load the VIP Users, their profile Images and the foillower number
-            //$arrayVipUserPropicFollowNumb = FPersistentManager::getInstance()->loadVip();
-
-            //var_dump($userAndPropic[0][1]->getImageData());
-
-            //var_dump($userAndPropic[0][0]->getUsername());
-            //$view->home($userAndPropic, $postInHome,$arrayVipUserPropicFollowNumb);
-
-            $view->home($postInHome);
+            $view = new VUser();
+            $view->home($postInHome, $postForYou);
         }else{
             header('Location: /recipeek/User/login');
             exit;

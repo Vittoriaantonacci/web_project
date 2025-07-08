@@ -92,6 +92,9 @@
     </div>
 </div>
 
+{/block}
+
+{block name = 'script'}
 <script src="/recipeek/public/assets/add_ing.js"></script>
 <script src="/recipeek/public/assets/new_meal_api.js"></script>
 {/block}

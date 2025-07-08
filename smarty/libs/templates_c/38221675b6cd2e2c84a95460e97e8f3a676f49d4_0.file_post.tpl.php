@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-06-27 18:05:13
+/* Smarty version 5.5.1, created on 2025-07-08 16:28:01
   from 'file:post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_685ec139d1c1f3_05201956',
+  'unifunc' => 'content_686d2af17f2a00_61126399',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38221675b6cd2e2c84a95460e97e8f3a676f49d4' => 
     array (
       0 => 'post.tpl',
-      1 => 1751037406,
+      1 => 1751984873,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,28 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_685ec139d1c1f3_05201956 (\Smarty\Template $_smarty_tpl) {
+function content_686d2af17f2a00_61126399 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_932728008685ec139cea8b1_39556839', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_271557000686d2af17c1700_68412225', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_337342302685ec139cf59f3_21375993', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1934351592686d2af17d26d3_68031400', "body");
+?>
+
+
+<?php 
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1916643365686d2af17f1cc1_31357629', 'script');
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_932728008685ec139cea8b1_39556839 extends \Smarty\Runtime\Block
+class Block_271557000686d2af17c1700_68412225 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -45,7 +50,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QU
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_337342302685ec139cf59f3_21375993 extends \Smarty\Runtime\Block
+class Block_1934351592686d2af17d26d3_68031400 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -65,21 +70,27 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 </p>
     </div>
 </div>
+
+<?php if ($_smarty_tpl->getValue('isLiked') !== null) {?>
 <div class="mt-3">
-    <?php if ($_smarty_tpl->getValue('isLiked')) {?>
-        <form method="post" action="/recipeek/Post/removeLike">
-            <input type="hidden" name="postId" value="<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
-" />
-            <button class="btn btn-danger">❤️ Rimuovi Like</button>
-        </form>
-    <?php } else { ?>
-        <form method="post" action="/recipeek/Post/addLike">
-            <input type="hidden" name="postId" value="<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
-" />
-            <button class="btn btn-outline-danger">🤍 Metti Like</button>
-        </form>
-    <?php }?>
+    <button class="btn btn-like <?php if ($_smarty_tpl->getValue('isLiked')) {?>btn-danger<?php } else { ?>btn-outline-danger<?php }?>"
+            data-action="<?php if ($_smarty_tpl->getValue('isLiked')) {?>removeLike<?php } else { ?>addLike<?php }?>"
+            data-post-id="<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
+">
+        <?php if ($_smarty_tpl->getValue('isLiked')) {?>❤️ Rimuovi Like<?php } else { ?>🤍 Metti Like<?php }?>
+    </button>
 </div>
+<?php }
+if ($_smarty_tpl->getValue('isSaved') !== null) {?>
+    <div class="mt-3">
+        <button class="btn btn-save <?php if ($_smarty_tpl->getValue('isSaved')) {?>btn-warning<?php } else { ?>btn-outline-warning<?php }?>"
+                data-action="<?php if ($_smarty_tpl->getValue('isSaved')) {?>removeSave<?php } else { ?>addSave<?php }?>"
+                data-post-id="<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
+">
+            🔖 <?php if ($_smarty_tpl->getValue('isSaved')) {?>Rimuovi dai salvati<?php } else { ?>Salva post<?php }?>
+        </button>
+    </div>
+<?php }?>
 
 <div class="card mt-4">
     <div class="card-header">Commenti</div>
@@ -122,4 +133,18 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 }
 /* {/block "body"} */
+/* {block 'script'} */
+class Block_1916643365686d2af17f1cc1_31357629 extends \Smarty\Runtime\Block
+{
+public function callBlock(\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
+?>
+
+<?php echo '<script'; ?>
+ src="/recipeek/public/assets/btn_state.js"><?php echo '</script'; ?>
+>
+<?php
+}
+}
+/* {/block 'script'} */
 }

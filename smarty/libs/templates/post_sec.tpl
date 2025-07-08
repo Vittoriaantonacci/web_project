@@ -15,11 +15,13 @@
         <div id="saved-posts" class="tab-content fade show">
             {if $savedPost|@count > 0}
                 {foreach from=$savedPost item=post}
-                    <div class="styled-card mb-3">
-                        <h5>{$post->getTitle()|escape}</h5>
-                        <p>{$post->getDescription()|escape}</p>
-                        <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
-                    </div>
+                    <a href="/recipeek/Post/view/{$post->getIdPost()}" class="text-decoration-none text-dark">
+                        <div class="styled-card mb-3">
+                            <h5>{$post->getTitle()|escape}</h5>
+                            <p>{$post->getDescription()|escape}</p>
+                            <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
+                        </div>
+                    </a>
                 {/foreach}
             {else}
                 <p class="text-muted">Nessun post salvato.</p>
@@ -30,11 +32,13 @@
         <div id="created-posts" class="tab-content fade" style="display: none;">
             {if $yourPost|@count > 0}
                 {foreach from=$yourPost item=post}
-                    <div class="styled-card mb-3">
-                        <h5>{$post->getTitle()|escape}</h5>
-                        <p>{$post->getDescription()|escape}</p>
-                        <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
-                    </div>
+                    <a href="/recipeek/Post/view/{$post->getIdPost()}" class="text-decoration-none text-dark">
+                        <div class="styled-card mb-3">
+                            <h5>{$post->getTitle()|escape}</h5>
+                            <p>{$post->getDescription()|escape}</p>
+                            <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
+                        </div>
+                    </a>
                 {/foreach}
             {else}
                 <p class="text-muted">Non hai ancora creato nessun post.</p>
