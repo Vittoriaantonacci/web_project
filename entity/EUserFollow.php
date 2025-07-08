@@ -1,4 +1,13 @@
 <?php
+/**
+ * The EUserFollow class represents a "follow" relationship between two users.
+ * It includes the following attributes (with corresponding methods):
+ * - id: the unique identifier of the relationship;
+ * - idFollower: the ID of the user who follows;
+ * - idFollowed: the ID of the user being followed.
+ */
+
+
 use Doctrine\ORM\Mapping as ORM;
 
 

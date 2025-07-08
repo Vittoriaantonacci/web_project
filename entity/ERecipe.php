@@ -1,17 +1,19 @@
 <?php
 /**
- * La classe ERecipe contiene tutti gli attributi e metodi riguardanti una ricetta.
- *  Contiene i seguenti attributi (e i relativi metodi):
- * - idRecipe: identificativo univoco della ricetta;
- * - nameRecipe: nome della ricetta;
- * - infos: informazioni generali sulla ricetta;
- * - description: descrizione della ricetta;
- * - ingredients: lista degli ingredienti;
- * - preparation_time: tempo di preparazione;
- * - cooking_time: tempo di cottura;
- * - grams_one_portion: grammi per una porzione;
- * - image: immagine della ricetta (di tipo EImage);
+ * The ERecipe class defines all attributes and methods related to a recipe.
+ * It includes the following attributes (with corresponding methods):
+ * - idRecipe: a unique identifier for the recipe;
+ * - nameRecipe: the name of the recipe;
+ * - infos: general information about the recipe;
+ * - description: the description of the recipe;
+ * - preparation_time: time required for preparation;
+ * - cooking_time: time required for cooking;
+ * - grams_one_portion: weight in grams for a single portion;
+ * - image: representative image of the recipe (of type EImage);
+ * - creator: the EProfile object of the user who created the recipe;
+ * - ingredients: a set of ingredients (EMeal) that compose the recipe;
  */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
@@ -100,8 +102,6 @@ class ERecipe {
     public function getCreator(): EProfile { return $this->creator; }
 
     
-
-
     /**SETTERS */    
     public function setNameRecipe(string $nameRecipe): void { $this->nameRecipe = $nameRecipe; }
 

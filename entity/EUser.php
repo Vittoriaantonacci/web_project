@@ -1,16 +1,17 @@
 <?php
 /**
-  * La classe EUser contiene tutti gli attributi e metodi riguardanti l'utente. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idUser: è l'identificativo dell'utente stesso;
-  * - name: è il nome dell'utente;
-  * - surname: è il cognome dell'utente;
-  * - birthDate: è la data di nascita dell'utente;
-  * - gender: è il sesso dell'utente;
-  * - username: è il nome con cui l'utente sceglie di registrarsi per poi accedere;
-  * - email: è l'email con cui l'utente sceglie di registrarsi per poi accedere;
-  * - password: è la password con cui l'utente sceglie di registrarsi per poi accedere;
-*/
+ * The EUser class contains all attributes and methods related to the user.
+ * It includes the following attributes (with corresponding methods):
+ * - idUser: the unique identifier of the user;
+ * - name: the user's first name;
+ * - surname: the user's last name;
+ * - birthDate: the user's date of birth;
+ * - gender: the user's gender;
+ * - email: the email the user chooses to register and log in with;
+ * - password: the password the user chooses to register and log in with;
+ * - username: the username the user chooses to register and log in with;
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;

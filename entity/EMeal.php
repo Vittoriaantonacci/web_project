@@ -1,15 +1,16 @@
 <?php
 /**
-  * La classe EMeal contiene tutti gli attributi e metodi riguardanti il piatto stesso. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idMeal: è l'identificativo del piatto stesso;
-  * - nameMeal: è il nome del piatto;
-  * - imageMeal: è l'immagine del piatto;
-  * - type: è il tipo di patto;
-  * - recipe: è la ricetta del piatto;
-  * - servings: nel piatto c'è la lista delle porzioni;
-  * - mealPlan: riferimento al piano alimentare a cui appartiene il pasto;
-*/
+ * The EMeal class defines all attributes and methods related to a meal.
+ * It includes the following attributes (with corresponding methods):
+ * - idMeal: a unique identifier for the meal;
+ * - nameMeal: the name of the meal;
+ * - type: the type of meal;
+ * - image: the image associated with the meal;
+ * - serving: an EServing entity containing nutritional information for a single serving;
+ * - recipes: a collection of ERecipe objects that make up the meal;
+ * - mealPlans: a collection of EMealPlan objects to which the meal belongs.
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
@@ -78,7 +79,7 @@ class EMeal{
 
 
     /**SETTERS */
-    //Doctrine gestisce automaticamente l’id, il metodo setIdMeal() non serve e può causare problemi
+    //Doctrine automatically manages the ID; the setIdMeal() method is unnecessary and can cause problems
     
     public function setName(string $nameMeal): void { $this->nameMeal = $nameMeal; }
 

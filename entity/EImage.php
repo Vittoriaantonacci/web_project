@@ -1,14 +1,18 @@
 <?php
 /**
-  * La classe EImage contiene tutti gli attributi e metodi riguardanti le immagini. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idImage: è un identificativo dell'immagine stessa;
-  * - name: nome dell'immagine;
-  * - size: le dimensioni dell'immagine;
-  * - type: tipo dell'immagine;
-  * - imageData: dati binari dell'immagine;
-  * - post: post di cui l'immagine fa parte;
-*/
+ * The EImage class defines all attributes and methods related to images.
+ * It includes the following attributes (with corresponding methods):
+ * - idImage: a unique identifier for the image;
+ * - name: the name of the image;
+ * - size: the dimensions of the image;
+ * - type: the type of the image;
+ * - imagePath: the file path in the filesystem or a relative URL;
+ * - post: an EPost object to which the image may be associated;
+ * - meal: an EMeal object associated with the image;
+ * - recipe: an ERecipe object associated with the image;
+ * - profile: an EProfile object associated with the image.
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;

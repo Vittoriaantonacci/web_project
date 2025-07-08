@@ -1,15 +1,16 @@
 <?php
 /**
- * La classe EServing rappresenta una porzione di un piatto, contiene tutti gli attributi e metodi riguardanti una porzione. 
- * Contiene i seguenti attributi:
- * - idServing: identificativo della porzione;
- * - description: descrizione della porzione;
- * - calories: calorie della porzione;
- * - carbohydrate: quantità di carboidrati (g);
- * - protein: quantità di proteine (g);
- * - fat: quantità di grassi (g);
- * - meal: pasto al quale si riferisce la divisione delle porzioni
+ * The EServing class represents a serving associated with a meal, containing all attributes and methods related to a serving.
+ * It includes the following attributes:
+ * - idServing: a unique identifier for the serving;
+ * - description: description of the serving;
+ * - calories: calorie content of the serving;
+ * - carbohydrate: amount of carbohydrates (g);
+ * - protein: amount of proteins (g);
+ * - fat: amount of fats (g);
+ * - meal: reference to the meal (EMeal) associated with the serving;
  */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;

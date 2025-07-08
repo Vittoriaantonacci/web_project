@@ -1,12 +1,13 @@
 <?php
 /**
-  * La classe ELike contiene tutti gli attributi e metodi riguardanti i like. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idLike: è un identificativo del like stesso;
-  * - user: oggetto EUser relativo all'autore del like;
-  * - post: post al quale è stato messo il like; 
-  * - date: data di quando è stato messo il like;
-*/
+ * The ELike class defines all attributes and methods related to likes.
+ * It includes the following attributes (with corresponding methods):
+ * - idLike: a unique identifier for the like;
+ * - user: an EUser object representing the author of the like;
+ * - post: an EPost object to which the like was given;
+ * - dateLike: the date and time when the like was made.
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;

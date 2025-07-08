@@ -1,15 +1,16 @@
 <?php
 /**
-  * La classe EMealPlan contiene tutti gli attributi e metodi riguardanti il piano alimentare. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idMealPlan: è l'identificativo del piano alimentare stesso;
-  * - nameMealPlan: è il nome del piano alimentare;
-  * - description: è la descrizione del piano alimentare;
-  * - tag: è il tag del piano alimentare;
-  * - creation_date: è la data di creazione del piano alimentare;
-  * - creator: è il profilo che ha creato il piano alimentare;
-  * - recipes: nel piano alimentare c'è la lista delle ricette;
-*/
+ * The EMealPlan class defines all attributes and methods related to a meal plan.
+ * It includes the following attributes (with corresponding methods):
+ * - idMealPlan: a unique identifier for the meal plan;
+ * - nameMealPlan: the name of the meal plan;
+ * - description: the description of the meal plan;
+ * - tag: the tag associated with the meal plan;
+ * - creation_time: the date and time when the meal plan was created;
+ * - creator: an EProfile object representing the creator of the meal plan;
+ * - meals: a collection of EMeal objects that compose the meal plan.
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
@@ -84,7 +85,7 @@ class EMealPlan{
 
 
     /**SETTERS */
-    //Doctrine gestisce automaticamente l’id, il metodo setIdMealPlan() non serve e può causare problemi
+    //Doctrine automatically manages the ID; the setIdMealPlan() method is unnecessary and can cause problems
     public function setNameMealPlan(string $nameMealPlan): void { $this->nameMealPlan = $nameMealPlan; }
 
     public function setDescription(string $description): void { $this->description = $description; }

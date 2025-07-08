@@ -1,15 +1,16 @@
 <?php
 /**
-  * La classe EComment contiene tutti gli attributi e metodi riguardanti i commenti. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idComment: è un identificativo del commento stesso;
-  * - body: testo/corpo del commento;
-  * - isRemoved: commento rimosso o no;
-  * - user: oggetto EUser relativo all'autore del commento;
-  * - post: post al quale appartiene il commento;
-  * - creation_time: data e ora del commento;
-  * - isPinned: commento fissato o no; 
-*/
+ * The EComment class defines all attributes and methods related to comments.
+ * It includes the following attributes (with corresponding methods):
+ * - idComment: a unique identifier for the comment;
+ * - body: the text content of the comment;
+ * - isRemoved: indicates whether the comment has been removed;
+ * - user: an EProfile object representing the author of the comment;
+ * - post: an EPost object indicating the post to which the comment belongs;
+ * - creation_time: the date and time when the comment was created;
+ * - isPinned: indicates whether the comment is pinned at the top.
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
@@ -77,7 +78,6 @@ class EComment{
 
     public function getIsPinned(): bool { return $this->isPinned; }
 
-    //metodo per ottenere l'username dell'autore del commento
     public function getUsername(): string { return $this->user->getUsername(); }
 
 

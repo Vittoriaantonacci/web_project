@@ -1,17 +1,23 @@
 <?php
 /**
-  * La classe EProfile è un'estensione della classe EUser e contiene tutti gli attributi e metodi riguardanti il profilo. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - nickname: è il nome del profilo stesso;
-  * - pro_pic: è l'immagine del profilo;
-  * - biography: è la biografia che compare nel profilo;
-  * - info: sono informazioni che l'utente può mettere sul proprio profilo;
-  * - post: sono i post presenti nel profilo;
-  * - vip: abbonamento si o no, quindi un utente può essere vip o meno;
-  * - isBanned: si o no;
-  * - meal_plans: nel profilo c'è la lista dei piani alimentari (pasti);
-  * - favorites: lista di ricette favorite.
-  */
+ * The EProfile class is an extension of the EUser class and defines all attributes and methods related to the profile.
+ * It includes the following attributes (with corresponding methods):
+ * - nickname: the name of the profile;
+ * - biography: the biography displayed on the profile;
+ * - info: additional information the user can add to their profile;
+ * - vip: a boolean indicating whether the user is VIP or not;
+ * - isBanned: a boolean indicating whether the user has been banned;
+ * - image: the profile image;
+ * - comments: the comments written by the user (OneToMany relationship with EComment);
+ * - likes: the likes made by the user (OneToMany relationship with ELike);
+ * - posts: the posts published by the user (OneToMany relationship with EPost);
+ * - mealPlans: the meal plans created by the user (OneToMany relationship with EMealPlan);
+ * - recipes: the recipes created by the user (OneToMany relationship with ERecipe);
+ * - savedRecipes: recipes saved by the user (ManyToMany relationship with ERecipe);
+ * - savedMealPlans: meal plans saved by the user (ManyToMany relationship with EMealPlan);
+ * - savedPosts: posts saved by the user (ManyToMany relationship with EPost);
+ */
+
 
 require_once('vendor/autoload.php');
 require_once('EUser.php');
@@ -132,6 +138,7 @@ class EProfile extends EUser {
 
     public function getSavedRecipes(): Collection { return $this->savedRecipes; }
 
+
     /** SETTERS */
     public function setNickname(string $nickname): void { $this->nickname = $nickname; }
 
@@ -144,7 +151,6 @@ class EProfile extends EUser {
     public function setIsBanned(bool $isBanned): void { $this->isBanned = $isBanned; }
 
     public function setVip(bool $vip): void { $this->vip = $vip; }
-
 
     public function addComment(EComment $comment): void {
         if (!$this->comment->contains($comment)) {
@@ -198,8 +204,6 @@ class EProfile extends EUser {
             $this->savedPosts->add($post);
         }
     }
-
-
 
     public function removePost(EPost $post): void {
         if ($this->posts->contains($post)) {

@@ -1,18 +1,19 @@
 <?php
 /**
-  * La classe EPost contiene tutti gli attributi e metodi riguardanti i post. 
-  *  Contiene i seguenti attributi (e i relativi metodi):
-  * - idPost: è un identificativo del post stesso;
-  * - title: titolo del post;
-  * - description: descrizione del post;
-  * - category: categoria del post;
-  * - creation_time: data e ora del post;
-  * - isRemoved: post rimosso o no;
-  * - profile: oggetto EProfile relativo al profilo di colui che ha pubblicato il post;
-  * - images: insieme di immagini del post;
-  * - comments: insieme dei commenti del post;
-  * - likes: insieme dei like del post;
-*/
+ * The EPost class defines all attributes and methods related to posts.
+ * It includes the following attributes (with corresponding methods):
+ * - idPost: a unique identifier for the post;
+ * - title: the title of the post;
+ * - description: the description of the post;
+ * - category: the category of the post;
+ * - creation_time: the date and time when the post was created;
+ * - isRemoved: indicates whether the post has been removed;
+ * - profile: an EProfile object representing the user profile that created the post;
+ * - images: a collection of EImage objects associated with the post;
+ * - comments: a collection of EComment objects related to the post;
+ * - likes: a collection of ELike objects related to the post;
+ */
+
 
 require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
@@ -110,8 +111,9 @@ class EPost{
         return false;
     }
 
+    
     /** SETTERS */    
-    //Doctrine gestisce automaticamente l’id, il metodo setIdPost() non serve e può causare problemi
+    //Doctrine automatically manages the ID; the setIdPost() method is unnecessary and can cause problems 
 
     public function setTitle(string $title): void { $this->title = $title; }
 

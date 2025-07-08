@@ -1,10 +1,8 @@
 <?php
 /**
- * La classe EMod è un'estensione della classe EUser. Questa classe nasce poichè i tipi di utilizzatori dell'applicazione in questione sono diversi. 
- * Contiene i seguenti attributi:
- * - role: indica il ruolo;
- * - permission:
-*/
+ * The EMod class is an extension of the EUser class.
+ * This class was created because the types of users in the application are different.
+ */
 
 
 /*
