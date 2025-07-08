@@ -28,7 +28,7 @@ class EPost{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private ?int $idPost = null; //l’id può essere null finché Doctrine non lo assegna
+    private ?int $idPost = null; 
    
     #[ORM\Column(type: "string")]
     private string $title;
@@ -45,7 +45,7 @@ class EPost{
     #[ORM\Column(type: "boolean")]
     private bool $isRemoved;
 
-    #[ORM\ManyToOne(targetEntity: EProfile::class, cascade: ["persist", "remove"])]
+    #[ORM\ManyToOne(targetEntity: EProfile::class, cascade: ["persist"])]
     #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser")]
     private EProfile $profile;
 
@@ -92,11 +92,11 @@ class EPost{
 
     public function getProfile(): EProfile { return $this->profile; }
 
-    public function getImages() { return $this->images; }
+    public function getImages(): Collection { return $this->images; }
 
-    public function getComments() { return $this->comments; }
+    public function getComments(): Collection { return $this->comments; }
 
-    public function getLikes() { return $this->likes; }
+    public function getLikes(): Collection { return $this->likes; }
 
     public function getLikedByUser($idUser): bool {
         if ($idUser === null) return false;
@@ -109,10 +109,6 @@ class EPost{
         }
         return false;
     }
-
-    //public function getComments(): ArrayCollection { return $this->comments; }
-    //public function getLikes(): ArrayCollection { return $this->likes; }
-
 
     /** SETTERS */    
     //Doctrine gestisce automaticamente l’id, il metodo setIdPost() non serve e può causare problemi

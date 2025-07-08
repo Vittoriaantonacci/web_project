@@ -1,3 +1,4 @@
+/*
 body {
   background-color: #121212;
   color: #e0e0e0;
@@ -87,4 +88,148 @@ body {
   z-index: 1020;
   background-color: #121212;
   padding: 0.5rem 1rem;
+}
+*/
+
+
+/* Sfondo e testo di base */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+}
+.d-flex {
+  display: flex;
+}
+.sidebar-left {
+  background-color: #1e1e1e;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  min-width: 200px;
+  max-width: 300px;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+.sidebar-right {
+  background-color: #1e1e1e;
+  border-radius: 1rem 0 0 1rem;
+  flex-shrink: 0;
+  min-width: 200px;
+  max-width: 300px;
+
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+}
+.nav-link {
+  color: #e0e0e0;
+}
+.nav-link:hover {
+  background-color: rgba(201, 193, 248, 0.66);
+  color: #8affc1;
+  border-radius: 1rem;
+}
+
+/* Input e textarea leggibili */
+.form-control,
+.form-select {
+  background-color: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border: 1px solid #444 !important;
+}
+
+.form-control::placeholder,
+textarea::placeholder {
+  color: #bbbbbb !important; /* Più visibile su sfondo scuro */
+}
+
+/* Select dropdown leggibile */
+.form-select option {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+
+/* Card container */
+.card {
+  background-color: #1e1e1e !important;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+/* Header delle card personalizzati */
+.card-header {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Colori personalizzati per le card header */
+.card-header.bg-primary {
+  background-color: #7d4cff !important; /* Viola */
+}
+
+.card-header.bg-secondary {
+  background-color: #6ee7b7 !important; /* Verde chiaro */
+}
+
+.card-header.bg-success {
+  background-color: #6ee7b7 !important; /* Verde chiaro */
+}
+
+/* Pulsanti */
+.btn-outline-danger {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+}
+.btn-outline-danger:hover {
+  background-color: #ff6b6b;
+  color: #121212;
+}
+
+.btn-outline-primary {
+  border-color: #8affc1;
+  color: #8affc1;
+}
+.btn-outline-primary:hover {
+  background-color: #9b8aff;
+  color: #121212;
+}
+
+.btn-primary {
+  background-color: #8affc1;
+  border-color: #8affc1;
+  color: #121212;
+}
+.btn-primary:hover {
+  background-color: #9b8aff;
+  border-color: #9b8aff;
+  color: #fff;
+}
+
+/* Modal e chiusura */
+.modal-content {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+.modal-body input {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+.modal-body .list-group-item {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+.btn-close {
+  filter: invert(1);
 }

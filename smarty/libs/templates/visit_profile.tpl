@@ -20,7 +20,7 @@
             <p><strong>Biografia:</strong> {if $profile->getBiography()}{$profile->getBiography()|escape}{else}vuoto{/if}</p>
             {if $isFollowed !== null}
                 <div class="mt-2">
-                    <button class="btn btn-follow {if $isFollowed}btn-danger{else}btn-outline-danger{/if}"
+                    <button class="btn btn-follow {if $isFollowed}btn-primary{else}btn-outline-primary{/if}"
                             data-action="{if $isFollowed}unfollow{else}follow{/if}"
                             data-user-id="{$profile->getIdUser()}">
                         🤝 {if $isFollowed}Non seguire più{else}Segui{/if}
@@ -151,4 +151,8 @@
         }
     }
 </script>
+{/block}
+
+{block name = 'script'}
+<script src="/recipeek/public/assets/btn_state.js"></script>
 {/block}

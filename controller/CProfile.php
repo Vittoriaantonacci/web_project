@@ -29,4 +29,12 @@ class CProfile {
         $view = new VProfile();
         $view->visitProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers']);
     }
+
+    public static function follow() {
+        $followerId = USession::getInstance()->get('user');
+        $followedId = UHTTPMethods::post('profileId');
+
+        
+
+    }
 }

@@ -24,11 +24,11 @@ class ELikes{
     #[ORM\Column(type: "integer")]
     private ?int $idLike = null; //l’id può essere null finché Doctrine non lo assegna
    
-    #[ORM\ManyToOne(targetEntity: EUser::class, inversedBy: "likes", cascade: ["persist", "remove"])]
+    #[ORM\ManyToOne(targetEntity: EUser::class, inversedBy: "likes", cascade: ["persist"])]
     #[ORM\JoinColumn(name: "idUser", referencedColumnName: "idUser")]
     private EUser $user;
     
-    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "likes", cascade: ["persist", "remove"])]
+    #[ORM\ManyToOne(targetEntity: EPost::class, inversedBy: "likes", cascade: ["persist"])]
     #[ORM\JoinColumn(name: "idPost", referencedColumnName: "idPost")]
     private EPost $post;
     

@@ -17,6 +17,14 @@ Installation::install();
 //CRecipe::loadMeal("Banana");
 
 
+/*
+$post = FPersistentManager::getInstance()->getPostById(1);
+
+$likes = $post->getLikes()->toArray();
+
+foreach ($likes as $like) {
+    echo "ciao";
+}*/
 
 
 
