@@ -32,12 +32,12 @@ class VMealPlan {
 
     /**
      * Show "YOUR MEAL PLAN" page, that contains saved and created ones
-     * @param EMealPlan $createdRecipes
-     * @param EMealPlan $savedRecipes
+     * @param EMealPlan $createdMealPlan
+     * @param EMealPlan $savedMealPlan
      */
-    public function yourRecipe($createdRecipes, $savedRecipes) {
-        $this->smarty->assign('savedRecipe', $savedRecipes);
-        $this->smarty->assign('yourRecipe', $createdRecipes);
+    public function yourMealPlan($createdMealPlan, $savedMealPlan) {
+        $this->smarty->assign('savedMealPlan', $savedMealPlan);
+        $this->smarty->assign('yourMealPlan', $createdMealPlan);
         $this->smarty->display('meal_plan_sec.tpl');
     }
 }
