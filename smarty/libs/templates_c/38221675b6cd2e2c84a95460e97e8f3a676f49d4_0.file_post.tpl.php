@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 16:28:01
+/* Smarty version 5.5.1, created on 2025-07-09 00:50:50
   from 'file:post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d2af17f2a00_61126399',
+  'unifunc' => 'content_686da0ca5368b1_14516274',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38221675b6cd2e2c84a95460e97e8f3a676f49d4' => 
     array (
       0 => 'post.tpl',
-      1 => 1751984873,
+      1 => 1752015047,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d2af17f2a00_61126399 (\Smarty\Template $_smarty_tpl) {
+function content_686da0ca5368b1_14516274 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_271557000686d2af17c1700_68412225', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1594488580686da0ca4fee24_99665617', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1934351592686d2af17d26d3_68031400', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1582144763686da0ca506ba6_07915889', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1916643365686d2af17f1cc1_31357629', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_2119530658686da0ca534414_51529286', 'script');
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_271557000686d2af17c1700_68412225 extends \Smarty\Runtime\Block
+class Block_1594488580686da0ca4fee24_99665617 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -50,7 +50,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QU
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1934351592686d2af17d26d3_68031400 extends \Smarty\Runtime\Block
+class Block_1582144763686da0ca506ba6_07915889 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -93,7 +93,7 @@ if ($_smarty_tpl->getValue('isSaved') !== null) {?>
 <?php }?>
 
 <div class="card mt-4">
-    <div class="card-header">Commenti</div>
+    <div class="card-header bg-primary">Commenti</div>
     <div class="card-body">
         <?php if ($_smarty_tpl->getValue('post')->getComments() && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('post')->getComments()) > 0) {?>
             <?php
@@ -134,7 +134,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_1916643365686d2af17f1cc1_31357629 extends \Smarty\Runtime\Block
+class Block_2119530658686da0ca534414_51529286 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

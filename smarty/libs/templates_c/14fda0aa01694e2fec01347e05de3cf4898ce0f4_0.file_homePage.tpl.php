@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 15:01:06
+/* Smarty version 5.5.1, created on 2025-07-09 01:54:25
   from 'file:homePage.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d16925ee5d2_98403981',
+  'unifunc' => 'content_686dafb15b9a03_50414018',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '14fda0aa01694e2fec01347e05de3cf4898ce0f4' => 
     array (
       0 => 'homePage.tpl',
-      1 => 1751979663,
+      1 => 1752018839,
       2 => 'file',
     ),
   ),
@@ -20,30 +20,30 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d16925ee5d2_98403981 (\Smarty\Template $_smarty_tpl) {
+function content_686dafb15b9a03_50414018 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1438549154686d16925ca172_12139073', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1561965349686dafb15a9648_76743916', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_80556118686d16925d2979_85972864', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1005338128686dafb15ab779_64770456', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_838321015686d16925ed9f8_36515087', "script");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_923795458686dafb15b9349_16028609', "script");
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_1438549154686d16925ca172_12139073 extends \Smarty\Runtime\Block
+class Block_1561965349686dafb15a9648_76743916 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -53,7 +53,7 @@ Home - Recipeek<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_80556118686d16925d2979_85972864 extends \Smarty\Runtime\Block
+class Block_1005338128686dafb15ab779_64770456 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -63,8 +63,8 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
     <div class="styled-card">
         <!-- Topbar Tabs -->
         <div class="d-flex justify-content-around mb-3">
-            <button class="btn btn-outline-primary tab-btn active" data-target="#saved-posts">Followed</button>
-            <button class="btn btn-outline-primary tab-btn" data-target="#created-posts">ForYou</button>
+            <button class="btn btn-primary tab-btn active" data-variant="primary" data-target="#saved-posts">Followed</button>
+            <button class="btn btn-primary tab-btn" data-variant="primary" data-target="#created-posts">ForYou</button>
         </div>
 
         <!-- Sezione: Post Salvati -->
@@ -77,7 +77,7 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('post')->value) {
 $foreach0DoElse = false;
 ?>
                   <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
-" class="card post-card text-decoration-none text-dark">
+" class="card text-decoration-none">
                     <div class="card-body">
                       <h5 class="card-title"><?php echo $_smarty_tpl->getValue('post')->getTitle();?>
 </h5>
@@ -107,7 +107,7 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('post')->value) {
 $foreach1DoElse = false;
 ?>
                   <a href="/recipeek/Post/view/<?php echo $_smarty_tpl->getValue('post')->getIdPost();?>
-" class="card post-card text-decoration-none text-dark">
+" class="card text-decoration-none">
                     <div class="card-body">
                       <h5 class="card-title"><?php echo $_smarty_tpl->getValue('post')->getTitle();?>
 </h5>
@@ -133,7 +133,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block "script"} */
-class Block_838321015686d16925ed9f8_36515087 extends \Smarty\Runtime\Block
+class Block_923795458686dafb15b9349_16028609 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

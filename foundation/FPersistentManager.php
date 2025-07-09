@@ -57,9 +57,13 @@ class FPersistentManager{
     
     public static function getCreatedRecipes($userId) { return FPersistentManager::getUserById($userId)->getRecipes()->toArray(); }
 
+    public static function getCreatedMealPlans($userId) { return FPersistentManager::getUserById($userId)->getMealPlans()->toArray(); }
+
     public static function getSavedPosts($userId) { return FPersistentManager::getUserById($userId)->getSavedPosts()->toArray(); }
 
     public static function getSavedRecipes($userId) { return FPersistentManager::getUserById($userId)->getSavedRecipes()->toArray(); }
+
+    public static function getSavedMealPlans($userId) { return FPersistentManager::getUserById($userId)->getSavedMealPlans()->toArray(); }
 
     public static function getGenericMeals() { return FEntityManager::getInstance()->getObjList(EMeal::getEntity(), "type", "Generic"); }
 
@@ -125,7 +129,7 @@ class FPersistentManager{
      */
     public static function getUserByUsername($username) {
         if(FEntityManager::getInstance()->existWithAttribute(EUser::class, "username", $username)) {
-            return FUser::getUserByUsername($username);
+            return FEntityManager::getInstance()->getObjByValue(EProfile::getEntity(), 'username', $username);
         }else{
             return null;
         }
@@ -151,20 +155,27 @@ class FPersistentManager{
     /**
      * Method that return information about a profile for profile page
      */
-    public static function getProfileInfo($userID) {
-        $user = self::getUserById($userID);
-        try{
-        $followers = FUserFollow::getFollowerUsers($userID);
-        $followed = FUserFollow::getFollowedUsers($userID);
-        }catch (\Exception $e) {
-            echo "ERROR " . $e->getMessage();
-            return [];
-        }
+    public static function getProfileInfo($visitedId, $visitingId = null) {
+        $user = self::getUserById($visitedId);
+        
+        $followers = FUserFollow::getFollowerUsers($visitedId);
+        $followed = FUserFollow::getFollowedUsers($visitedId);
 
+        $isFollowed = false;
+
+        if ($visitingId != null) {
+            foreach ($followers as $follower) {
+                if($follower->getIdUser() == $visitingId) {
+                    $isFollowed = true;
+                }
+            }
+        }
+    
         return [
             'user' => $user,
             'followers' => $followers,
             'followed' => $followed,
+            'isFollowed' => $isFollowed
         ];
     }
 
@@ -309,12 +320,69 @@ class FPersistentManager{
     }
 
     /**
-     * Method to remove a saved post
+     * Method to remove a saved recipe
      * @param int $idUser
      * @param int $idPost
      */
     public static function removeSavedRecipe($idUser, $idRecipe) {
         $recipe = self::getRecipeById($idRecipe);
+        $user = self::getUserById($idUser);
+
+        // TODO //
+    }
+
+    /**
+     * Methos to remove a UserFollow
+     * @param int $idFollowed
+     * @param int $idFollower
+     */
+    public static function removeFollow($idFollower, $idFollowed){
+        $userFollow = FUserFollow::getUserFollow($idFollower, $idFollowed);
+        
+        if($userFollow) { self::delete($userFollow[0]); }
+    }
+
+    /**
+     * Method to save a meal plan
+     * @param int $idUser
+     * @param int $idPost
+     */
+    public static function addSavedMealPlan($idUser, $idMealPlan) {
+        $mealPlan = self::getMealPlanById($idMealPlan);
+        $user = self::getUserById($idUser);
+
+        $user->addSavedMealPlan($mealPlan);
+
+        self::saveUser($user);
+        self::saveMealPlan($mealPlan);
+    }
+
+    /**
+     * Method to check if a user saved a meal plan, to set initial state of button
+     * @param int $idUser
+     * @param int $idPost
+     * @return bool
+     */
+    public static function isRecipeMealPlan ($idUser, $idMealPlan) {
+        $mealPlan = self::getMealPlanById($idMealPlan);
+        if ($mealPlan == null) return false;
+
+        $user = self::getUserById($idUser);
+        if ($user == null) return false;
+
+        if($user->getSavedMealPlans()->contains($mealPlan)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Method to remove a saved meal plan
+     * @param int $idUser
+     * @param int $idPost
+     */
+    public static function removeSavedMealPlan($idUser, $idMealPlan) {
+        $mealPlan = self::getMealPlanById($idMealPlan);
         $user = self::getUserById($idUser);
 
         // TODO //

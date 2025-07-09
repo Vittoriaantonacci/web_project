@@ -47,9 +47,11 @@ class CRecipe {
             header('Location: /recipeek/User/login');
             exit;
         }
+        $pm = FPersistentManager::getInstance();
+        $userId = USession::getInstance()->get('user');
 
-        $createdRecipes = FPersistentManager::getInstance()->getCreatedRecipes(USession::getInstance()->get('user'));
-        $savedRecipes = FPersistentManager::getInstance()->getSavedRecipes(USession::getInstance()->get('user'));
+        $createdRecipes = $pm->getCreatedRecipes($userId);
+        $savedRecipes = $pm->getSavedRecipes($userId);
 
         $view = new VRecipe();
         $view->yourRecipe($createdRecipes, $savedRecipes);
@@ -62,6 +64,7 @@ class CRecipe {
      * It create the Recipe entity with form compiled data and save it on db
      */
     public static function onCreate() {
+        $pm = FPersistentManager::getInstance();
 
         $title = UHTTPMethods::post('nameRecipe');
         $description = UHTTPMethods::post('description');
@@ -73,7 +76,7 @@ class CRecipe {
         // lista di idMeals
         $ingredients = UHTTPMethods::post('ingredients');
         $imageData = UHTTPMethods::saveUploadedFile('image', 'recipes');
-        $profile = FPersistentManager::getInstance()->getUserById(USession::getInstance()->get('user'));
+        $profile = $pm->getUserById(USession::getInstance()->get('user'));
         
         $recipe = new ERecipe(
             nameRecipe: $title,
@@ -90,12 +93,12 @@ class CRecipe {
         }
 
         foreach($ingredients as $mealId){
-            $meal = FPersistentManager::getInstance()->getMealById($mealId);
+            $meal = $pm->getMealById($mealId);
             $recipe->addIngredient($meal);
         }
         
         $profile->addRecipe($recipe);
-        FPersistentManager::getInstance()->saveRecipe($recipe);
+        $pm->saveRecipe($recipe);
         header('Location: /recipeek/User/homePage');
         exit;
 
@@ -107,9 +110,6 @@ class CRecipe {
     public static function loadMeal() {
         $input = UHTTPMethods::get('q');
 
-        //DA SISTEMARE IL MODAL SU JAVASCRIPT (IL METODO FUNZIONA)
-        CError::showError($input);
-        /*
         $response = UApiClient::getInstance()->searchFood($input);
 
         $meal_list = EMeal::fromFatSecretJson($response);
@@ -125,17 +125,28 @@ class CRecipe {
         ];
         
         }, $meal_list);
+
         header('Content-Type: application/json');
-        echo json_encode($results);*/
+        echo json_encode($results);
     }
 
     /**
-     * 
+     * Add a Recipe to your saved
      */
     public static function addSave(){
         $userId = USession::getInstance()->get('user');
         $idRecipe = UHTTPMethods::post('recipeId');
 
         FPersistentManager::getInstance()->addSavedRecipe($userId, $idRecipe);
+    }
+
+    /**
+     * Remove a Recipe to your saved
+     */
+    public static function removeSave() {
+        $userId = USession::getInstance()->get('user');
+        $idRecipe = UHTTPMethods::post('recipeId');
+
+        FPersistentManager::getInstance()->removeSavedRecipe($userId, $idRecipe);
     }
 }

@@ -22,7 +22,7 @@
                 <div class="mt-2">
                     <button class="btn btn-follow {if $isFollowed}btn-primary{else}btn-outline-primary{/if}"
                             data-action="{if $isFollowed}unfollow{else}follow{/if}"
-                            data-user-id="{$profile->getIdUser()}">
+                            data-profile-id="{$profile->getIdUser()}">
                         🤝 {if $isFollowed}Non seguire più{else}Segui{/if}
                     </button>
                 </div>
@@ -90,7 +90,7 @@
                             <div class="row row-cols-1 row-cols-md-2 g-3">
                                 {foreach from=$recipes item=recipe}
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipe/{$recipe->getIdRecipe()}'">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/Recipe/view/{$recipe->getIdRecipe()}'">
                                             <div class="card-body">
                                                 <h5 class="card-title">{$recipe->getNameRecipe()|escape}</h5>
                                                 <p class="card-text">{$recipe->getDescription()|escape}</p>
@@ -108,7 +108,7 @@
                             <div class="row row-cols-1 row-cols-md-2 g-3">
                                 {foreach from=$mealPlans item=mealPlan}
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/mealplan/{$mealPlan->getIdMealPlan()}'">
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/MealPlan/view/{$mealPlan->getIdMealPlan()}'">
                                             <div class="card-body">
                                                 <h5 class="card-title">{$mealPlan->getNameMealPlan()|escape}</h5>
                                                 <p class="card-text">{$mealPlan->getDescription()|escape}</p>

@@ -34,7 +34,7 @@
 {/if}
 
 <div class="card mt-4">
-    <div class="card-header">Commenti</div>
+    <div class="card-header bg-primary">Commenti</div>
     <div class="card-body">
         {if $post->getComments() && $post->getComments()|@count > 0}
             {foreach from=$post->getComments() item=comment}

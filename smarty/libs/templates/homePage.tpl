@@ -7,15 +7,15 @@
     <div class="styled-card">
         <!-- Topbar Tabs -->
         <div class="d-flex justify-content-around mb-3">
-            <button class="btn btn-outline-primary tab-btn active" data-target="#saved-posts">Followed</button>
-            <button class="btn btn-outline-primary tab-btn" data-target="#created-posts">ForYou</button>
+            <button class="btn btn-primary tab-btn active" data-variant="primary" data-target="#saved-posts">Followed</button>
+            <button class="btn btn-primary tab-btn" data-variant="primary" data-target="#created-posts">ForYou</button>
         </div>
 
         <!-- Sezione: Post Salvati -->
         <div id="saved-posts" class="tab-content fade show">
             {if $posts|@count > 0}
                 {foreach from=$posts item=post}
-                  <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card post-card text-decoration-none text-dark">
+                  <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card text-decoration-none">
                     <div class="card-body">
                       <h5 class="card-title">{$post->getTitle()}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">di {$post->getProfile()->getUsername()}</h6>
@@ -33,7 +33,7 @@
         <div id="created-posts" class="tab-content fade" style="display: none;">
             {if $yourPosts|@count > 0}
                 {foreach from=$yourPosts item=post}
-                  <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card post-card text-decoration-none text-dark">
+                  <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card text-decoration-none">
                     <div class="card-body">
                       <h5 class="card-title">{$post->getTitle()}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">di {$post->getProfile()->getUsername()}</h6>

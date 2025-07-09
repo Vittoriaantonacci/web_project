@@ -22,7 +22,18 @@
             <!-- Categoria -->
             <div class="mb-3">
                 <label for="category" class="form-label">Categoria</label>
-                <input type="text" class="form-control" id="category" name="category" placeholder="Es. Dolce, Primo, Secondo..." required />
+                <select class="form-select" id="category" name="category" required>
+                    <option value="">Seleziona una categoria</option>
+                    <option value="colazione">Colazione</option>
+                    <option value="pranzo">Pranzo</option>
+                    <option value="cena">Cena</option>
+                    <option value="merenda">Merenda</option>
+                    <option value="dolce">Dolce</option>
+                    <option value="spuntino">Spuntino</option>
+                    <option value="bevanda">Bevanda</option>
+                    <option value="contorno">Contorno</option>
+                    <option value="antipasto">Antipasto</option>
+                </select>
             </div>
 
             <!-- Immagine -->

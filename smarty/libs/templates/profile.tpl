@@ -12,7 +12,7 @@
             <h2 class="mb-0">
                 {if $profile->getNickname()}{$profile->getNickname()|escape}{else}vuoto{/if}
             </h2>
-            <p class="mb-1 text-muted">@{if $profile->getUsername()}{$profile->getUsername()|escape}{else}vuoto{/if}</p>
+            <p class="mb-1">@{if $profile->getUsername()}{$profile->getUsername()|escape}{else}vuoto{/if}</p>
             <p class="mb-1">
                 <strong>Nome:</strong> {if $profile->getName()}{$profile->getName()|escape}{else}vuoto{/if}
                 {if $profile->getSurname()}{$profile->getSurname()|escape}{else}vuoto{/if}
@@ -24,39 +24,41 @@
     <div class="row mb-4">
         <div class="col">
             <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followed')">Seguiti</button>
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followers')">Follower</button>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn active" data-variant="secondary" data-target="#followed-users-section">Seguiti</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn" data-variant="secondary" data-target="#followers-users-section">Follower</button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div id="followed-users-section">
+                <div class="card">
+                    <div id="followed-users-section" class="tab-content fade show">
                         {if isset($followed) && $followed|@count > 0}
-                            <ul class="list-group list-group-flush">
-                                {foreach from=$followed item=user}
-                                    <li class="list-group-item">
+                            {foreach from=$followed item=user}
+                                <a href="/recipeek/Profile/visitProfile/{$user->getIdUser()}"  class="card text-decoration-none">
+                                    <div class="card-body">
                                         {if $user->getName()}{$user->getName()|escape}{else}vuoto{/if}
                                         {if $user->getSurname()} {$user->getSurname()|escape}{else}vuoto{/if}
                                         (@{if $user->getUsername()}{$user->getUsername()|escape}{else}vuoto{/if})
-                                    </li>
-                                {/foreach}
-                            </ul>
+                                    </div>
+                                </a>
+                            {/foreach}
                         {else}
                             <p class="text-muted">Non segui nessun utente.</p>
                         {/if}
                     </div>
-                    <div id="followers-users-section" style="display: none;">
+                    <div id="followers-users-section" class="tab-content fade" style="display: none;">
                         {if isset($followers) && $followers|@count > 0}
-                            <ul class="list-group list-group-flush">
-                                {foreach from=$followers item=user}
-                                    <li class="list-group-item">
+                            {foreach from=$followers item=user}
+                                <a href="/recipeek/Profile/visitProfile/{$user->getIdUser()}"  class="card text-decoration-none"">
+                                    <div class="card-body">
                                         {if $user->getName()}{$user->getName()|escape}{else}vuoto{/if}
                                         {if $user->getSurname()} {$user->getSurname()|escape}{else}vuoto{/if}
                                         (@{if $user->getUsername()}{$user->getUsername()|escape}{else}vuoto{/if})
-                                    </li>
-                                {/foreach}
-                            </ul>
+                                    </div>
+                                </a>
+                            {/foreach}
                         {else}
                             <p class="text-muted">Nessun follower al momento.</p>
                         {/if}
@@ -81,17 +83,8 @@
     </div>
 </div>
 
-<script>
-    function toggleFollowTab(tab) {
-        const followed = document.getElementById('followed-users-section');
-        const followers = document.getElementById('followers-users-section');
-        if (tab === 'followed') {
-            followed.style.display = 'block';
-            followers.style.display = 'none';
-        } else {
-            followed.style.display = 'none';
-            followers.style.display = 'block';
-        }
-    }
-</script>
+{/block}
+
+{block name="script"}
+<script src="/recipeek/public/assets/tab_btn.js"></script>
 {/block}

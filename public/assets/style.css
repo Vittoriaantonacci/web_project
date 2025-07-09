@@ -40,23 +40,7 @@ body {
   color: #8affc1;
   border-radius: 1rem;
 }
-.main-content {
-  flex-grow: 1;
-  padding: 2rem;
-}
-.input-group .form-control {
-  background-color: #2a2a2a;
-  border: none;
-  color: #fff;
-}
-.input-group .form-control::placeholder {
-  color: #ccc;
-}
-.input-group .btn {
-  background-color: #8affc1;
-  border: none;
-  color: #121212;
-}
+
 .input-group .btn:hover {
   background-color: #9b8aff;
   color: #fff;
@@ -138,6 +122,9 @@ body {
   color: #8affc1;
   border-radius: 1rem;
 }
+.card .text-muted {
+  color: #ccc !important; 
+}
 
 /* Input e textarea leggibili */
 .form-control,
@@ -149,7 +136,7 @@ body {
 
 .form-control::placeholder,
 textarea::placeholder {
-  color: #bbbbbb !important; /* Più visibile su sfondo scuro */
+  color: #bbbbbb !important; 
 }
 
 /* Select dropdown leggibile */
@@ -165,6 +152,8 @@ textarea::placeholder {
   border: none;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 /* Header delle card personalizzati */
@@ -196,7 +185,7 @@ textarea::placeholder {
   color: #121212;
 }
 
-.btn-outline-primary {
+.btn-outline-primary.tab-btn {
   border-color: #8affc1;
   color: #8affc1;
 }
@@ -205,7 +194,7 @@ textarea::placeholder {
   color: #121212;
 }
 
-.btn-primary {
+.tab-btn.btn-primary {
   background-color: #8affc1;
   border-color: #8affc1;
   color: #121212;
@@ -215,6 +204,72 @@ textarea::placeholder {
   border-color: #9b8aff;
   color: #fff;
 }
+
+.btn-outline-secondary {
+  border-color: #9b8aff;
+  color: #9b8aff;
+}
+.btn-outline-secondary:hover {
+  background-color: #8affc1;
+  color: #121212;
+}
+
+.btn-secondary {
+  background-color: #9b8aff;
+  border-color: #9b8aff;
+  color: #121212;
+}
+.btn-secondary:hover {
+  background-color: #8affc1;
+  border-color: #8affc1;
+  color: #fff;
+}
+
+/* Button tab_btn behavior */
+.tab-btn.btn-secondary {
+    background-color: transparent;
+    border-color: #9b8aff;
+    color: #9b8aff;
+}
+.tab-btn.btn-secondary:hover {
+    background-color: #8affc1;
+    border-color: #8affc1;
+    color: #fff;
+}
+
+.tab-btn.active.btn-secondary {
+    background-color: #9b8aff;
+    border-color: #9b8aff;
+    color: #121212;
+}
+.tab-btn.active.btn-secondary:hover {
+    background-color: #8affc1;
+    border-color: #8affc1;
+    color: #121212;
+}
+
+.tab-btn.btn-primary {
+    background-color: transparent;
+    border-color: #8affc1;
+    color: #8affc1;
+}
+.tab-btn.btn-primary:hover {
+    background-color: #9b8aff;
+    border-color: #9b8aff;
+    color: #fff;
+}
+
+.tab-btn.active.btn-primary {
+    background-color: #8affc1;
+    border-color: #8affc1;
+    color: #121212;
+}
+.tab-btn.active.btn-primary:hover {
+    background-color: #9b8aff;
+    border-color: #9b8aff;
+    color: #121212;
+}
+
 
 /* Modal e chiusura */
 .modal-content {

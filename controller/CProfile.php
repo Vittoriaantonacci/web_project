@@ -18,8 +18,9 @@ class CProfile {
         $view->displayProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers']);
     }
 
-    public static function visitProfile($idProfile) {
-        $profileInfos = FPersistentManager::getInstance()->getProfileInfo($idProfile);
+    public static function visitProfile($visitedId) {
+        $visitingId = USession::getInstance()->get('user');
+        $profileInfos = FPersistentManager::getInstance()->getProfileInfo($visitedId, $visitingId);
 
         if (!$profileInfos) {
             CError::showError('Profilo non trovato');
@@ -27,14 +28,21 @@ class CProfile {
         }
 
         $view = new VProfile();
-        $view->visitProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers']);
+        $view->visitProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers'], $profileInfos['isFollowed']);
     }
 
     public static function follow() {
         $followerId = USession::getInstance()->get('user');
         $followedId = UHTTPMethods::post('profileId');
 
-        
+        $follow = new EUserFollow($followerId, $followedId);
+        FPersistentManager::getInstance()->saveFollow($follow);
+    }
 
+    public static function unfollow() {
+        $followerId = USession::getInstance()->get('user');
+        $followedId = UHTTPMethods::post('profileId');
+
+        FPersistentManager::getInstance()->removeFollow($followerId, $followedId);
     }
 }

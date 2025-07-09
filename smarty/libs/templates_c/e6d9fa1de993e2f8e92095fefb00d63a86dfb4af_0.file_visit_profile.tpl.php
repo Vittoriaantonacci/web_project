@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 17:28:56
+/* Smarty version 5.5.1, created on 2025-07-08 23:57:15
   from 'file:visit_profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d3938d775b9_56314181',
+  'unifunc' => 'content_686d943bdf21b4_77897113',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e6d9fa1de993e2f8e92095fefb00d63a86dfb4af' => 
     array (
       0 => 'visit_profile.tpl',
-      1 => 1751988534,
+      1 => 1752011825,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d3938d775b9_56314181 (\Smarty\Template $_smarty_tpl) {
+function content_686d943bdf21b4_77897113 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_154526341686d3938d3a292_15480164', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1459390021686d943bd9e359_66620232', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1813039072686d3938d76ad9_90026272', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1092169945686d943bdf1978_04635742', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_154526341686d3938d3a292_15480164 extends \Smarty\Runtime\Block
+class Block_1459390021686d943bd9e359_66620232 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -76,7 +76,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getBiography(),
                 <div class="mt-2">
                     <button class="btn btn-follow <?php if ($_smarty_tpl->getValue('isFollowed')) {?>btn-primary<?php } else { ?>btn-outline-primary<?php }?>"
                             data-action="<?php if ($_smarty_tpl->getValue('isFollowed')) {?>unfollow<?php } else { ?>follow<?php }?>"
-                            data-user-id="<?php echo $_smarty_tpl->getValue('profile')->getIdUser();?>
+                            data-profile-id="<?php echo $_smarty_tpl->getValue('profile')->getIdUser();?>
 ">
                         🤝 <?php if ($_smarty_tpl->getValue('isFollowed')) {?>Non seguire più<?php } else { ?>Segui<?php }?>
                     </button>
@@ -174,7 +174,7 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('recipe')->value) {
 $foreach2DoElse = false;
 ?>
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipe/<?php echo $_smarty_tpl->getValue('recipe')->getIdRecipe();?>
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/Recipe/view/<?php echo $_smarty_tpl->getValue('recipe')->getIdRecipe();?>
 '">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('recipe')->getNameRecipe(), ENT_QUOTES, 'UTF-8', true);?>
@@ -202,7 +202,7 @@ foreach ($_from ?? [] as $_smarty_tpl->getVariable('mealPlan')->value) {
 $foreach3DoElse = false;
 ?>
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/mealplan/<?php echo $_smarty_tpl->getValue('mealPlan')->getIdMealPlan();?>
+                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/MealPlan/view/<?php echo $_smarty_tpl->getValue('mealPlan')->getIdMealPlan();?>
 '">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('mealPlan')->getNameMealPlan(), ENT_QUOTES, 'UTF-8', true);?>
@@ -257,7 +257,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_1813039072686d3938d76ad9_90026272 extends \Smarty\Runtime\Block
+class Block_1092169945686d943bdf1978_04635742 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

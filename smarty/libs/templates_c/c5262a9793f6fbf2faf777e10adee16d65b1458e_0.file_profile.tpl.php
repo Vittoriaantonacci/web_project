@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 16:49:50
+/* Smarty version 5.5.1, created on 2025-07-09 01:51:04
   from 'file:profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d300ec3a8d1_28753597',
+  'unifunc' => 'content_686daee895dd71_49868313',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c5262a9793f6fbf2faf777e10adee16d65b1458e' => 
     array (
       0 => 'profile.tpl',
-      1 => 1751985733,
+      1 => 1752018660,
       2 => 'file',
     ),
   ),
@@ -20,20 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d300ec3a8d1_28753597 (\Smarty\Template $_smarty_tpl) {
+function content_686daee895dd71_49868313 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1678227132686d300ebfe929_85965884', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_610790120686daee893a3c2_97566095', "body");
 ?>
 
-<?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
+
+<?php 
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1110183779686daee895d639_82619059', "script");
+$_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_1678227132686d300ebfe929_85965884 extends \Smarty\Runtime\Block
+class Block_610790120686daee893a3c2_97566095 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -53,7 +56,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getNickname(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>
             </h2>
-            <p class="mb-1 text-muted">@<?php if ($_smarty_tpl->getValue('profile')->getUsername()) {
+            <p class="mb-1">@<?php if ($_smarty_tpl->getValue('profile')->getUsername()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getUsername(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?></p>
             <p class="mb-1">
@@ -73,23 +76,26 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getBiography(),
     <div class="row mb-4">
         <div class="col">
             <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followed')">Seguiti</button>
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followers')">Follower</button>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn active" data-variant="secondary" data-target="#followed-users-section">Seguiti</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn" data-variant="secondary" data-target="#followers-users-section">Follower</button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div id="followed-users-section">
+                <div class="card">
+                    <div id="followed-users-section" class="tab-content fade show">
                         <?php if ((true && ($_smarty_tpl->hasVariable('followed') && null !== ($_smarty_tpl->getValue('followed') ?? null))) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('followed')) > 0) {?>
-                            <ul class="list-group list-group-flush">
-                                <?php
+                            <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('followed'), 'user');
 $foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('user')->value) {
 $foreach0DoElse = false;
 ?>
-                                    <li class="list-group-item">
+                                <a href="/recipeek/Profile/visitProfile/<?php echo $_smarty_tpl->getValue('user')->getIdUser();?>
+"  class="card text-decoration-none">
+                                    <div class="card-body">
                                         <?php if ($_smarty_tpl->getValue('user')->getName()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getName(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>
@@ -98,25 +104,26 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getName(), ENT_QUO
                                         (@<?php if ($_smarty_tpl->getValue('user')->getUsername()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getUsername(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>)
-                                    </li>
-                                <?php
+                                    </div>
+                                </a>
+                            <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-                            </ul>
                         <?php } else { ?>
                             <p class="text-muted">Non segui nessun utente.</p>
                         <?php }?>
                     </div>
-                    <div id="followers-users-section" style="display: none;">
+                    <div id="followers-users-section" class="tab-content fade" style="display: none;">
                         <?php if ((true && ($_smarty_tpl->hasVariable('followers') && null !== ($_smarty_tpl->getValue('followers') ?? null))) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('followers')) > 0) {?>
-                            <ul class="list-group list-group-flush">
-                                <?php
+                            <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('followers'), 'user');
 $foreach1DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('user')->value) {
 $foreach1DoElse = false;
 ?>
-                                    <li class="list-group-item">
+                                <a href="/recipeek/Profile/visitProfile/<?php echo $_smarty_tpl->getValue('user')->getIdUser();?>
+"  class="card text-decoration-none"">
+                                    <div class="card-body">
                                         <?php if ($_smarty_tpl->getValue('user')->getName()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getName(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>
@@ -125,11 +132,11 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getName(), ENT_QUO
                                         (@<?php if ($_smarty_tpl->getValue('user')->getUsername()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('user')->getUsername(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>)
-                                    </li>
-                                <?php
+                                    </div>
+                                </a>
+                            <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-                            </ul>
                         <?php } else { ?>
                             <p class="text-muted">Nessun follower al momento.</p>
                         <?php }?>
@@ -155,23 +162,22 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
     </div>
 </div>
 
-<?php echo '<script'; ?>
->
-    function toggleFollowTab(tab) {
-        const followed = document.getElementById('followed-users-section');
-        const followers = document.getElementById('followers-users-section');
-        if (tab === 'followed') {
-            followed.style.display = 'block';
-            followers.style.display = 'none';
-        } else {
-            followed.style.display = 'none';
-            followers.style.display = 'block';
-        }
-    }
-<?php echo '</script'; ?>
->
 <?php
 }
 }
 /* {/block "body"} */
+/* {block "script"} */
+class Block_1110183779686daee895d639_82619059 extends \Smarty\Runtime\Block
+{
+public function callBlock(\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
+?>
+
+<?php echo '<script'; ?>
+ src="/recipeek/public/assets/tab_btn.js"><?php echo '</script'; ?>
+>
+<?php
+}
+}
+/* {/block "script"} */
 }

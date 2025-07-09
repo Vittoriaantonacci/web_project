@@ -44,7 +44,7 @@ class FUserFollow{
         return $result;
     }
 
-    public static function getUserFollow($idUser, $idFollowed){
-        return FEntityManager::getInstance()->getObjByTWOValues(EUserFollow::getEntity(), 'idFollower', $idUser, 'idFollowed', $idFollowed);
+    public static function getUserFollow($idfollower, $idFollowed){
+        return FEntityManager::getInstance()->getObjByTWOValues(EUserFollow::getEntity(), 'idFollower', $idfollower, 'idFollowed', $idFollowed);
     }
 }
