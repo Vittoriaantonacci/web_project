@@ -21,25 +21,37 @@ function openModal(selectEl) {
     newInput.addEventListener('input', () => {
         const q = newInput.value;
         if (q.length > 2) {
-            fetch(`/recipeek/Recipe/loadMeal?q=${encodeURIComponent(q)}`)
-                .then(res => res.json())
-                .then(data => {
-                    resultsContainer.innerHTML = '';
-                    if (Array.isArray(data)) {
-                        data.forEach(meal => {
-                            const btn = document.createElement('button');
-                            btn.className = 'list-group-item list-group-item-action';
-                            btn.textContent = meal.name;
-                            btn.onclick = () => {
-                                const option = document.createElement('option');
-                                option.value = meal.name;
-                                option.textContent = meal.name;
-                                selectEl.appendChild(option);
-                                selectEl.value = meal.name;
-                                closeModal();
-                            };
-                            resultsContainer.appendChild(btn);
-                        });
+            fetch('/recipeek/Recipe/loadMeal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `input=${encodeURIComponent(q)}`
+                })
+                .then(res => res.text())
+                .then(txt => {
+                    console.log('Risposta grezza:', txt);
+                    try {
+                        const data = JSON.parse(txt);
+                        console.log('Parsed JSON:', data);
+                        resultsContainer.innerHTML = '';
+                        if (Array.isArray(data)) {
+                            data.forEach(meal => {
+                                const btn = document.createElement('button');
+                                btn.className = 'list-group-item list-group-item-action';
+                                btn.textContent = meal.name;
+                                btn.onclick = () => {
+                                    const option = document.createElement('option');
+                                    option.value = meal.name;
+                                    option.textContent = meal.name;
+                                    selectEl.appendChild(option);
+                                    selectEl.value = meal.name;
+                                    closeModal();
+                                };
+                                resultsContainer.appendChild(btn);
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Errore parsing JSON:', e);
+                        resultsContainer.innerHTML = '<div class="text-danger">Errore nella risposta del server</div>';
                     }
                 })
                 .catch(err => {

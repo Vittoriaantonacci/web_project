@@ -71,16 +71,12 @@ class EMeal{
 
     public function getRecipes() { return $this->recipes; }
 
-    public function getServing(): ?EServing {
-        return $this->serving;
-    }
+    public function getServing(): ?EServing { return $this->serving; }
 
     public function getMealPlans(): Collection { return $this->mealPlans; }
 
 
     /**SETTERS */
-    //Doctrine automatically manages the ID; the setIdMeal() method is unnecessary and can cause problems
-    
     public function setName(string $nameMeal): void { $this->nameMeal = $nameMeal; }
 
     public function setImage(EImage $imageMeal): void { $this->image = $imageMeal; }

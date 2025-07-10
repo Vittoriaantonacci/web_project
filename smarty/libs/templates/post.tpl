@@ -5,35 +5,53 @@
 {block name="body"}
 <div class="card post-card">
     <div class="card-body">
-        <h2 class="card-title">{$post->getTitle()|escape}</h2>
-        <h6 class="card-subtitle mb-2 text-muted">
-            di {$post->getProfile()->getUsername()|escape}
-        </h6>
-        {if $post->getImages() && $post->getImages()|@count > 0}
-            <div id="postImagesCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {foreach from=$post->getImages() item=image name=imgLoop}
-                        <div class="carousel-item {if $smarty.foreach.imgLoop.first}active{/if}">
-                            <img src="/recipeek/public/uploads/posts/{$image->getImagePath()}" class="d-block w-100 rounded shadow" alt="Immagine del post">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-lg-6">
+                <h2 class="card-title">{$post->getTitle()|escape}</h2>
+                <div class="col-12 col-md-auto">
+                    <a href="/recipeek/Profile/visitProfile/{$post->getProfile()->getIdUser()}" class="card text-decoration-none">
+                        <div class="d-flex align-items-center">
+                            {if $post->getProfile()->getProPic()}
+                                <img src="/recipeek/public/uploads/propic/{$post->getProfile()->getProPic()->getPath()|escape}" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
+                            {else}
+                                <img src="/recipeek/public/default/profile_ph.png" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
+                            {/if}
+                            <div class="ms-3 card-body">
+                                <p class="mb-0 fw-bold">{$post->getProfile()->getNickname()|escape}</p>
+                                <p class="mb-1">@{$post->getProfile()->getUsername()|escape}</p>
+                            </div>
                         </div>
-                    {/foreach}
+                    </a>
                 </div>
-                {if $post->getImages()|@count > 1}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Precedente</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Successiva</span>
-                    </button>
+                <p class="card-text">{$post->getDescription()|escape}</p>
+                <p class="text-muted small">Creato il: {$post->getCreationTimeStr()|escape}</p>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {if $post->getImages() && $post->getImages()|@count > 0}
+                    <div id="postImagesCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {foreach from=$post->getImages() item=image name=imgLoop}
+                                <div class="carousel-item {if $smarty.foreach.imgLoop.first}active{/if}">
+                                    <img src="/recipeek/public/uploads/posts/{$image->getImagePath()}" class="fixed-post-img rounded shadow" alt="Immagine del post">
+                                </div>
+                            {/foreach}
+                        </div>
+                        {if $post->getImages()|@count > 1}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Precedente</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Successiva</span>
+                            </button>
+                        {/if}
+                    </div>
+                {else}
+                    <img src="/recipeek/public/default/post_ph.png" class="fixed-post-img rounded shadow mb-3" alt="Immagine profilo">
                 {/if}
             </div>
-        {else}
-            <img src="/recipeek/public/default/post_ph.png" class="img-fluid rounded shadow" alt="Immagine profilo">
-        {/if}
-        <p class="card-text">{$post->getDescription()|escape}</p>
-        <p class="text-muted small">Creato il: {$post->getCreationTimeStr()|escape}</p>
+        </div>
     </div>
 </div>
 

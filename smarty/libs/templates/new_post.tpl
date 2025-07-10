@@ -40,7 +40,7 @@
             <div class="mb-3">
                 <label for="images" class="form-label">Immagini</label>
                 <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple required />
-                <small class="form-text text-muted">Puoi caricare fino a 5 immagini.</small>
+                <small class="form-text mb-1">Puoi caricare fino a 5 immagini.</small>
             </div>
 
             <!-- Bottone invio -->

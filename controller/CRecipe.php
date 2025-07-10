@@ -108,7 +108,7 @@ class CRecipe {
      * This method was called in the ingredient selection when it needs to perform an API call
      */
     public static function loadMeal() {
-        $input = UHTTPMethods::get('q');
+        $input = UHTTPMethods::post('input');
 
         $response = UApiClient::getInstance()->searchFood($input);
 
@@ -128,6 +128,7 @@ class CRecipe {
 
         header('Content-Type: application/json');
         echo json_encode($results);
+        exit;
     }
 
     /**
