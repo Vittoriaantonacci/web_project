@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 23:57:15
+/* Smarty version 5.5.1, created on 2025-07-09 10:56:20
   from 'file:visit_profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d943bdf21b4_77897113',
+  'unifunc' => 'content_686e2eb4dbd5c4_30153249',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e6d9fa1de993e2f8e92095fefb00d63a86dfb4af' => 
     array (
       0 => 'visit_profile.tpl',
-      1 => 1752011825,
+      1 => 1752051378,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d943bdf21b4_77897113 (\Smarty\Template $_smarty_tpl) {
+function content_686e2eb4dbd5c4_30153249 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1459390021686d943bd9e359_66620232', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_2083284916686e2eb4d7d597_97391098', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1092169945686d943bdf1978_04635742', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1385556942686e2eb4dbc5b0_21028033', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_1459390021686d943bd9e359_66620232 extends \Smarty\Runtime\Block
+class Block_2083284916686e2eb4d7d597_97391098 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -58,7 +58,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getNickname(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?>
             </h2>
-            <p class="mb-1 text-muted">@<?php if ($_smarty_tpl->getValue('profile')->getUsername()) {
+            <p class="mb-1">@<?php if ($_smarty_tpl->getValue('profile')->getUsername()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getUsername(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?></p>
             <p class="mb-1">
@@ -257,7 +257,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_1092169945686d943bdf1978_04635742 extends \Smarty\Runtime\Block
+class Block_1385556942686e2eb4dbc5b0_21028033 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

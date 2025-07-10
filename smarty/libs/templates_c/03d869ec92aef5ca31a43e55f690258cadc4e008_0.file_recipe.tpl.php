@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 16:25:20
+/* Smarty version 5.5.1, created on 2025-07-09 18:32:59
   from 'file:recipe.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d2a50b13935_97045029',
+  'unifunc' => 'content_686e99bb0f7741_43403530',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '03d869ec92aef5ca31a43e55f690258cadc4e008' => 
     array (
       0 => 'recipe.tpl',
-      1 => 1751984717,
+      1 => 1752060054,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d2a50b13935_97045029 (\Smarty\Template $_smarty_tpl) {
+function content_686e99bb0f7741_43403530 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_658072011686d2a50ae6d81_27621894', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_353855226686e99bb0cafa2_27132469', 'body');
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1312207900686d2a50b10e98_91928567', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1269821257686e99bb0f6fd6_58273066', 'script');
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block 'body'} */
-class Block_658072011686d2a50ae6d81_27621894 extends \Smarty\Runtime\Block
+class Block_353855226686e99bb0cafa2_27132469 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -46,8 +46,10 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
     <div class="row mb-4">
         <div class="col-md-6">
             <?php if ($_smarty_tpl->getValue('recipe')->getImage()) {?>
-                <img src="<?php echo $_smarty_tpl->getValue('recipe')->getImage()->getImagePath();?>
+                <img src="/recipeek/public/uploads/recipes/<?php echo $_smarty_tpl->getValue('recipe')->getImage()->getImagePath();?>
 " class="img-fluid rounded shadow" alt="Immagine ricetta">
+            <?php } else { ?>
+                <img src="/recipeek/public/default/recipe_ph.png" class="img-fluid rounded shadow" alt="Immagine ricetta">
             <?php }?>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center">
@@ -129,7 +131,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block 'body'} */
 /* {block 'script'} */
-class Block_1312207900686d2a50b10e98_91928567 extends \Smarty\Runtime\Block
+class Block_1269821257686e99bb0f6fd6_58273066 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

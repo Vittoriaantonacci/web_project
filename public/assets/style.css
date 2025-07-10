@@ -116,6 +116,7 @@ body {
 }
 .nav-link {
   color: #e0e0e0;
+  font-weight: bold;
 }
 .nav-link:hover {
   background-color: rgba(201, 193, 248, 0.66);
@@ -126,7 +127,7 @@ body {
   color: #ccc !important; 
 }
 
-/* Input e textarea leggibili */
+/* Input e textarea */
 .form-control,
 .form-select {
   background-color: #2a2a2a !important;
@@ -185,7 +186,7 @@ textarea::placeholder {
   color: #121212;
 }
 
-.btn-outline-primary.tab-btn {
+.btn-outline-primary{
   border-color: #8affc1;
   color: #8affc1;
 }
@@ -194,7 +195,7 @@ textarea::placeholder {
   color: #121212;
 }
 
-.tab-btn.btn-primary {
+.btn-primary {
   background-color: #8affc1;
   border-color: #8affc1;
   color: #121212;

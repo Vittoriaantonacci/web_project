@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-09 00:50:50
+/* Smarty version 5.5.1, created on 2025-07-09 18:56:14
   from 'file:post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686da0ca5368b1_14516274',
+  'unifunc' => 'content_686e9f2ee39277_46735426',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38221675b6cd2e2c84a95460e97e8f3a676f49d4' => 
     array (
       0 => 'post.tpl',
-      1 => 1752015047,
+      1 => 1752079824,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686da0ca5368b1_14516274 (\Smarty\Template $_smarty_tpl) {
+function content_686e9f2ee39277_46735426 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1594488580686da0ca4fee24_99665617', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1053378661686e9f2ee136f8_94314335', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1582144763686da0ca506ba6_07915889', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1685483604686e9f2ee1b4b4_80849425', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_2119530658686da0ca534414_51529286', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1027466151686e9f2ee38b19_38259790', 'script');
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_1594488580686da0ca4fee24_99665617 extends \Smarty\Runtime\Block
+class Block_1053378661686e9f2ee136f8_94314335 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -50,7 +50,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QU
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1582144763686da0ca506ba6_07915889 extends \Smarty\Runtime\Block
+class Block_1685483604686e9f2ee1b4b4_80849425 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -64,6 +64,42 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
             di <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getProfile()->getUsername(), ENT_QUOTES, 'UTF-8', true);?>
 
         </h6>
+        <?php if ($_smarty_tpl->getValue('post')->getImages() && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('post')->getImages()) > 0) {?>
+            <div id="postImagesCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('post')->getImages(), 'image', false, NULL, 'imgLoop', array (
+  'first' => true,
+  'index' => true,
+));
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('image')->value) {
+$foreach0DoElse = false;
+$_smarty_tpl->tpl_vars['__smarty_foreach_imgLoop']->value['index']++;
+$_smarty_tpl->tpl_vars['__smarty_foreach_imgLoop']->value['first'] = !$_smarty_tpl->tpl_vars['__smarty_foreach_imgLoop']->value['index'];
+?>
+                        <div class="carousel-item <?php if (($_smarty_tpl->getValue('__smarty_foreach_imgLoop')['first'] ?? null)) {?>active<?php }?>">
+                            <img src="/recipeek/public/uploads/posts/<?php echo $_smarty_tpl->getValue('image')->getImagePath();?>
+" class="d-block w-100 rounded shadow" alt="Immagine del post">
+                        </div>
+                    <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                </div>
+                <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('post')->getImages()) > 1) {?>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Precedente</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Successiva</span>
+                    </button>
+                <?php }?>
+            </div>
+        <?php } else { ?>
+            <img src="/recipeek/public/default/post_ph.png" class="img-fluid rounded shadow" alt="Immagine profilo">
+        <?php }?>
         <p class="card-text"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getDescription(), ENT_QUOTES, 'UTF-8', true);?>
 </p>
         <p class="text-muted small">Creato il: <?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getCreationTimeStr(), ENT_QUOTES, 'UTF-8', true);?>
@@ -98,13 +134,16 @@ if ($_smarty_tpl->getValue('isSaved') !== null) {?>
         <?php if ($_smarty_tpl->getValue('post')->getComments() && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('post')->getComments()) > 0) {?>
             <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('post')->getComments(), 'comment');
-$foreach0DoElse = true;
+$foreach1DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('comment')->value) {
-$foreach0DoElse = false;
+$foreach1DoElse = false;
 ?>
                 <div class="mb-3 border-bottom pb-2">
-                    <strong><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('comment')->getUser()->getUsername(), ENT_QUOTES, 'UTF-8', true);?>
+                    <a href="/recipeek/Profile/visitProfile/<?php echo htmlspecialchars((string)$_smarty_tpl->getValue('comment')->getUser()->getIdUser(), ENT_QUOTES, 'UTF-8', true);?>
+" class="nav-link text-decoration-none">
+                        <strong><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('comment')->getUser()->getUsername(), ENT_QUOTES, 'UTF-8', true);?>
 </strong>
+                    </a>
                     <small class="text-muted ms-2"><?php echo $_smarty_tpl->getValue('comment')->getCreationTimeStr();?>
 </small>
                     <p class="mb-1"><?php echo htmlspecialchars((string)$_smarty_tpl->getValue('comment')->getBody(), ENT_QUOTES, 'UTF-8', true);?>
@@ -134,7 +173,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_2119530658686da0ca534414_51529286 extends \Smarty\Runtime\Block
+class Block_1027466151686e9f2ee38b19_38259790 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

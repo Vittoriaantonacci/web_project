@@ -85,7 +85,6 @@ class EMealPlan{
 
 
     /**SETTERS */
-    //Doctrine automatically manages the ID; the setIdMealPlan() method is unnecessary and can cause problems
     public function setNameMealPlan(string $nameMealPlan): void { $this->nameMealPlan = $nameMealPlan; }
 
     public function setDescription(string $description): void { $this->description = $description; }

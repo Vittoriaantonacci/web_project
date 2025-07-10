@@ -124,6 +124,10 @@ class EProfile extends EUser {
 
     public function getPosts(): Collection { return $this->posts; }
 
+    public function getComments(): Collection { return $this->comment; }
+
+    public function getLikes(): Collection { return $this->likes; }
+
     public function getRecipes(): Collection { return $this->recipes; }
 
     public function getMealPlans(): Collection { return $this->mealPlans; }
@@ -227,5 +231,21 @@ class EProfile extends EUser {
         if ($this->savedRecipes->contains($recipe)) {
             $this->savedRecipes->removeElement($recipe);
         }
+    }
+
+    public function removeLike(ELikes $like): void {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+        }
+    }
+
+    public function removeComment(EComment $comment): void {
+        if ($this->comment->contains($comment)) {
+            $this->comment->removeElement($comment);
+        }
+    }
+
+    public function __toString(): string {
+        return "Profile: " . $this->getNickname() . " (" . $this->getIdUser() . ")";
     }
 }

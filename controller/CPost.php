@@ -11,7 +11,7 @@ class CPost {
     public static function view($idPost) {
         $pm = FPersistentManager::getInstance();
         $idUser = USession::getInstance()->get('user');
-        
+
         $post = $pm->getPostById($idPost);
 
         $isLiked = null;
@@ -22,7 +22,7 @@ class CPost {
         }
         
         $vPost = new VPost();
-        $vPost->show($post, $isLiked, $isSaved);
+        $vPost->show($post, $isLiked, $isSaved, $idUser);
     }
 
     public static function create() {
@@ -57,25 +57,19 @@ class CPost {
      * create a comment taking info from the compiled form and associate it to the post
      * @param int $idPost Refers to id of the post
      */
-    public static function addComment($idPost){
+    public static function addComment(){
         if (!CUser::isLogged()) {
             header('Location: /recipeek/User/login');
             exit;
         }
 
         $userId = USession::getInstance()->get('user');
-        $profile = FPersistentManager::getInstance()->getUserById($userId);
-        $post = FPersistentManager::getInstance()->getPostById($idPost);
+        $postId = UHTTPMethods::post('postId');
+        $body = UHTTPMethods::post('body');
 
-        $comment = new EComment(UHTTPMethods::post('body'));
+        FPersistentManager::getInstance()->addComment($userId, $postId, $body);
 
-        $profile->addComment($comment);
-        $post->addComment($comment);
-
-        FPersistentManager::getInstance()->savePost($post);
-        FPersistentManager::getInstance()->saveUser($profile);
-
-        header('Location: /recipeek/Post/view/' . $idPost);
+        header('Location: /recipeek/Post/view/' . $postId);
         exit;
 
     }
@@ -93,6 +87,8 @@ class CPost {
     public static function removeLike() {
         $idPost = UHTTPMethods::post('postId');
         $idUser = USession::getInstance()->get('user');
+
+        FPersistentManager::getInstance()->removeLike($idUser, $idPost);
     }
 
     public static function addSave() {
@@ -105,6 +101,8 @@ class CPost {
     public static function removeSave() {
         $idPost = UHTTPMethods::post('postId');
         $idUser = USession::getInstance()->get('user');
+ 
+        FPersistentManager::getInstance()->removeSavedPost($idUser, $idPost);
     }
 
     public static function onCreate() {
@@ -117,11 +115,16 @@ class CPost {
             $post = new EPost($title, $description, $category);
             $post->setProfile($profile);
 
-            $imageData = UHTTPMethods::saveUploadedFile('image', 'posts');
+            $imageDataArray = UHTTPMethods::saveUploadedFiles('images', 'posts');
 
-            if ($imageData) {
-                $image = new EImage($imageData['name'],  $imageData['size'], $imageData['ext'], $imageData['path']);
-                $post->addImage($image);
+            if ($imageDataArray && is_array($imageDataArray)) {
+                $count = 0;
+                foreach ($imageDataArray as $imageData) {
+                    if ($count >= 5) break;
+                    $image = new EImage($imageData['name'], $imageData['size'], $imageData['ext'], $imageData['path']);
+                    $post->addImage($image);
+                    $count++;
+                }
             }
 
             FPersistentManager::getInstance()->savePost($post);

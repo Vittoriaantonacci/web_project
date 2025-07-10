@@ -16,7 +16,11 @@ class Installation{
             $stmt = $db->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" . DB_NAME ."'");
             $existingDatabase = $stmt->fetchColumn();
 
-            if(!$existingDatabase){
+            // verify if the database has tables, if not, the database is considered empty
+            $tables = $db->query("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" . DB_NAME . "';");
+            $existingTables = $tables->fetchColumn();
+
+            if(!$existingDatabase || $existingTables == 0){
                 $queryCreateDB = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
                 $db->exec($queryCreateDB);
 

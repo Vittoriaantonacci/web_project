@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 17:06:35
+/* Smarty version 5.5.1, created on 2025-07-09 12:28:26
   from 'file:layout.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d33fb459eb5_95039349',
+  'unifunc' => 'content_686e444a5b80b7_37062302',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '88e5c6e8aad3a73815637105d39a7225d23e856e' => 
     array (
       0 => 'layout.tpl',
-      1 => 1751987117,
+      1 => 1752056901,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d33fb459eb5_95039349 (\Smarty\Template $_smarty_tpl) {
+function content_686e444a5b80b7_37062302 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
 ?>
@@ -30,7 +30,7 @@ $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1214543910686d33fb44a933_06279372', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_909344576686e444a5876c5_83494117', "title");
 ?>
 </title>
 
@@ -52,7 +52,7 @@ $_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1214543910686
         <li class="nav-item"><a class="nav-link" href="/recipeek/User/homePage">🏠 Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Post/create">➕ Nuovo Post</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/create">➕ New Recipe</a></li>
-        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/create">➕ New Meal Plan</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/MealPlan/create">➕ New Meal Plan</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/User/logout">🚪 Logout</a></li>
       </ul>
     </div>
@@ -61,11 +61,11 @@ $_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1214543910686
     <div class="col main-content">
       <div class="topbar d-md-none d-flex justify-content-between w-100 mb-2 px-3">
         <button id="toggleSidebarLeft" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarLeft">☰ Info</button>
-        <button id="toggleSidebarRight" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarRight">☰ Profile</button>
+        <button id="toggleSidebarRight" class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarRight">☰ Profile</button>
       </div>
 
       <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1865442419686d33fb458901_47381740', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1578993319686e444a5b4264_56683051', "body");
 ?>
 
     </div>
@@ -93,14 +93,14 @@ $_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1865442419686
  src="/recipeek/public/assets/script.js"><?php echo '</script'; ?>
 >
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1676496088686d33fb459421_81796687', "script");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1456248647686e444a5b4c64_47062903', "script");
 ?>
 
 
 </body>
 </html><?php }
 /* {block "title"} */
-class Block_1214543910686d33fb44a933_06279372 extends \Smarty\Runtime\Block
+class Block_909344576686e444a5876c5_83494117 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -110,7 +110,7 @@ Recipeek<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1865442419686d33fb458901_47381740 extends \Smarty\Runtime\Block
+class Block_1578993319686e444a5b4264_56683051 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -118,7 +118,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 }
 /* {/block "body"} */
 /* {block "script"} */
-class Block_1676496088686d33fb459421_81796687 extends \Smarty\Runtime\Block
+class Block_1456248647686e444a5b4c64_47062903 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

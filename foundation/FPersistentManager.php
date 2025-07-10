@@ -1,5 +1,7 @@
 <?php
 
+use Dom\Comment;
+
 class FPersistentManager{
 
     /** SINGLETON CLASS INSTANCIATION  */
@@ -210,22 +212,41 @@ class FPersistentManager{
     }
 
     /**
+     * Method that add a comment to a post
+     * @param int $idUser
+     * @param int $idPost
+     * @param string $body
+     */
+    public static function addComment($idUser, $idPost, $body) {
+        $comment = new EComment($body);
+
+        $post = self::getPostById($idPost);
+        $user = self::getUserById($idUser);
+
+        $post->addComment($comment);
+        $user->addComment($comment);
+
+        self::savePost($post);
+        self::saveUser($user);
+        self::saveComment($comment);
+    }
+
+    /**
      * Verify if an user liked a post, to set initial state of button
      * @param int $idUser
      * @param int $idPost
      * @return bool
      */
     public static function isLiked($idUser, $idPost) {
-        $post = self::getPostById($idPost);
-        if ($post == null) return false;
-        
-        foreach ($post->getLikes() as $like){
-            if ($like->getUserId() == $idUser){
+        $user = self::getUserById($idUser);
+        if ($user == null) return false;
+
+        foreach ($user->getLikes()->toArray() as $like){
+            if ($like->getPost()->getIdPost() == $idPost){
                 return true;
             }
         }
         return false;
-
     }
 
     /**
@@ -234,7 +255,20 @@ class FPersistentManager{
      * @param int $idPost
      */
     public static function removeLike($idUser, $idPost) {
-        // TODO //
+        $user = self::getUserById($idUser);
+        if ($user == null) return false;
+
+        foreach ($user->getLikes()->toArray() as $like){
+            if ($like->getPost()->getIdPost() == $idPost){
+                self::delete($like);
+
+                $post = self::getPostById($idPost);
+                $post->removeLike($like);
+                self::savePost($post);
+                $user->removeLike($like);
+                self::saveUser($user);
+            }
+        }
     }
 
 
@@ -281,7 +315,10 @@ class FPersistentManager{
         $post = self::getPostById($idPost);
         $user = self::getUserById($idUser);
 
-        // TODO //
+        $user->removeSavedPost($post);
+
+        self::saveUser($user);
+        self::savePost($post);
     }
 
     
@@ -328,7 +365,9 @@ class FPersistentManager{
         $recipe = self::getRecipeById($idRecipe);
         $user = self::getUserById($idUser);
 
-        // TODO //
+        $user->removeSavedRecipe($recipe);
+
+        self::saveUser($user);
     }
 
     /**
@@ -385,7 +424,9 @@ class FPersistentManager{
         $mealPlan = self::getMealPlanById($idMealPlan);
         $user = self::getUserById($idUser);
 
-        // TODO //
+        $user->removeSavedMealPlan($mealPlan);
+
+        self::saveUser($user);
     }
 
     

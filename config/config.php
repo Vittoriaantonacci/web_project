@@ -1,8 +1,5 @@
 <?php
 
-//Param for use Doctine ORM
-define('USE_DOCTRINE', true);
-
 //Database Connection
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'RecipeekDB');

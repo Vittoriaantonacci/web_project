@@ -235,6 +235,28 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getComments(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getComments', []);
+
+        return parent::getComments();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLikes(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLikes', []);
+
+        return parent::getLikes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getRecipes(): \Doctrine\Common\Collections\Collection
     {
 
@@ -505,6 +527,39 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSavedRecipe', [$recipe]);
 
         parent::removeSavedRecipe($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeLike(\ELikes $like): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeLike', [$like]);
+
+        parent::removeLike($like);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeComment(\EComment $comment): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeComment', [$comment]);
+
+        parent::removeComment($comment);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __toString(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
+
+        return parent::__toString();
     }
 
     /**

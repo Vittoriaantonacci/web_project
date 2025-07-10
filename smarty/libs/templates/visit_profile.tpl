@@ -12,7 +12,7 @@
             <h2 class="mb-0">
                 {if $profile->getNickname()}{$profile->getNickname()|escape}{else}vuoto{/if}
             </h2>
-            <p class="mb-1 text-muted">@{if $profile->getUsername()}{$profile->getUsername()|escape}{else}vuoto{/if}</p>
+            <p class="mb-1">@{if $profile->getUsername()}{$profile->getUsername()|escape}{else}vuoto{/if}</p>
             <p class="mb-1">
                 <strong>Nome:</strong> {if $profile->getName()}{$profile->getName()|escape}{else}vuoto{/if}
                 {if $profile->getSurname()}{$profile->getSurname()|escape}{else}vuoto{/if}

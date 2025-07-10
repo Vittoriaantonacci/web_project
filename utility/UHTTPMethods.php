@@ -71,4 +71,43 @@ class UHTTPMethods {
         return ['error' => is_uploaded_file($tmpPath) ? 'File is in tmp, move issue' : 'Invalid file upload.'];
   
     }
+
+    public static function saveUploadedFiles(string $inputName, string $dest): ?array {
+        if (!isset($_FILES[$inputName]) || !is_array($_FILES[$inputName]['name'])) {
+            return ['error' => 'No files uploaded or upload error.'];
+        }
+
+        $savedFiles = [];
+
+        $fileCount = count($_FILES[$inputName]['name']);
+        for ($i = 0; $i < $fileCount; $i++) {
+            if ($_FILES[$inputName]['error'][$i] !== UPLOAD_ERR_OK) {
+                continue; // skip files with errors
+            }
+
+            $tmpPath = $_FILES[$inputName]['tmp_name'][$i];
+            $originalName = $_FILES[$inputName]['name'][$i];
+            $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+            $size = $_FILES[$inputName]['size'][$i];
+
+            $safeName = uniqid('img_', true) . '.' . strtolower($extension);
+            $destinationDir = __DIR__ . '/../public/uploads/' . $dest;
+            $destinationPath = $destinationDir . '/' . $safeName;
+
+            if (!is_dir($destinationDir)) {
+                mkdir($destinationDir, 0777, true);
+            }
+
+            if (move_uploaded_file($tmpPath, $destinationPath)) {
+                $savedFiles[] = [
+                    'path' => $safeName,
+                    'name' => $originalName,
+                    'ext' => strtolower($extension),
+                    'size' => $size
+                ];
+            }
+        }
+
+        return $savedFiles;
+    }
 }

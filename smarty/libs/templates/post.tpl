@@ -9,6 +9,29 @@
         <h6 class="card-subtitle mb-2 text-muted">
             di {$post->getProfile()->getUsername()|escape}
         </h6>
+        {if $post->getImages() && $post->getImages()|@count > 0}
+            <div id="postImagesCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {foreach from=$post->getImages() item=image name=imgLoop}
+                        <div class="carousel-item {if $smarty.foreach.imgLoop.first}active{/if}">
+                            <img src="/recipeek/public/uploads/posts/{$image->getImagePath()}" class="d-block w-100 rounded shadow" alt="Immagine del post">
+                        </div>
+                    {/foreach}
+                </div>
+                {if $post->getImages()|@count > 1}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Precedente</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Successiva</span>
+                    </button>
+                {/if}
+            </div>
+        {else}
+            <img src="/recipeek/public/default/post_ph.png" class="img-fluid rounded shadow" alt="Immagine profilo">
+        {/if}
         <p class="card-text">{$post->getDescription()|escape}</p>
         <p class="text-muted small">Creato il: {$post->getCreationTimeStr()|escape}</p>
     </div>
@@ -39,7 +62,9 @@
         {if $post->getComments() && $post->getComments()|@count > 0}
             {foreach from=$post->getComments() item=comment}
                 <div class="mb-3 border-bottom pb-2">
-                    <strong>{$comment->getUser()->getUsername()|escape}</strong>
+                    <a href="/recipeek/Profile/visitProfile/{$comment->getUser()->getIdUser()|escape}" class="nav-link text-decoration-none">
+                        <strong>{$comment->getUser()->getUsername()|escape}</strong>
+                    </a>
                     <small class="text-muted ms-2">{$comment->getCreationTimeStr()}</small>
                     <p class="mb-1">{$comment->getBody()|escape}</p>
                 </div>

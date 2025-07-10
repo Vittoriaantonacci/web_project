@@ -272,7 +272,7 @@ class EPost extends \EPost implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getImages()
+    public function getImages(): \Doctrine\Common\Collections\Collection
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImages', []);
@@ -283,7 +283,7 @@ class EPost extends \EPost implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getComments()
+    public function getComments(): \Doctrine\Common\Collections\Collection
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getComments', []);
@@ -294,7 +294,7 @@ class EPost extends \EPost implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getLikes()
+    public function getLikes(): \Doctrine\Common\Collections\Collection
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLikes', []);

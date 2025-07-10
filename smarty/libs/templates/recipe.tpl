@@ -5,7 +5,9 @@
     <div class="row mb-4">
         <div class="col-md-6">
             {if $recipe->getImage()}
-                <img src="{$recipe->getImage()->getImagePath()}" class="img-fluid rounded shadow" alt="Immagine ricetta">
+                <img src="/recipeek/public/uploads/recipes/{$recipe->getImage()->getImagePath()}" class="img-fluid rounded shadow" alt="Immagine ricetta">
+            {else}
+                <img src="/recipeek/public/default/recipe_ph.png" class="img-fluid rounded shadow" alt="Immagine ricetta">
             {/if}
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center">

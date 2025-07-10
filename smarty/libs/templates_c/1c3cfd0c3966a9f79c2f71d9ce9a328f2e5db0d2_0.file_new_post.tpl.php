@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-09 00:41:50
+/* Smarty version 5.5.1, created on 2025-07-09 18:49:34
   from 'file:new_post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d9eae505534_26312048',
+  'unifunc' => 'content_686e9d9e30b239_79338271',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1c3cfd0c3966a9f79c2f71d9ce9a328f2e5db0d2' => 
     array (
       0 => 'new_post.tpl',
-      1 => 1752014507,
+      1 => 1752079771,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d9eae505534_26312048 (\Smarty\Template $_smarty_tpl) {
+function content_686e9d9e30b239_79338271 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_343106324686d9eae4c6727_39797009', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1899534371686e9d9e2fb746_73294710', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1264829317686d9eae4cdb98_69416569', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1292138358686e9d9e308e85_37232631', "body");
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_343106324686d9eae4c6727_39797009 extends \Smarty\Runtime\Block
+class Block_1899534371686e9d9e2fb746_73294710 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -46,7 +46,7 @@ Crea Nuovo Post<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1264829317686d9eae4cdb98_69416569 extends \Smarty\Runtime\Block
+class Block_1292138358686e9d9e308e85_37232631 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -85,10 +85,11 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
                 </select>
             </div>
 
-            <!-- Immagine -->
+            <!-- Immagini -->
             <div class="mb-3">
-                <label for="image" class="form-label">Immagine</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*" required />
+                <label for="images" class="form-label">Immagini</label>
+                <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple required />
+                <small class="form-text text-muted">Puoi caricare fino a 5 immagini.</small>
             </div>
 
             <!-- Bottone invio -->

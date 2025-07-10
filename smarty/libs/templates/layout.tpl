@@ -23,7 +23,7 @@
         <li class="nav-item"><a class="nav-link" href="/recipeek/User/homePage">🏠 Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Post/create">➕ Nuovo Post</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/create">➕ New Recipe</a></li>
-        <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/create">➕ New Meal Plan</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/MealPlan/create">➕ New Meal Plan</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/User/logout">🚪 Logout</a></li>
       </ul>
     </div>
@@ -32,7 +32,7 @@
     <div class="col main-content">
       <div class="topbar d-md-none d-flex justify-content-between w-100 mb-2 px-3">
         <button id="toggleSidebarLeft" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarLeft">☰ Info</button>
-        <button id="toggleSidebarRight" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarRight">☰ Profile</button>
+        <button id="toggleSidebarRight" class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarRight">☰ Profile</button>
       </div>
 
       {block name="body"}{/block}
