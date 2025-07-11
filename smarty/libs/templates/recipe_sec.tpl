@@ -19,12 +19,12 @@
                         <div class="card-body">
                             <h5>{$recipe->getNameRecipe()|escape}</h5>
                             <p>{$recipe->getDescription()|escape}</p>
-                            <p class="text-muted small">Creato da: {$recipe->getCreator()->getUsername()|escape}</p>
+                            <p class="mb-1 small">Creato da: {$recipe->getCreator()->getUsername()|escape}</p>
                         </div>
                     </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Nessun post salvato.</p>
+                <p class="mb-1">Nessun post salvato.</p>
             {/if}
         </div>
 
@@ -36,12 +36,12 @@
                         <div class="card-body">
                             <h5>{$recipe->getNameRecipe()|escape}</h5>
                             <p>{$recipe->getDescription()|escape}</p>
-                            <p class="text-muted small">Creato da: {$recipe->getCreator()->getUsername()|escape}</p>
+                            <p class="mb-1 small">Creato da: {$recipe->getCreator()->getUsername()|escape}</p>
                         </div>
                     </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Non hai ancora creato nessun post.</p>
+                <p class="mb-1">Non hai ancora creato nessun post.</p>
             {/if}
         </div>
     </div>

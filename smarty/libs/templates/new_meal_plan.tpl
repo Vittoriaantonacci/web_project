@@ -17,10 +17,28 @@
             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
         </div>
 
-        <!-- Tag -->
+        <!-- Categoria -->
         <div class="mb-3">
-            <label for="tag" class="form-label">Tag</label>
-            <input type="text" class="form-control" id="tag" name="tag" required>
+            <label for="category" class="form-label">Categoria</label>
+            <select class="form-select" id="category" name="category" required>
+                <option value="" disabled selected>Seleziona una categoria</option>
+                <option value="antipasto">Antipasto</option>
+                <option value="primo">Primo</option>
+                <option value="secondo">Secondo</option>
+                <option value="dolce">Dolce</option>
+                <option value="bevanda">Bevanda</option>
+                {if $isVip}
+                    <option value="antipasto #Fit">Antipasto #Fit</option>
+                    <option value="primo #Fit">Primo #Fit</option>
+                    <option value="secondo #Fit">Secondo #Fit</option>
+                    <option value="dolce #Fit">Dolce #Fit</option>
+                    <option value="bevanda #Fit">Bevanda #Fit</option>
+                    <option value="contorno #Fit">Contorno #Fit</option>
+                    <option value="salsa #Fit">Salsa #Fit</option>
+                    <option value="snack #Fit">Snack #Fit</option>
+                    <option value="colazione #Fit">Colazione #Fit</option>
+                {/if}
+            </select>
         </div>
 
         {assign var=mealtimes value=['Colazione', 'Pranzo', 'Snacks', 'Cena']}
@@ -29,19 +47,19 @@
             <div class="card-header bg-success text-white">{$mealtime}</div>
             <div class="card-body">
                 <label class="form-label">Ingredienti</label>
-                <div class="ingredient-list" id="ingredient-list-{$smarty.foreach.outer.index}">
+                <div id="ingredient-list-{$mealtime|lower}" class="ingredient-list">
                     <div class="d-flex mb-2">
-                        <select class="form-select me-2 ingredient-select" name="ingredients[]">
+                        <select class="form-select me-2 ingredient-select" name="ingredients[{$mealtime|lower}][]">
                             <option disabled selected value="">Seleziona un ingrediente</option>
                             {foreach from=$meals item=meal}
                                 <option value="{$meal->getId()}">{$meal->getName()|escape}</option>
                             {/foreach}
-                            <option value="_load_more_">🔍 Carica altri cibi...</option>
+                            <option value="__load_more__">🔍 Carica altri cibi...</option>
                         </select>
                         <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredientTo('ingredient-list-{$smarty.foreach.outer.index}')">Aggiungi ingrediente</button>
+                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('{$mealtime|lower}')">Aggiungi ingrediente</button>
             </div>
         </div>
         {/foreach}
@@ -72,43 +90,4 @@
 {block name='script'}
 <script src="/recipeek/public/assets/add_ing.js"></script>
 <script src="/recipeek/public/assets/new_meal_api.js"></script>
-<script>
-    function addIngredientTo(containerId) {
-        const container = document.getElementById(containerId);
-        const select = document.createElement("select");
-        select.name = "ingredients[]";
-        select.className = "form-select me-2 ingredient-select";
-
-        const defaultOption = document.createElement("option");
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        defaultOption.text = "Seleziona un ingrediente";
-        select.appendChild(defaultOption);
-
-        {foreach from=$meals item=meal}
-            const opt = document.createElement("option");
-            opt.value = "{$meal->getId()}";
-            opt.text = "{$meal->getName()|escape:'javascript'}";
-            select.appendChild(opt);
-        {/foreach}
-
-        const loadMore = document.createElement("option");
-        loadMore.value = "_load_more_";
-        loadMore.text = "🔍 Carica altri cibi...";
-        select.appendChild(loadMore);
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "d-flex mb-2";
-        wrapper.appendChild(select);
-
-        const removeBtn = document.createElement("button");
-        removeBtn.type = "button";
-        removeBtn.className = "btn btn-outline-danger";
-        removeBtn.textContent = "Rimuovi";
-        removeBtn.onclick = function () { wrapper.remove(); };
-        wrapper.appendChild(removeBtn);
-
-        container.appendChild(wrapper);
-    }
-</script>
 {/block}

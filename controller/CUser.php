@@ -17,27 +17,85 @@ class CUser {
         }
         if(USession::isset('user')){
             return true;
-        }      
-        return true;
+        }
+        return false;
+    }
+
+    /**
+     * check if the user is logged and is a VIP user
+     * @return boolean
+     */
+    public static function isVip(){
+        if(!CUser::isLogged()){
+            return false;
+        }
+        $userId = USession::getInstance()->get('user');
+        $user = FPersistentManager::getInstance()->getUserById($userId);
+        if($user->getIsVip()){
+            return true;
+        }
+        return false;
     }
 
     /**
      * check if the user is banned
-     * @return void
+     * @param int|null $idUser
+     * If idUser is null, it will check the current user
+     * If idUser is not null, it will check the user with the given id
+     * @return bool | void
+     * If the user is banned, it will remove the session and redirect to the login page
+     * If the user is not banned, it will return false
      */
-    public static function isBanned()
-    {
-        /*
-        $userId = USession::getSessionElement('user');
-        $user = FPersistentManager::getInstance()->retriveObj(EUser::getEntity(), $userId);
-        if($user->isBanned()){
-            $view = new VUser();
-            USession::unsetSession();
-            USession::destroySession();
-            $view->loginBan();
+    public static function isBanned($idUser = null){
+        if ($idUser === null) {
+            if (!CUser::isLogged()) {
+                return false;
+            }
+            $idUser = USession::getInstance()->get('user');
+            $user = FPersistentManager::getInstance()->getUserById($idUser);
+            if($user->getIsBanned()){
+                USession::remove('user');
+                USession::unset();
+                USession::destroy();
+                header('Location: /recipeek/User/login');
+            }
+        } else {
+            $user = FPersistentManager::getInstance()->getUserById($idUser);
+            if($user->getIsBanned()){
+                return true;
+            }
+            return false;
         }
-        */
+    }
+
+    public static function isAdmin() {
+        if (!CUser::isLogged()) {
+            return false;
+        }
+        $userId = USession::getInstance()->get('user');
+        $user = FPersistentManager::getInstance()->getUserById($userId);
+        if ($user->getIsAdmin()) {
+            return true;
+        }
         return false;
+    }
+
+    public static function checkValation() {
+        if (!CUser::isLogged() || CUser::isBanned()) {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+    }
+
+    public static function requireVip($itemCategory) {
+        if (!CUser::isLogged()) {
+            header('Location: /recipeek/User/login');
+            exit;
+        }
+        if (strpos($itemCategory, "#") !== false && !CUser::isVip()) {
+            header('Location: /recipeek/User/subscribe');
+            exit;
+        }
     }
 
 
@@ -112,6 +170,34 @@ class CUser {
         }
     } 
 
+    /**
+     * This method is used to show the user profile page.
+     * It will load the user profile from the database and display it.
+     */
+    public static function subscribe(){
+        CUser::isLogged();
+
+        $view = new VUser();
+        $view->subscribe();
+    }
+
+    /**
+     * This method is used to handle the subscription checkout process.
+     * It will set the user as VIP in the database.
+     */
+    public static function subCheckout(){
+        CUser::isLogged();
+
+        $userId = USession::getInstance()->get('user');
+        $user = FPersistentManager::getInstance()->getUserById($userId);
+
+        $user->setVip(true);
+        FPersistentManager::getInstance()->saveUser($user);
+
+        header('Location: /recipeek/User/homePage');
+        exit;
+    }
+
     // this method is used to logout the user, it will remove the session and redirect to the login page
     public static function logout() {
         USession::getInstance();
@@ -125,96 +211,87 @@ class CUser {
 
 
     /** -------------------- LOADING INFO METHODS --------------------  */
+
     public static function homePage(){
-        if(CUser::isLogged()){
-            $userId = USession::getInstance()->get('user');
-            
-            $postInHome = FPersistentManager::getInstance()->loadHomePage($userId);
-            $postForYou = FPersistentManager::getInstance()->loadForYouPage($userId);
-            
-            $view = new VUser();
-            $view->home($postInHome, $postForYou);
-        }else{
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
+
+        $userId = USession::getInstance()->get('user');
+        
+        $postInHome = FPersistentManager::getInstance()->loadHomePage($userId);
+        $postForYou = FPersistentManager::getInstance()->loadForYouPage($userId);
+        
+        $view = new VUser();
+        $view->home($postInHome, $postForYou);
+
     }   
 
-    /*public static function profilePage() {
-        if ($username === null) {
-        // esempio: carica l'utente loggato dalla sessione
-            $userId = USession::getInstance()->getSessionElement('user');
-            $user = FPersistentManager::getInstance()->retriveObj(EUser::getEntity(), $userId);
-            $username = $user->getUsername();
-        }
-    
-        $view = new VUser();
-    
-        // Recupera l'utente dal database tramite username
-        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
-    
-        // Se l'utente non esiste, mostra una pagina di errore
-        if ($profile === null) {
-            $view->error(); // oppure: echo "Profilo non trovato";
-            return;
-        }
-    
-        // Mostra il profilo nella view
-        $view->showProfile($profile);
-        
-    } 
+    public static function filter(){
+        CUser::checkValation();
 
-    public static function profile(?string $username = null) {
-    if (!self::isLogged()) {
-        header('Location: /recipeek/User/login');
+        $userId = USession::getInstance()->get('user');
+        
+
+        $user = FPersistentManager::getInstance()->getUserById($userId);
+
+        $view = new VUser();
+        $view->filter(isVip: $user->getIsVip() ?? false);
+
+    }
+
+    public static function filter_api() {
+        CUser::checkValation();
+
+        $pm = FPersistentManager::getInstance();
+
+        $category = UHTTPMethods::post('category');
+
+        $posts = $pm->getPostsByCategory($category);
+        $recipes = $pm->getRecipesByCategory($category);
+        $mealPlans = $pm->getMealPlansByCategory($category);
+
+        $postArray = array_map(function ($post) {
+            return [
+                'id' => $post->getIdPost(),
+                'title' => $post->getTitle(),
+                'description' => $post->getDescription(),
+                'created' => $post->getCreationTimeStr(),
+                'category' => $post->getCategory(),
+                'username' => $post->getProfile()->getUsername(),
+            ];
+        }, $posts);
+
+        $recipeArray = array_map(function ($recipe) {
+            return [
+                'id' => $recipe->getIdRecipe(),
+                'title' => $recipe->getNameRecipe(),
+                'description' => $recipe->getDescription(),
+                'created' => $recipe->getCreationTimeStr(),
+                'category' => $recipe->getCategory(),
+                'username' => $recipe->getCreator()->getUsername(),
+            ];
+        }, $recipes);
+
+        $mealPlanArray = array_map(function ($mp) {
+            return [
+                'id' => $mp->getIdMealPlan(),
+                'name' => $mp->getNameMealPlan(),
+                'description' => $mp->getDescription(),
+                'created' => $mp->getCreationTimeStr(),
+                'category' => $mp->getCategory(),
+                'username' => $mp->getCreator()->getUsername(),
+
+            ];
+        }, $mealPlans);
+
+        $result = [
+            'posts' => $postArray,
+            'recipes' => $recipeArray,
+            'mealPlans' => $mealPlanArray
+        ];
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
         exit;
     }
 
-    $view = new VUser();
-
-    if ($username === null) {
-        // Prendi l'id utente dalla sessione
-        $userId = USession::getInstance()->getSessionElement('user');
-        if ($userId === null) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
-        // Usa getUserById invece di retriveObj
-        $profile = FPersistentManager::getInstance()->getUserById($userId);
-        if ($profile === null) {
-            $view->error();
-            return;
-        }
-    } else {
-        // Cerca l'utente tramite username
-        $profile = FPersistentManager::getInstance()->getUserByUsername($username);
-        if ($profile === null) {
-            $view->error();
-            return;
-        }
-    }
-
-        $view->showProfile($profile);
-    }*/
-
-    /** -------------------- MODIFY INFO METHODS --------------------  */
-
-    /**
-     * method to follow a user, the check is in the profile() method
-     * @param int $followerId Refers to the id of a user
-     */
-    public static function follow($followedId){
-        if(CUser::isLogged()){
-            //$userId = USession::getInstance()->getSessionElement('user');
-            $userId = 1;
-            if($followedId == 1){
-                $userId = 2;
-            }
-            //new Follow Object
-            $follow = new EUserFollow($userId, $followedId);
-            FPersistentManager::getInstance()->saveFollow($follow);
-            //$visitedUser = FPersistentManager::getInstance()->getUserById(EUser::getEntity(), $followedId);
-            //header('Location: /Agora/User/profile/' . $visitedUser->getUsername());
-        }       
-    }
 }

@@ -16,6 +16,29 @@
                     <label for="description" class="form-label">Descrizione</label>
                     <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                 </div>
+                <!-- Categoria -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">Categoria</label>
+                    <select class="form-select" id="category" name="category" required>
+                        <option value="" disabled selected>Seleziona una categoria</option>
+                        <option value="antipasto">Antipasto</option>
+                        <option value="primo">Primo</option>
+                        <option value="secondo">Secondo</option>
+                        <option value="dolce">Dolce</option>
+                        <option value="bevanda">Bevanda</option>
+                        {if $isVip}
+                            <option value="antipasto #Fit">Antipasto #Fit</option>
+                            <option value="primo #Fit">Primo #Fit</option>
+                            <option value="secondo #Fit">Secondo #Fit</option>
+                            <option value="dolce #Fit">Dolce #Fit</option>
+                            <option value="bevanda #Fit">Bevanda #Fit</option>
+                            <option value="contorno #Fit">Contorno #Fit</option>
+                            <option value="salsa #Fit">Salsa #Fit</option>
+                            <option value="snack #Fit">Snack #Fit</option>
+                            <option value="colazione #Fit">Colazione #Fit</option>
+                        {/if}
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -45,9 +68,9 @@
             <div class="card-header bg-success text-white">Ingredienti e dettagli</div>
             <div class="card-body">
                 <label for="ingredients" class="form-label">Ingredienti</label>
-                <div id="ingredient-list">
+                <div id="ingredient-list-ingredients" class="ingredient-list">
                     <div class="d-flex mb-2">
-                        <select class="form-select me-2 ingredient-select" name="ingredients[]">
+                        <select class="form-select me-2 ingredient-select" name="ingredients[ingredients][]">
                             <option disabled selected value="">Seleziona un ingrediente</option>
                             {foreach from=$meals item=meal}
                                 <option value="{$meal->getId()}">{$meal->getName()|escape}</option>
@@ -57,7 +80,7 @@
                         <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient()">Aggiungi ingrediente</button>
+                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
 
                 <div class="mb-3">
                     <label for="infos" class="form-label">Procedimento</label>

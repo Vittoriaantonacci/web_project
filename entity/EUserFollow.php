@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 #[ORM\Entity] 
-#[ORM\Table(name:"userFollow")]
+#[ORM\Table(name:"user_follow")]
 class EUserFollow {
 
     #[ORM\Id]

@@ -19,12 +19,12 @@
                         <div class="card-body">
                             <h5>{$post->getTitle()|escape}</h5>
                             <p>{$post->getDescription()|escape}</p>
-                            <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
+                            <p class="mb-1 small">Categoria: {$post->getCategory()|escape}</p>
                         </div>
                     </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Nessun post salvato.</p>
+                <p class="mb-1">Nessun post salvato.</p>
             {/if}
         </div>
 
@@ -36,12 +36,12 @@
                         <div class="card-body">
                             <h5>{$post->getTitle()|escape}</h5>
                             <p>{$post->getDescription()|escape}</p>
-                            <p class="text-muted small">Categoria: {$post->getCategory()|escape}</p>
+                            <p class="mb-1 small">Categoria: {$post->getCategory()|escape}</p>
                         </div>
                     </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Non hai ancora creato nessun post.</p>
+                <p class="mb-1">Non hai ancora creato nessun post.</p>
             {/if}
         </div>
     </div>

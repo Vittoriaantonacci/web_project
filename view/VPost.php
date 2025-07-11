@@ -14,7 +14,8 @@ class VPost {
         $this->smarty->display('post.tpl');  
     }
 
-    public function create() {
+    public function create(bool $isVip = false) {
+        $this->smarty->assign('isVip', $isVip);
         $this->smarty->display('new_post.tpl');
     }
 

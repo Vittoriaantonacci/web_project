@@ -5,7 +5,9 @@
     <div class="row mb-4 align-items-center">
         <div class="col-md-3 text-center">
             {if $profile->getProPic()}
-                <img src="{$profile->getProPic()->getPath()|escape}" alt="Immagine profilo" class="img-fluid rounded-circle border" style="max-width: 150px;">
+                <img src="/recipeek/public/uploads/propic/{$profile->getProPic()->getImagePath()|escape}" class="img-fluid rounded shadow" alt="Immagine profilo">
+            {else}
+                <img src="/recipeek/public/default/profile_ph.png" class="img-fluid rounded shadow" alt="Immagine profilo">
             {/if}
         </div>
         <div class="col-md-9">
@@ -23,7 +25,7 @@
                     <button class="btn btn-follow {if $isFollowed}btn-primary{else}btn-outline-primary{/if}"
                             data-action="{if $isFollowed}unfollow{else}follow{/if}"
                             data-profile-id="{$profile->getIdUser()}">
-                        🤝 {if $isFollowed}Non seguire più{else}Segui{/if}
+                            🤝 {if $isFollowed}Non seguire più{else}Segui{/if}
                     </button>
                 </div>
             {/if}
@@ -33,43 +35,51 @@
     <div class="row mb-4">
         <div class="col">
             <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followed')">Seguiti</button>
-                        <button class="btn btn-sm btn-light" type="button" onclick="toggleFollowTab('followers')">Follower</button>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn active" data-variant="secondary" data-target="#followed-users-section">Seguiti</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100 tab-btn" data-variant="secondary" data-target="#followers-users-section">Follower</button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div id="followed-users-section">
-                        {if isset($followed) && $followed|@count > 0}
-                            <ul class="list-group list-group-flush">
-                                {foreach from=$followed item=user}
-                                    <li class="list-group-item">
+                <div id="followed-users-section" class="card-body tab-content fade show">
+                    {if isset($followed) && $followed|@count > 0}
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            {foreach from=$followed item=user}
+                                <div class="col">
+                                    <a href="/recipeek/Profile/visitProfile/{$user->getIdUser()}" class="card text-decoration-none">
+                                        <div class="card-body">
+                                            {if $user->getName()}{$user->getName()|escape}{else}vuoto{/if}
+                                            {if $user->getSurname()} {$user->getSurname()|escape}{else}vuoto{/if}
+                                            (@{if $user->getUsername()}{$user->getUsername()|escape}{else}vuoto{/if})
+                                        </div>
+                                    </a>
+                                </div>
+                            {/foreach}
+                        </div>
+                    {else}
+                        <p class="text-muted">Non segui nessun utente.</p>
+                    {/if}
+                </div>
+                <div id="followers-users-section" class="card-body tab-content fade" style="display: none;">
+                    {if isset($followers) && $followers|@count > 0}
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                         {foreach from=$followers item=user}
+                            <div class="col">
+                                <a href="/recipeek/Profile/visitProfile/{$user->getIdUser()}" class="card text-decoration-none">
+                                    <div class="card-body">
                                         {if $user->getName()}{$user->getName()|escape}{else}vuoto{/if}
                                         {if $user->getSurname()} {$user->getSurname()|escape}{else}vuoto{/if}
                                         (@{if $user->getUsername()}{$user->getUsername()|escape}{else}vuoto{/if})
-                                    </li>
-                                {/foreach}
-                            </ul>
-                        {else}
-                            <p class="text-muted">Non segui nessun utente.</p>
-                        {/if}
-                    </div>
-                    <div id="followers-users-section" style="display: none;">
-                        {if isset($followers) && $followers|@count > 0}
-                            <ul class="list-group list-group-flush">
-                                {foreach from=$followers item=user}
-                                    <li class="list-group-item">
-                                        {if $user->getName()}{$user->getName()|escape}{else}vuoto{/if}
-                                        {if $user->getSurname()} {$user->getSurname()|escape}{else}vuoto{/if}
-                                        (@{if $user->getUsername()}{$user->getUsername()|escape}{else}vuoto{/if})
-                                    </li>
-                                {/foreach}
-                            </ul>
-                        {else}
-                            <p class="text-muted">Nessun follower al momento.</p>
-                        {/if}
-                    </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {/foreach}
+                        </div>
+                    {else}
+                        <p class="text-muted">Nessun follower al momento.</p>
+                    {/if}
                 </div>
             </div>
         </div>
@@ -78,19 +88,21 @@
     <div class="row mb-4">
         <div class="col">
             <div class="card shadow-sm">
-                <div class="card-header bg-dark text-white d-flex justify-content-center">
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('recipes')">Ricette</button>
-                        <button class="btn btn-sm btn-outline-light" onclick="toggleContentTab('mealplans')">Piani Alimentari</button>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100 tab-btn active" data-variant="primary" data-target="#recipes-section">Ricette</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100 tab-btn" data-variant="primary" data-target="#mealplans-section">Piani Alimentari</button>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="recipes-section">
+                    <div id="recipes-section" class="tab-content fade show">
                         {if isset($recipes) && $recipes|@count > 0}
                             <div class="row row-cols-1 row-cols-md-2 g-3">
                                 {foreach from=$recipes item=recipe}
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/Recipe/view/{$recipe->getIdRecipe()}'">
+                                        <div class="card clickable-card" onclick="window.location.href='/recipeek/Recipe/view/{$recipe->getIdRecipe()}'">
                                             <div class="card-body">
                                                 <h5 class="card-title">{$recipe->getNameRecipe()|escape}</h5>
                                                 <p class="card-text">{$recipe->getDescription()|escape}</p>
@@ -103,12 +115,12 @@
                             <p class="text-muted">Nessuna ricetta disponibile.</p>
                         {/if}
                     </div>
-                    <div id="mealplans-section" style="display: none;">
+                    <div id="mealplans-section" class="tab-content fade" style="display: none;">
                         {if isset($mealPlans) && $mealPlans|@count > 0}
                             <div class="row row-cols-1 row-cols-md-2 g-3">
                                 {foreach from=$mealPlans item=mealPlan}
                                     <div class="col">
-                                        <div class="card h-100 clickable-card" onclick="window.location.href='/recipeek/MealPlan/view/{$mealPlan->getIdMealPlan()}'">
+                                        <div class="card clickable-card" onclick="window.location.href='/recipeek/MealPlan/view/{$mealPlan->getIdMealPlan()}'">
                                             <div class="card-body">
                                                 <h5 class="card-title">{$mealPlan->getNameMealPlan()|escape}</h5>
                                                 <p class="card-text">{$mealPlan->getDescription()|escape}</p>
@@ -126,7 +138,11 @@
         </div>
     </div>
 </div>
+{/block}
 
+{block name = 'script'}
+<script src="/recipeek/public/assets/tab_btn.js"></script>
+<script src="/recipeek/public/assets/btn_state.js"></script>
 <script>
     function toggleFollowTab(tab) {
         const followed = document.getElementById('followed-users-section');
@@ -151,8 +167,4 @@
         }
     }
 </script>
-{/block}
-
-{block name = 'script'}
-<script src="/recipeek/public/assets/btn_state.js"></script>
 {/block}

@@ -134,7 +134,7 @@ class EProfile extends EUser {
 
     public function getIsBanned(): bool { return $this->isBanned; }
 
-    public function getVip(): bool { return $this->vip; }
+    public function getIsVip(): bool { return $this->vip; }
 
     public function getSavedMealPlans(): Collection { return $this->savedMealPlans; }
 

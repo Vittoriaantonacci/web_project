@@ -290,12 +290,12 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getVip(): bool
+    public function getIsVip(): bool
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVip', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsVip', []);
 
-        return parent::getVip();
+        return parent::getIsVip();
     }
 
     /**

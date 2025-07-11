@@ -44,16 +44,12 @@ class EMeal{
     #[ORM\ManyToMany(targetEntity: ERecipe::class, mappedBy: "ingredients")]
     private Collection $recipes;
 
-    #[ORM\ManyToMany(targetEntity: EMealPlan::class, mappedBy: "meals")]
-    private Collection $mealPlans;
-
     private static $entity = EMeal::class;
 
     /**CONSTRUCTOR */
     public function __construct($nameMeal, $type){
         $this->nameMeal = $nameMeal;
         $this->type = $type;
-        $this->mealPlans = new ArrayCollection(); 
         $this->recipes = new ArrayCollection(); 
     }
 
@@ -73,8 +69,6 @@ class EMeal{
 
     public function getServing(): ?EServing { return $this->serving; }
 
-    public function getMealPlans(): Collection { return $this->mealPlans; }
-
 
     /**SETTERS */
     public function setName(string $nameMeal): void { $this->nameMeal = $nameMeal; }
@@ -82,20 +76,6 @@ class EMeal{
     public function setImage(EImage $imageMeal): void { $this->image = $imageMeal; }
 
     public function setType(string $type): void { $this->type = $type; }
-
-    public function addMealPlan(EMealPlan $mealPlan): void {
-        if (!$this->mealPlans->contains($mealPlan)){
-            $this->mealPlans->add($mealPlan);
-            $mealPlan->addMeal($this);
-        }
-    }
-
-    public function removeMealPlan(EMealPlan $mealPlan): void {
-        if (!$this->mealPlans->contains($mealPlan)){
-            $this->mealPlans->removeElement($mealPlan);
-            $mealPlan->removeMeal($this);
-        }
-    }
 
     public function setServing(EServing $serving): void {
         $this->serving = $serving;

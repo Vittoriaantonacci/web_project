@@ -35,7 +35,7 @@ class EMealPlan{
     private string $description;
     
     #[ORM\Column(type: "string")]
-    private string $tag;
+    private string $category;
 
     #[ORM\Column(type: "datetime")]
     private DateTime $creation_time;
@@ -43,24 +43,15 @@ class EMealPlan{
     #[ORM\ManyToOne(targetEntity: EProfile::class)]
     #[ORM\JoinColumn(name: "creator_id", referencedColumnName: "idUser")]
     private EProfile $creator;
-   
-    #[ORM\ManyToMany(targetEntity: EMeal::class, inversedBy: "mealPlans", cascade: ["persist"])]
-    #[ORM\JoinTable(name: "mealplan_meals",
-        joinColumns: [new ORM\JoinColumn(name: "idMealPlan", referencedColumnName: "idMealPlan")],
-        inverseJoinColumns: [new ORM\JoinColumn(name: "idMeal", referencedColumnName: "idMeal")]
-    )]
-    private Collection $meals;
 
     private static $entity = EMealPlan::class;
 
      /**CONSTRUCTOR */
-    public function __construct($nameMealPlan, $description, $tag, EProfile $creator){
+    public function __construct($nameMealPlan, $description, $category){
         $this->nameMealPlan = $nameMealPlan;
         $this->description = $description;
-        $this->tag = $tag;
-        $this->creator = $creator;
+        $this->category = $category;
         $this->creation_time = new DateTime("now");
-        $this->meals = new ArrayCollection();
     }
 
 
@@ -73,15 +64,14 @@ class EMealPlan{
 
     public function getDescription(): string { return $this->description; }
 
-    public function getTag(): string { return $this->tag; }
+    public function getCategory(): string { return $this->category; }
 
     public function getCreator(): EProfile { return $this->creator; }
 
     public function getCreationTime(): DateTime { return $this->creation_time; }
 
-    public function getTimeStr(): string { return $this->creation_time->format('Y-m-d H:i:s'); }
+    public function getCreationTimeStr(): string { return $this->creation_time->format('Y-m-d H:i:s'); }
 
-    public function getMeals(): Collection { return $this->meals; }
 
 
     /**SETTERS */
@@ -89,23 +79,10 @@ class EMealPlan{
 
     public function setDescription(string $description): void { $this->description = $description; }
 
-    public function setTag(string $tag): void { $this->tag = $tag; }
+    public function setCategory(string $category): void { $this->category = $category; }
 
     public function setCreator(EProfile $creator): void { $this->creator = $creator; }
 
     public function setCreationTime(DateTime $dateTime): void { $this->creation_time = $dateTime; }
 
-    public function addMeal(EMeal $meal): void {
-        if (!$this->meals->contains($meal)) {
-            $this->meals->add($meal);
-            $meal->addMealPlan($this);
-        }
-    }
-
-    public function removeMeal(EMeal $meal): void {
-        if ($this->meals->contains($meal)) {
-            $this->meals->removeElement($meal);
-            $meal->removeMealPlan($this);
-        }
-    }
 }

@@ -8,28 +8,25 @@ class CRecipe {
      * It shows the form to create a recipe
      */
     public static function create() {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
         
         $view = new VRecipe();
-        $view->create();
+        $view->create(CUser::isVip());
     }
 
     /**
      * It shows recipe details
      */
     public static function view($idRecipe) {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
+
         $pm = FPersistentManager::getInstance();
 
         $recipe = $pm->getRecipeById($idRecipe);
-        $idUser = USession::getInstance()->get('user');
+        CUser::requireVip($recipe->getCategory());
 
+        $idUser = USession::getInstance()->get('user');
+        
         $isSaved = null;
         if ($recipe->getCreator()->getIdUser() != $idUser) {
             $isSaved = $pm->isRecipeSaved($idUser, $idRecipe);
@@ -43,10 +40,8 @@ class CRecipe {
      * It create the view with saved and created recipes (when click on your recipe section)
      */
     public static function yourRecipes() {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
+        
         $pm = FPersistentManager::getInstance();
         $userId = USession::getInstance()->get('user');
 
@@ -68,6 +63,7 @@ class CRecipe {
 
         $title = UHTTPMethods::post('nameRecipe');
         $description = UHTTPMethods::post('description');
+        $category = UHTTPMethods::post('category');
         $prep_time = UHTTPMethods::post('preparation_time');
         $cook_time = UHTTPMethods::post('cooking_time');
         $grams_on_portion = UHTTPMethods::post('grams_one_portion');
@@ -81,18 +77,19 @@ class CRecipe {
         $recipe = new ERecipe(
             nameRecipe: $title,
             infos: $infos,
+            category: $category,
             description: $description,
             preparation_time: $prep_time,
             cooking_time: $cook_time,
             grams_one_portion: $grams_on_portion
         );
 
-        if ($imageData) {
+        if (!$imageData['error']) {
             $image = new EImage($imageData['name'],  $imageData['size'], $imageData['ext'], $imageData['path']);
             $recipe->addImage($image);
         }
 
-        foreach($ingredients as $mealId){
+        foreach($ingredients['ingredients'] as $mealId){
             $meal = $pm->getMealById($mealId);
             $recipe->addIngredient($meal);
         }

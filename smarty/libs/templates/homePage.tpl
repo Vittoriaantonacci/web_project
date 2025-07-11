@@ -17,15 +17,16 @@
                 {foreach from=$posts item=post}
                   <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card text-decoration-none">
                     <div class="card-body">
+                      <h6 class="card-subtitle mb-2">{$post->getCategory()}</h6>
                       <h5 class="card-title">{$post->getTitle()}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">di {$post->getProfile()->getUsername()}</h6>
+                      <h6 class="card-subtitle mb-2">di {$post->getProfile()->getUsername()}</h6>
                       <p class="card-text">{$post->getDescription()}</p>
-                      <p class="text-muted small">Creato il: {$post->getCreationTimeStr()}</p>
+                      <p class="mb-1 small">Creato il: {$post->getCreationTimeStr()}</p>
                     </div>
                   </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Non ci sono post di utenti che segui.</p>
+                <p class="mb-1">Non ci sono post di utenti che segui.</p>
             {/if}
         </div>
 
@@ -35,15 +36,16 @@
                 {foreach from=$yourPosts item=post}
                   <a href="/recipeek/Post/view/{$post->getIdPost()}" class="card text-decoration-none">
                     <div class="card-body">
+                      <h6 class="card-subtitle mb-2">{$post->getCategory()}</h6>
                       <h5 class="card-title">{$post->getTitle()}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">di {$post->getProfile()->getUsername()}</h6>
+                      <h6 class="card-subtitle mb-2">di {$post->getProfile()->getUsername()}</h6>
                       <p class="card-text">{$post->getDescription()}</p>
-                      <p class="text-muted small">Creato il: {$post->getCreationTimeStr()}</p>
+                      <p class="mb-1 small">Creato il: {$post->getCreationTimeStr()}</p>
                     </div>
                   </a>
                 {/foreach}
             {else}
-                <p class="text-muted">Nessun post trovato, prova a ricaricare la pagina.</p>
+                <p class="mb-1">Nessun post trovato, prova a ricaricare la pagina.</p>
             {/if}
         </div>
     </div>

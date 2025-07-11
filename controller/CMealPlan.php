@@ -8,10 +8,7 @@ class CMealPlan {
      * It shows the form to create a recipe
      */
     public static function create() {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
 
         $view = new VMealPlan();
         $view->create();
@@ -21,39 +18,44 @@ class CMealPlan {
      * It shows Meal Plan details
      */
     public static function view($idMealPlan) {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
 
         $pm = FPersistentManager::getInstance();
         $mealPlan = $pm->getMealPlanById($idMealPlan);
+
+        CUser::requireVip($mealPlan->getCategory());
+
         $idUser = USession::getInstance()->get('user');
 
         $isSaved = null;
         if ($mealPlan && $mealPlan->getCreator()->getIdUser() != $idUser) {
-            $isSaved = $pm->isRecipeMealPlan($idUser, $idMealPlan);
+            $isSaved = $pm->isMealPlanSaved($idUser, $idMealPlan);
+        }
+
+        $res = [];
+        $mealsArray = $pm->getMealsByMealPlanId($idMealPlan);
+        foreach ($mealsArray as $mealType => $mealArray) {
+            foreach ($mealArray as $meal) {
+                $res[$mealType] = array_merge($res[$mealType] ?? [], [$meal]);
+            }
         }
 
         $view = new VMealPlan();
-        $view->detail($mealPlan, $isSaved);
+        $view->detail($mealPlan, $isSaved, $mealsArray);
     }
 
     /**
      * It create the view with saved and created recipes (when click on your recipe section)
      */
-    public static function yourMealPlan() {
-        if (!CUser::isLogged()) {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+    public static function yourMealPlans() {
+        CUser::checkValation();
 
         $pm = FPersistentManager::getInstance();
         $userId = USession::getInstance()->get('user');
 
-        // Dato che hai solo getSavedMealPlans, uso quello due volte
+    
         $savedMealPlans = $pm->getSavedMealPlans($userId);
-        $createdMealPlans = [];  // Non hai metodo per creati, quindi passo array vuoto
+        $createdMealPlans = $pm->getCreatedMealPlans($userId);
 
         $view = new VMealPlan();
         $view->yourMealPlan($createdMealPlans, $savedMealPlans);
@@ -70,24 +72,24 @@ class CMealPlan {
 
         $nameMealPlan = UHTTPMethods::post('nameMealPlan');
         $description = UHTTPMethods::post('description');
-        $tag = UHTTPMethods::post('tag');
-        $mealIds = UHTTPMethods::post('ingredients'); // array di ID pasti
+        $category = UHTTPMethods::post('category'); // Cambiato da 'tag' a 'category' per coerenza con il form
+        $ingredients = UHTTPMethods::post('ingredients');
 
         $userId = USession::getInstance()->get('user');
         $profile = $pm->getUserById($userId);
 
-        $mealPlan = new EMealPlan($nameMealPlan, $description, $tag, $profile);
+        // This commands are needful to create Meal Plan id
+        $mealPlan = new EMealPlan($nameMealPlan, $description, $category);
+        $profile->addMealPlan($mealPlan);
+        $pm->saveUser($profile);
+        $mealPlan = FPersistentManager::uploadMealPlan($mealPlan, $profile);
 
-        if (is_array($mealIds)) {
+        foreach ($ingredients as $mealtime => $mealIds) {
             foreach ($mealIds as $mealId) {
-                $meal = $pm->getMealById($mealId);
-                if ($meal !== null) {
-                    $mealPlan->addMeal($meal);
-                }
+                $association = new EMealPlanMeal($mealPlan->getIdMealPlan(), $mealId, $mealtime);
+                $pm->saveMealPlanMeal($association);
             }
         }
-
-        $pm->saveMealPlan($mealPlan);
 
         header('Location: /recipeek/User/homePage');
         exit;

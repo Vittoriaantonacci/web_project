@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-10 16:47:23
+/* Smarty version 5.5.1, created on 2025-07-11 20:08:42
   from 'file:recipe.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686fd27b266d57_43864676',
+  'unifunc' => 'content_6871532a339129_07264945',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '03d869ec92aef5ca31a43e55f690258cadc4e008' => 
     array (
       0 => 'recipe.tpl',
-      1 => 1752158839,
+      1 => 1752257318,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686fd27b266d57_43864676 (\Smarty\Template $_smarty_tpl) {
+function content_6871532a339129_07264945 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_41706172686fd27b24a7d7_70846695', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_11515667326871532a309c64_06000275', 'body');
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_786149204686fd27b2665d8_80707036', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_19181928426871532a338903_31804919', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block 'body'} */
-class Block_41706172686fd27b24a7d7_70846695 extends \Smarty\Runtime\Block
+class Block_11515667326871532a309c64_06000275 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -66,7 +66,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 " class="card text-decoration-none">
                             <div class="d-flex align-items-center">
                                 <?php if ($_smarty_tpl->getValue('recipe')->getCreator()->getProPic()) {?>
-                                    <img src="/recipeek/public/uploads/propic/<?php echo htmlspecialchars((string)$_smarty_tpl->getValue('recipe')->getCreator()->getProPic()->getPath(), ENT_QUOTES, 'UTF-8', true);?>
+                                    <img src="/recipeek/public/uploads/propic/<?php echo htmlspecialchars((string)$_smarty_tpl->getValue('recipe')->getCreator()->getProPic()->getImagePath(), ENT_QUOTES, 'UTF-8', true);?>
 " class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
                                 <?php } else { ?>
                                     <img src="/recipeek/public/default/profile_ph.png" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
@@ -145,7 +145,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block 'body'} */
 /* {block 'script'} */
-class Block_786149204686fd27b2665d8_80707036 extends \Smarty\Runtime\Block
+class Block_19181928426871532a338903_31804919 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

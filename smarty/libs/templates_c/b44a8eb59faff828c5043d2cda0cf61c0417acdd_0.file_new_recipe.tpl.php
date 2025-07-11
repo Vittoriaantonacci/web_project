@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-08 15:49:13
+/* Smarty version 5.5.1, created on 2025-07-11 01:06:12
   from 'file:new_recipe.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686d21d99fd4a9_78109188',
+  'unifunc' => 'content_68704764b10b69_88232627',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b44a8eb59faff828c5043d2cda0cf61c0417acdd' => 
     array (
       0 => 'new_recipe.tpl',
-      1 => 1751908990,
+      1 => 1752188623,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686d21d99fd4a9_78109188 (\Smarty\Template $_smarty_tpl) {
+function content_68704764b10b69_88232627 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1417207489686d21d99d9ca9_82481538', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_95806350668704764b00790_42613186', 'body');
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1915164387686d21d99fcc76_32296479', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_16411459168704764b10350_42216455', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block 'body'} */
-class Block_1417207489686d21d99d9ca9_82481538 extends \Smarty\Runtime\Block
+class Block_95806350668704764b00790_42613186 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -58,6 +58,29 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrizione</label>
                     <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
+                <!-- Categoria -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">Categoria</label>
+                    <select class="form-select" id="category" name="category" required>
+                        <option value="" disabled selected>Seleziona una categoria</option>
+                        <option value="antipasto">Antipasto</option>
+                        <option value="primo">Primo</option>
+                        <option value="secondo">Secondo</option>
+                        <option value="dolce">Dolce</option>
+                        <option value="bevanda">Bevanda</option>
+                        <?php if ($_smarty_tpl->getValue('isVip')) {?>
+                            <option value="antipasto #Fit">Antipasto #Fit</option>
+                            <option value="primo #Fit">Primo #Fit</option>
+                            <option value="secondo #Fit">Secondo #Fit</option>
+                            <option value="dolce #Fit">Dolce #Fit</option>
+                            <option value="bevanda #Fit">Bevanda #Fit</option>
+                            <option value="contorno #Fit">Contorno #Fit</option>
+                            <option value="salsa #Fit">Salsa #Fit</option>
+                            <option value="snack #Fit">Snack #Fit</option>
+                            <option value="colazione #Fit">Colazione #Fit</option>
+                        <?php }?>
+                    </select>
                 </div>
             </div>
         </div>
@@ -88,9 +111,9 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
             <div class="card-header bg-success text-white">Ingredienti e dettagli</div>
             <div class="card-body">
                 <label for="ingredients" class="form-label">Ingredienti</label>
-                <div id="ingredient-list">
+                <div id="ingredient-list-ingredients" class="ingredient-list">
                     <div class="d-flex mb-2">
-                        <select class="form-select me-2 ingredient-select" name="ingredients[]">
+                        <select class="form-select me-2 ingredient-select" name="ingredients[ingredients][]">
                             <option disabled selected value="">Seleziona un ingrediente</option>
                             <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('meals'), 'meal');
@@ -109,7 +132,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                         <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient()">Aggiungi ingrediente</button>
+                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
 
                 <div class="mb-3">
                     <label for="infos" class="form-label">Procedimento</label>
@@ -149,7 +172,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block 'body'} */
 /* {block 'script'} */
-class Block_1915164387686d21d99fcc76_32296479 extends \Smarty\Runtime\Block
+class Block_16411459168704764b10350_42216455 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

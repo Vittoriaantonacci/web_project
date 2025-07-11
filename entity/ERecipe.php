@@ -30,6 +30,9 @@ class ERecipe {
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
     private ?int $idRecipe = null; 
+
+    #[ORM\Column(type: "datetime")]
+    private DateTime $createdAt;
    
     #[ORM\Column(type: "string")]
     private string $nameRecipe;
@@ -39,6 +42,9 @@ class ERecipe {
     
     #[ORM\Column(type: "text")]
     private string $description;
+
+    #[ORM\Column(type: "string")]
+    private string $category;
 
     #[ORM\Column(type: "integer")]
     private int $preparation_time;
@@ -67,14 +73,16 @@ class ERecipe {
     private static string $entity = ERecipe::class;
 
     /**CONSTRUCTOR */
-    public function __construct($nameRecipe, $infos, $description, $preparation_time, $cooking_time, $grams_one_portion) {
+    public function __construct($nameRecipe, $infos, $description, $preparation_time, $cooking_time, $grams_one_portion, $category) {
         $this->nameRecipe = $nameRecipe;
         $this->infos = $infos;
+        $this->category = $category;
         $this->description = $description;
         $this->preparation_time = $preparation_time;
         $this->cooking_time = $cooking_time;
         $this->grams_one_portion = $grams_one_portion;
         $this->ingredients = new ArrayCollection();
+        $this->createdAt = new DateTime();
     }
 
     
@@ -82,6 +90,8 @@ class ERecipe {
     public static function getEntity(): string { return self::$entity; }
 
     public function getIdRecipe(): ?int { return $this->idRecipe; }
+
+    public function getCreationTime(): DateTime { return $this->createdAt; }
 
     public function getNameRecipe(): string { return $this->nameRecipe; }
 
@@ -97,9 +107,11 @@ class ERecipe {
 
     public function getGramsOnePortion(): int { return $this->grams_one_portion; }
 
-    public function getImage(): EImage { return $this->image; }
+    public function getImage(): ?EImage { return $this->image; }
 
     public function getCreator(): EProfile { return $this->creator; }
+
+    public function getCategory(): string { return $this->category; }
 
     
     /**SETTERS */    
@@ -116,6 +128,8 @@ class ERecipe {
     public function setGramsOnePortion(int $grams): void { $this->grams_one_portion = $grams; }
 
     public function setCreator(EProfile $profile): void { $this->creator = $profile; }
+
+    public function setCategory(string $category): void { $this->category = $category; }
 
     public function addImage(EImage $image): void {
             $this->image = $image;

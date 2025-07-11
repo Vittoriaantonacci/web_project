@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-10 12:51:31
+/* Smarty version 5.5.1, created on 2025-07-11 12:40:58
   from 'file:new_post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686f9b33d374b3_99269722',
+  'unifunc' => 'content_6870ea3aa2cbc5_27247894',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1c3cfd0c3966a9f79c2f71d9ce9a328f2e5db0d2' => 
     array (
       0 => 'new_post.tpl',
-      1 => 1752144663,
+      1 => 1752228212,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686f9b33d374b3_99269722 (\Smarty\Template $_smarty_tpl) {
+function content_6870ea3aa2cbc5_27247894 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_730751782686f9b33d248c0_88325038', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_8786945376870ea3aa1aeb4_79847148', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1321922928686f9b33d350d7_91772217', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_18413814576870ea3aa270b8_78258127', "body");
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_730751782686f9b33d248c0_88325038 extends \Smarty\Runtime\Block
+class Block_8786945376870ea3aa1aeb4_79847148 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -46,7 +46,7 @@ Crea Nuovo Post<?php
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_1321922928686f9b33d350d7_91772217 extends \Smarty\Runtime\Block
+class Block_18413814576870ea3aa270b8_78258127 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -72,16 +72,23 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
             <div class="mb-3">
                 <label for="category" class="form-label">Categoria</label>
                 <select class="form-select" id="category" name="category" required>
-                    <option value="">Seleziona una categoria</option>
-                    <option value="colazione">Colazione</option>
-                    <option value="pranzo">Pranzo</option>
-                    <option value="cena">Cena</option>
-                    <option value="merenda">Merenda</option>
-                    <option value="dolce">Dolce</option>
-                    <option value="spuntino">Spuntino</option>
-                    <option value="bevanda">Bevanda</option>
-                    <option value="contorno">Contorno</option>
+                    <option value="" disabled selected>Seleziona una categoria</option>
                     <option value="antipasto">Antipasto</option>
+                    <option value="primo">Primo</option>
+                    <option value="secondo">Secondo</option>
+                    <option value="dolce">Dolce</option>
+                    <option value="bevanda">Bevanda</option>
+                    <?php if ($_smarty_tpl->getValue('isVip')) {?>
+                        <option value="antipasto #Fit">Antipasto #Fit</option>
+                        <option value="primo #Fit">Primo #Fit</option>
+                        <option value="secondo #Fit">Secondo #Fit</option>
+                        <option value="dolce #Fit">Dolce #Fit</option>
+                        <option value="bevanda #Fit">Bevanda #Fit</option>
+                        <option value="contorno #Fit">Contorno #Fit</option>
+                        <option value="salsa #Fit">Salsa #Fit</option>
+                        <option value="snack #Fit">Snack #Fit</option>
+                        <option value="colazione #Fit">Colazione #Fit</option>
+                    <?php }?>
                 </select>
             </div>
 

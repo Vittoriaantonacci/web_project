@@ -22,9 +22,10 @@ class VRecipe {
     /**
      * Show user form to create a recipe
      */
-    public function create() {
+    public function create(bool $isVip = false) {
         $meals = FPersistentManager::getInstance()->getGenericMeals();
-        
+
+        $this->smarty->assign('isVip', $isVip);
         $this->smarty->assign('meals', $meals);
         $this->smarty->display('new_recipe.tpl');
     }

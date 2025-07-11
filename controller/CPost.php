@@ -9,10 +9,14 @@ class CPost {
      * 
      */
     public static function view($idPost) {
+        CUser::checkValation();
+
         $pm = FPersistentManager::getInstance();
-        $idUser = USession::getInstance()->get('user');
 
         $post = $pm->getPostById($idPost);
+        CUser::requireVip($post->getCategory());
+
+        $idUser = USession::getInstance()->get('user');
 
         $isLiked = null;
         $isSaved = null;
@@ -20,34 +24,26 @@ class CPost {
             $isLiked = $pm->isLiked($idUser, $idPost);
             $isSaved = $pm->isPostSaved($idUser, $idPost);
         }
-        
+
         $vPost = new VPost();
         $vPost->show($post, $isLiked, $isSaved, $idUser);
     }
 
     public static function create() {
-        if (CUser::isLogged()) {
-            $vPost = new VPost();
-            $vPost->create();
-        } else {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        CUser::checkValation();
+
+        $vPost = new VPost();
+        $vPost->create(CUser::isVip());
     }
 
     public static function yourPosts() {
-        if (CUser::isLogged()) {
-            // This method is called after a post is saved
-            $postCreated = FPersistentManager::getInstance()->getCreatedPosts(USession::getInstance()->get('user'));
-            $postSaved = FPersistentManager::getInstance()->getSavedPosts(USession::getInstance()->get('user'));
+        CUser::checkValation();           
+        
+        $postCreated = FPersistentManager::getInstance()->getCreatedPosts(USession::getInstance()->get('user'));
+        $postSaved = FPersistentManager::getInstance()->getSavedPosts(USession::getInstance()->get('user'));
 
-
-            $vPost = new VPost();
-            $vPost->postSaved($postCreated, $postSaved);
-        } else {
-            header('Location: /recipeek/User/login');
-            exit;
-        }
+        $vPost = new VPost();
+        $vPost->postSaved($postCreated, $postSaved);
     }
 
 

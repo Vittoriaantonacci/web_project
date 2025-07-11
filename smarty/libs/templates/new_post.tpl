@@ -23,16 +23,23 @@
             <div class="mb-3">
                 <label for="category" class="form-label">Categoria</label>
                 <select class="form-select" id="category" name="category" required>
-                    <option value="">Seleziona una categoria</option>
-                    <option value="colazione">Colazione</option>
-                    <option value="pranzo">Pranzo</option>
-                    <option value="cena">Cena</option>
-                    <option value="merenda">Merenda</option>
-                    <option value="dolce">Dolce</option>
-                    <option value="spuntino">Spuntino</option>
-                    <option value="bevanda">Bevanda</option>
-                    <option value="contorno">Contorno</option>
+                    <option value="" disabled selected>Seleziona una categoria</option>
                     <option value="antipasto">Antipasto</option>
+                    <option value="primo">Primo</option>
+                    <option value="secondo">Secondo</option>
+                    <option value="dolce">Dolce</option>
+                    <option value="bevanda">Bevanda</option>
+                    {if $isVip}
+                        <option value="antipasto #Fit">Antipasto #Fit</option>
+                        <option value="primo #Fit">Primo #Fit</option>
+                        <option value="secondo #Fit">Secondo #Fit</option>
+                        <option value="dolce #Fit">Dolce #Fit</option>
+                        <option value="bevanda #Fit">Bevanda #Fit</option>
+                        <option value="contorno #Fit">Contorno #Fit</option>
+                        <option value="salsa #Fit">Salsa #Fit</option>
+                        <option value="snack #Fit">Snack #Fit</option>
+                        <option value="colazione #Fit">Colazione #Fit</option>
+                    {/if}
                 </select>
             </div>
 

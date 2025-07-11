@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (controller === 'Recipe') idParamName = 'recipeId';
             else if (controller === 'MealPlan') idParamName = 'mealPlanId';
 
-            const itemId = button.dataset.postId || button.dataset.profileId || button.dataset.recipeId || button.dataset.mealPlanId;
+            const itemId = button.dataset.postId || button.dataset.profileId || button.dataset.recipeId || button.dataset.mealplanId;
 
             const bodyData = `${idParamName}=${encodeURIComponent(itemId)}`;
 
