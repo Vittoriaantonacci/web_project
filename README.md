@@ -6,8 +6,7 @@
 
 ## ➤ Be fit, be social!
 
-**Recipeek** 
-Recipeek is a web applicaton that merges a social network with your best hub to your feeding experience.
+**Recipeek** is a web applicaton that merges a social network with your best hub to your feeding experience.
 
 In our application, there are different types of users:
 - **BASIC PROFILE**: This user can visualisze and create non-sub addressed posts, recipes, and meal plans. He can do all social-network basic action, for instance like a post, save a creation or follow other accounts. It requires only a registration process.
@@ -23,7 +22,7 @@ For the administration point of view, this application is granted by:
 
 ## ➤ 🚀 Installation Guide
 
-This web app needs of this requirements:
+This web app needs this requirements:
 
 - PHP (version 8.2 or higher)
 - A web server (e.g. Apache)
