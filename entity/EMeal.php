@@ -7,8 +7,7 @@
  * - type: the type of meal;
  * - image: the image associated with the meal;
  * - serving: an EServing entity containing nutritional information for a single serving;
- * - recipes: a collection of ERecipe objects that make up the meal;
- * - mealPlans: a collection of EMealPlan objects to which the meal belongs.
+ * - recipes: a collection of ERecipe objects that make up the meal.
  */
 
 
