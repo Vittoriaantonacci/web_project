@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-10 16:44:14
+/* Smarty version 5.5.1, created on 2025-07-12 14:05:03
   from 'file:post.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_686fd1be06f870_29149907',
+  'unifunc' => 'content_68724f6f5f4fa7_83805830',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '38221675b6cd2e2c84a95460e97e8f3a676f49d4' => 
     array (
       0 => 'post.tpl',
-      1 => 1752158616,
+      1 => 1752321889,
       2 => 'file',
     ),
   ),
@@ -20,28 +20,28 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_686fd1be06f870_29149907 (\Smarty\Template $_smarty_tpl) {
+function content_68724f6f5f4fa7_83805830 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1301562502686fd1be042390_52515643', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_95714724868724f6f5b9425_41388493', "title");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_415730500686fd1be04a076_20032470', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_5576246468724f6f5c92a7_21123995', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1429910670686fd1be06f210_30993379', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_22644059968724f6f5f41a5_60180575', 'script');
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "title"} */
-class Block_1301562502686fd1be042390_52515643 extends \Smarty\Runtime\Block
+class Block_95714724868724f6f5b9425_41388493 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -50,7 +50,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getTitle(), ENT_QU
 }
 /* {/block "title"} */
 /* {block "body"} */
-class Block_415730500686fd1be04a076_20032470 extends \Smarty\Runtime\Block
+class Block_5576246468724f6f5c92a7_21123995 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -67,7 +67,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 " class="card text-decoration-none">
                         <div class="d-flex align-items-center">
                             <?php if ($_smarty_tpl->getValue('post')->getProfile()->getProPic()) {?>
-                                <img src="/recipeek/public/uploads/propic/<?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getProfile()->getProPic()->getPath(), ENT_QUOTES, 'UTF-8', true);?>
+                                <img src="/recipeek/public/uploads/propic/<?php echo htmlspecialchars((string)$_smarty_tpl->getValue('post')->getProfile()->getProPic()->getImagePath(), ENT_QUOTES, 'UTF-8', true);?>
 " class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
                             <?php } else { ?>
                                 <img src="/recipeek/public/default/profile_ph.png" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
@@ -194,7 +194,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_1429910670686fd1be06f210_30993379 extends \Smarty\Runtime\Block
+class Block_22644059968724f6f5f41a5_60180575 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

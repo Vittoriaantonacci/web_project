@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-12 01:23:39
+/* Smarty version 5.5.1, created on 2025-07-12 15:31:04
   from 'file:profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_68719cfb3d7473_49069823',
+  'unifunc' => 'content_687263986b62c7_92813637',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c5262a9793f6fbf2faf777e10adee16d65b1458e' => 
     array (
       0 => 'profile.tpl',
-      1 => 1752275894,
+      1 => 1752327053,
       2 => 'file',
     ),
   ),
@@ -20,23 +20,23 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_68719cfb3d7473_49069823 (\Smarty\Template $_smarty_tpl) {
+function content_687263986b62c7_92813637 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_169331064168719cfb3b4f09_13656475', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_16774766366872639867f177_66272930', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_153303316868719cfb3d7090_94865956', "script");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_2121091159687263986b5310_79307211', "script");
 $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_169331064168719cfb3b4f09_13656475 extends \Smarty\Runtime\Block
+class Block_16774766366872639867f177_66272930 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -84,6 +84,16 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getSurname(), E
             <p data-bs-toggle="modal" data-bs-target="#editBioModal" style="cursor:pointer;"><strong>Biografia:</strong> <?php if ($_smarty_tpl->getValue('profile')->getBiography()) {
 echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getBiography(), ENT_QUOTES, 'UTF-8', true);
 } else { ?>vuoto<?php }?></p>
+            <div class="mt-3">
+                <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                    Modifica Password
+                </button>
+                <?php if (!$_smarty_tpl->getValue('profile')->getIsVip()) {?>
+                    <a href="/recipeek/User/subscribe" class="btn btn-primary">
+                        Abbonati
+                    </a>
+                <?php }?>
+            </div>
         </div>
     </div>
 
@@ -159,6 +169,38 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
         </div>
     </div>
 
+<!-- Modal modifica password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post" action="/recipeek/Profile/updatePassword" onsubmit="return checkPasswordChange();">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordLabel">Modifica Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label for="currentPassword" class="form-label">Vecchia Password</label>
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                </div>
+                <div class="mb-2">
+                    <label for="newPassword" class="form-label">Nuova Password</label>
+                    <input type="password" class="form-control" id="regPassword" name="newPassword" required>
+                    <div id="passwordFeedback" class="form-text text-warning"></div>
+                </div>
+                <div class="mb-2">
+                    <label for="confirmPassword" class="form-label">Conferma Nuova Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div id="passwordError" class="text-danger small"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="registerBtn" class="btn btn-primary">Aggiorna</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
 </div>
 
 <!-- Modal modifica nickname -->
@@ -302,7 +344,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block "script"} */
-class Block_153303316868719cfb3d7090_94865956 extends \Smarty\Runtime\Block
+class Block_2121091159687263986b5310_79307211 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -310,6 +352,9 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 
 <?php echo '<script'; ?>
  src="/recipeek/public/assets/tab_btn.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="/recipeek/public/assets/chk_psw.js"><?php echo '</script'; ?>
 >
 <?php
 }

@@ -49,6 +49,50 @@ body {
   color: #ccc !important; 
 }
 
+/* Form di login e registrazione */
+.form-toggle-wrapper {
+  overflow: hidden;
+}
+
+.form-panel {
+  display: flex;
+  width: 200%;
+  height: max-content;
+  transition: transform 0.5s ease;
+}
+
+.form-box {
+  width: 50%;
+  padding: 1rem;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.toggle-buttons .btn {
+  width: 48%;
+}
+
+/* Cookie Banner */
+.cookie-modal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1050;
+}
+.cookie-modal-content {
+  background: #1e1e1e; color: #f0f0f0;
+  padding: 2rem; border-radius: 1rem;
+  max-width: 400px; text-align: center;
+}
+.cookie-modal-content button {
+  margin: 0.5rem;
+}
+
 /* Immagini */
 .fixed-post-img {
     width: 100%;

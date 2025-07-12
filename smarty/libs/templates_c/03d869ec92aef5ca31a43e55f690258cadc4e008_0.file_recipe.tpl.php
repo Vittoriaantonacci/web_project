@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-11 20:08:42
+/* Smarty version 5.5.1, created on 2025-07-12 01:59:45
   from 'file:recipe.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_6871532a339129_07264945',
+  'unifunc' => 'content_6871a571ba4809_32833033',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '03d869ec92aef5ca31a43e55f690258cadc4e008' => 
     array (
       0 => 'recipe.tpl',
-      1 => 1752257318,
+      1 => 1752275890,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6871532a339129_07264945 (\Smarty\Template $_smarty_tpl) {
+function content_6871a571ba4809_32833033 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_11515667326871532a309c64_06000275', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_15670538736871a571b7e4e9_20406046', 'body');
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_19181928426871532a338903_31804919', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_10315918606871a571ba43a8_21331673', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block 'body'} */
-class Block_11515667326871532a309c64_06000275 extends \Smarty\Runtime\Block
+class Block_15670538736871a571b7e4e9_20406046 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -145,7 +145,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block 'body'} */
 /* {block 'script'} */
-class Block_19181928426871532a338903_31804919 extends \Smarty\Runtime\Block
+class Block_10315918606871a571ba43a8_21331673 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

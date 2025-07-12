@@ -129,9 +129,18 @@ class CProfile {
         $userId = USession::getInstance()->get('user');
         $currentPassword = UHTTPMethods::post('currentPassword');
         $newPassword = UHTTPMethods::post('newPassword');
+        $confirmPassword = UHTTPMethods::post('confirmPassword');
 
-        if (empty($currentPassword) || empty($newPassword)) {
+        if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
             CError::showError('I campi non possono essere vuoti');
+            return;
+        }
+        if ($newPassword !== $confirmPassword) {
+            CError::showError('Le nuove password non corrispondono');
+            return;
+        }
+        if ($newPassword === $currentPassword) {
+            CError::showError('La nuova password deve essere diversa dalla password attuale');
             return;
         }
 
@@ -143,7 +152,7 @@ class CProfile {
             return;
         }
 
-        $user->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+        $user->setPassword($newPassword);
         $pm->saveUser($user);
 
         header('Location: /recipeek/Profile/profile');

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Post di Test</title>
-</head>
-<body>
-    <h1>ciao</h1>
+{extends file='layout.tpl'}
+
+{block name="title"}Errore - Recipeek{/block}
+
+{block name="body"}
+<div class="container mt-5">
+    <h1>Errore</h1>
     <p>{$error}</p>
-</body>
-</html>
+</div>
+{/block}

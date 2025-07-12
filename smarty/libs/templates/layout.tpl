@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/recipeek/public/default/logo.png" />
   <title>{block name="title"}Recipeek{/block}</title>
 
   <!-- Bootstrap & Custom Styles -->
@@ -39,6 +40,26 @@
       </div>
 
       {block name="body"}{/block}
+
+      <!-- Cookie Consent Modal -->
+      <div class="modal fade" id="cookieConsentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+              <h5 class="modal-title">Consenti i cookie?</h5>
+            </div>
+            <div class="modal-body">
+              <p>Ti informiamo che questo sito utilizza cookie per migliorare l’esperienza di navigazione. (Cookie tecnici e di sessione)</p>
+              <p>Per maggiori informazioni, consulta la <a href="https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9677876" class="text-white">Privacy Policy</a>.</p>
+            </div>
+            <div class="modal-footer">
+              <button id="cookieAccept" class="btn btn-success">Accetta</button>
+              <button id="cookieReject" class="btn btn-outline-light" data-bs-dismiss="modal">Rifiuta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
     </div>
 
     <!-- Sidebar Destra -->
@@ -53,12 +74,16 @@
         <li class="nav-item"><a class="nav-link" href="/recipeek/MealPlan/yourMealPlans"><i class="bi bi-calendar-week me-2"></i><span>Your Meal Plans</span></a></li>
       </ul>
     </div>
+    
+</div>
+
   </div>
 </div>
 
 <!-- JS Bootstrap + Custom -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/recipeek/public/assets/script.js"></script>
+<script src="/recipeek/public/assets/cookie_mdl.js"></script>
 {block name="script"}{/block}
 
 </body>

@@ -12,7 +12,7 @@
                     <a href="/recipeek/Profile/visitProfile/{$post->getProfile()->getIdUser()}" class="card text-decoration-none">
                         <div class="d-flex align-items-center">
                             {if $post->getProfile()->getProPic()}
-                                <img src="/recipeek/public/uploads/propic/{$post->getProfile()->getProPic()->getPath()|escape}" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
+                                <img src="/recipeek/public/uploads/propic/{$post->getProfile()->getProPic()->getImagePath()|escape}" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
                             {else}
                                 <img src="/recipeek/public/default/profile_ph.png" class="rounded-circle profile-pic-sm img-thumbnail" alt="Immagine profilo">
                             {/if}

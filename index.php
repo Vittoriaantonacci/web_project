@@ -10,6 +10,9 @@ require_once "foundation/FEntityManager.php";
 Installation::install();
 (new CFrontController())->run();
 
+//require_once "placeholder.php";
+//populateDatabase();
+
 
 
 

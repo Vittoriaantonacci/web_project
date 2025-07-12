@@ -30,6 +30,16 @@
                 {if $profile->getSurname()}{$profile->getSurname()|escape}{else}vuoto{/if}
             </p>
             <p data-bs-toggle="modal" data-bs-target="#editBioModal" style="cursor:pointer;"><strong>Biografia:</strong> {if $profile->getBiography()}{$profile->getBiography()|escape}{else}vuoto{/if}</p>
+            <div class="mt-3">
+                <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                    Modifica Password
+                </button>
+                {if !$profile->getIsVip()}
+                    <a href="/recipeek/User/subscribe" class="btn btn-primary">
+                        Abbonati
+                    </a>
+                {/if}
+            </div>
         </div>
     </div>
 
@@ -79,6 +89,38 @@
         </div>
     </div>
 
+<!-- Modal modifica password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post" action="/recipeek/Profile/updatePassword" onsubmit="return checkPasswordChange();">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordLabel">Modifica Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label for="currentPassword" class="form-label">Vecchia Password</label>
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                </div>
+                <div class="mb-2">
+                    <label for="newPassword" class="form-label">Nuova Password</label>
+                    <input type="password" class="form-control" id="regPassword" name="newPassword" required>
+                    <div id="passwordFeedback" class="form-text text-warning"></div>
+                </div>
+                <div class="mb-2">
+                    <label for="confirmPassword" class="form-label">Conferma Nuova Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div id="passwordError" class="text-danger small"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="registerBtn" class="btn btn-primary">Aggiorna</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
 </div>
 
 <!-- Modal modifica nickname -->
@@ -215,4 +257,5 @@
 
 {block name="script"}
 <script src="/recipeek/public/assets/tab_btn.js"></script>
+<script src="/recipeek/public/assets/chk_psw.js"></script>
 {/block}
