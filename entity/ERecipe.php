@@ -3,9 +3,11 @@
  * The ERecipe class defines all attributes and methods related to a recipe.
  * It includes the following attributes (with corresponding methods):
  * - idRecipe: a unique identifier for the recipe;
+ * - createdAt: the date and time the recipe was created;
  * - nameRecipe: the name of the recipe;
  * - infos: general information about the recipe;
  * - description: the description of the recipe;
+ * - category: the category associated with the recipe;
  * - preparation_time: time required for preparation;
  * - cooking_time: time required for cooking;
  * - grams_one_portion: weight in grams for a single portion;

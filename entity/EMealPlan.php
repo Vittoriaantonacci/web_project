@@ -5,10 +5,9 @@
  * - idMealPlan: a unique identifier for the meal plan;
  * - nameMealPlan: the name of the meal plan;
  * - description: the description of the meal plan;
- * - tag: the tag associated with the meal plan;
+ * - category: the category of the meal plan;
  * - creation_time: the date and time when the meal plan was created;
- * - creator: an EProfile object representing the creator of the meal plan;
- * - meals: a collection of EMeal objects that compose the meal plan.
+ * - creator: an EProfile object representing the creator of the meal plan.
  */
 
 
@@ -71,7 +70,6 @@ class EMealPlan{
     public function getCreationTime(): DateTime { return $this->creation_time; }
 
     public function getCreationTimeStr(): string { return $this->creation_time->format('Y-m-d H:i:s'); }
-
 
 
     /**SETTERS */
