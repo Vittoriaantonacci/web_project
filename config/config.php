@@ -19,8 +19,8 @@ define('COOKIE_EXP_TIME', 2592000); // 30 days in seconds
 //define('DIRECTORY_SEPARATOR', '/appORM/');
 
 //Api constants
-define('CLIENT_ID', '');
-define('CLIENT_SECRET', '');
+define('CLIENT_ID', 'YOUR_CLIENT_ID'); // Cambia con il tuo client ID FatSecret
+define('CLIENT_SECRET', 'YOUR_CLIENT_SECRET'); // Cambia con il tuo client secret FatSecret
 
 
 

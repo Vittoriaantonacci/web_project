@@ -1,8 +1,8 @@
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#digitalplot)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#recipeek)
 
 # ➤ Recipeek
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#the-perfect-site-for-every-reader)
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#Be-fit-Be-Social!)
 
 ## ➤ Be fit, be social!
 
@@ -57,7 +57,14 @@ Edit the database settings in the following file:
 ```
 Be sure to set your host, database name, username, and password properly.
 
-### 4. Enjoy the application!
+### 4. API Authentication
+This web application uses Fat Secret API to retrieve food serving datas and informations. To make API call works you should follow this steps:
+- Make an account on FatSecret API platform: https://platform.fatsecret.com/platform-api
+- Follow steps to generate an API key
+- Place your keys on /config/config.php (better solution: place it in a your own file .env)
+- Whitelist you IP address on FatSecret dedicated section.
+
+### 5. Enjoy the application!
 
 Open your favourite browser and enter the URI 
 
