@@ -157,6 +157,11 @@ textarea::placeholder {
 }
 
 /* Pulsanti */
+.tab-btn {
+  min-width: 35%;
+  min-height: 50px;
+}
+
 .btn-outline-danger {
   color: #ff6b6b;
   border-color: #ff6b6b;
