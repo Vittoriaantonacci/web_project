@@ -24,6 +24,10 @@ class CProfile {
         CUser::checkValation();
 
         $visitingId = USession::getInstance()->get('user');
+        if ($visitedId == $visitingId) {
+            header('Location: /recipeek/Profile/profile');
+            exit;
+        }
         $profileInfos = FPersistentManager::getInstance()->getProfileInfo($visitedId, $visitingId);
 
         if (!$profileInfos) {
@@ -33,6 +37,13 @@ class CProfile {
 
         $view = new VProfile();
         $view->visitProfile($profileInfos['user'], $profileInfos['followed'], $profileInfos['followers'], $profileInfos['isFollowed']);
+    }
+
+    public static function findProfile() {
+        CUser::checkValation();
+
+        $view = new VProfile();
+        $view->profileFilter();
     }
 
     // -------------------- BEHAVIOR METHODS -------------------- //

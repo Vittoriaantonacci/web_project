@@ -147,4 +147,20 @@ class CRecipe {
 
         FPersistentManager::getInstance()->removeSavedRecipe($userId, $idRecipe);
     }
+
+    public static function removeRecipe($profileId = null) {
+        $idRecipe = UHTTPMethods::post('recipeId');
+        $idUser = $profileId ? $profileId : USession::getInstance()->get('user');
+
+        FPersistentManager::getInstance()->removeRecipe($idRecipe, $idUser);
+
+        if ($profileId !== null) {
+            var_dump("ok");
+            header('Location: /recipeek/User/dashboard/' . $profileId);
+            exit;
+        }
+
+        header('Location: /recipeek/User/homePage');
+        exit;
+    }
 }

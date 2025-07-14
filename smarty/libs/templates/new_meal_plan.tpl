@@ -5,6 +5,11 @@
     <h2 class="mb-4">Crea un nuovo piano alimentare</h2>
 
     <form action="/recipeek/MealPlan/onCreate" method="post" enctype="multipart/form-data">
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-dark">Nuovo Piano Alimentare</div>
+        <div class="card-body">
+
         <!-- Nome del Meal Plan -->
         <div class="mb-3">
             <label for="nameMealPlan" class="form-label">Nome del Piano</label>
@@ -41,31 +46,36 @@
             </select>
         </div>
 
+        </div>
+        </div>
+
         {assign var=mealtimes value=['Colazione', 'Pranzo', 'Snacks', 'Cena']}
         {foreach from=$mealtimes item=mealtime name=outer}
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">{$mealtime}</div>
-            <div class="card-body">
-                <label class="form-label">Ingredienti</label>
-                <div id="ingredient-list-{$mealtime|lower}" class="ingredient-list">
-                    <div class="d-flex mb-2">
-                        <select class="form-select me-2 ingredient-select" name="ingredients[{$mealtime|lower}][]">
-                            <option disabled selected value="">Seleziona un ingrediente</option>
-                            {foreach from=$meals item=meal}
-                                <option value="{$meal->getId()}">{$meal->getName()|escape}</option>
-                            {/foreach}
-                            <option value="__load_more__">🔍 Carica altri cibi...</option>
-                        </select>
-                        <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
-                    </div>
+            <div class="card-header bg-secondary text-white">{$mealtime}</div>
+
+        <div class="card-body">
+            <label class="form-label">Ingredienti</label>
+            <div id="ingredient-list-{$mealtime|lower}" class="ingredient-list">
+                <div class="d-flex mb-2">
+                    <select class="form-select me-2 ingredient-select" name="ingredients[{$mealtime|lower}][]">
+                        <option disabled selected value="">Seleziona un ingrediente</option>
+                        {foreach from=$meals item=meal}
+                            <option value="{$meal->getId()}">{$meal->getName()|escape}</option>
+                        {/foreach}
+                        <option value="__load_more__">🔍 Carica altri cibi...</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('{$mealtime|lower}')">Aggiungi ingrediente</button>
             </div>
+            <button type="button" class="btn btn-outline-danger mt-2" onclick="addIngredient('{$mealtime|lower}')">Aggiungi ingrediente</button>
+        </div>
+
         </div>
         {/foreach}
 
         <div class="text-end">
-            <button type="submit" class="btn btn-primary">Crea piano alimentare</button>
+            <button type="submit" class="btn btn-danger">Crea piano alimentare</button>
         </div>
     </form>
 

@@ -14,8 +14,6 @@
  * - likes: a collection of ELike objects related to the post;
  */
 
-
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

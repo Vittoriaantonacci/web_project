@@ -22,7 +22,7 @@
             <p><strong>Biografia:</strong> {if $profile->getBiography()}{$profile->getBiography()|escape}{else}vuoto{/if}</p>
             {if $isFollowed !== null}
                 <div class="mt-2">
-                    <button class="btn btn-follow {if $isFollowed}btn-primary{else}btn-outline-primary{/if}"
+                    <button class="btn btn-follow {if $isFollowed}btn-danger{else}btn-outline-danger{/if}"
                             data-action="{if $isFollowed}unfollow{else}follow{/if}"
                             data-profile-id="{$profile->getIdUser()}">
                             🤝 {if $isFollowed}Non seguire più{else}Segui{/if}

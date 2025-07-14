@@ -69,6 +69,7 @@
       </div>
       <ul class="nav flex-column px-3">
         <li class="nav-item"><a class="nav-link" href="/recipeek/Profile/profile"><i class="bi bi-person me-2"></i><span>Profilo</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipeek/Profile/findProfile"><i class="bi bi-search me-2"></i><span>Find User</span></a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Post/yourPosts"><i class="bi bi-stickies me-2"></i><span>Your Posts</span></a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/Recipe/yourRecipes"><i class="bi bi-journal-text me-2"></i><span>Your Recipes</span></a></li>
         <li class="nav-item"><a class="nav-link" href="/recipeek/MealPlan/yourMealPlans"><i class="bi bi-calendar-week me-2"></i><span>Your Meal Plans</span></a></li>

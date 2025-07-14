@@ -12,8 +12,6 @@
  * - username: the username the user chooses to register and log in with;
  */
 
-
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,8 +20,10 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
 #[ORM\InheritanceType("JOINED")]
-#[ORM\DiscriminatorColumn(name: "discr", type: "string")] //definisce la colonna che distinguerà tra EUser e EProfile
-#[ORM\DiscriminatorMap(["user" => EUser::class, "profile" => EProfile::class])] //associa i valori della colonna ai nomi delle classi
+#[ORM\DiscriminatorColumn(name: "user_type", type: "string")] 
+#[ORM\DiscriminatorMap(["user" => EUser::class, 
+                        "profile" => EProfile::class,
+                        "moderators" => EMod::class])]
 
 class EUser{
 
@@ -53,7 +53,7 @@ class EUser{
     #[ORM\Column(type: "string")]
     protected string $username;
 
-    private static  $entity = EUser::class;
+    private static $entity = EUser::class;
 
     /** CONSTRUCTOR */
     public function __construct($name,$surname, $birthDate, $gender, $email, $password, $username){

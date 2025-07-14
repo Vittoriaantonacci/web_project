@@ -4,7 +4,7 @@ class CFrontController{
     
     public function run(){
         $requestUrl = UServer::getInstance()->getRequestUrl();
-        //$requestUrl = "/recipeek/Recipe/view/1"; 
+        //$requestUrl = "/recipeek/Recipe/removeRecipe/2"; // For testing purposes, replace with actual request URL
 
         $requestUrl = trim($requestUrl, '/');
         $urlParts = explode('/', $requestUrl);

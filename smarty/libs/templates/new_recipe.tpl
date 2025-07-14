@@ -65,7 +65,7 @@
 
         <!-- Parte 3: Ingredienti, infos, immagine -->
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">Ingredienti e dettagli</div>
+            <div class="card-header bg-primary text-white">Ingredienti e dettagli</div>
             <div class="card-body">
                 <label for="ingredients" class="form-label">Ingredienti</label>
                 <div id="ingredient-list-ingredients" class="ingredient-list">
@@ -80,7 +80,7 @@
                         <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
+                <button type="button" class="btn btn-outline-danger mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
 
                 <div class="mb-3">
                     <label for="infos" class="form-label">Procedimento</label>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="text-end">
-            <button type="submit" class="btn btn-primary">Crea ricetta</button>
+            <button type="submit" class="btn btn-danger">➕ Crea ricetta</button>
         </div>
     </form>
     <!-- Modal per caricamento ingredienti via API -->

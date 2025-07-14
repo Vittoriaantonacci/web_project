@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-12 02:00:30
+/* Smarty version 5.5.1, created on 2025-07-14 16:35:38
   from 'file:visit_profile.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_6871a59e3372b6_79433274',
+  'unifunc' => 'content_687515ba6a9052_06961061',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e6d9fa1de993e2f8e92095fefb00d63a86dfb4af' => 
     array (
       0 => 'visit_profile.tpl',
-      1 => 1752275882,
+      1 => 1752503732,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_6871a59e3372b6_79433274 (\Smarty\Template $_smarty_tpl) {
+function content_687515ba6a9052_06961061 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_7802739776871a59e2ee518_60901397', "body");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_2060533817687515ba667052_59327111', "body");
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_10448278456871a59e336b14_00636512', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_157860922687515ba6a7c26_50491624', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block "body"} */
-class Block_7802739776871a59e2ee518_60901397 extends \Smarty\Runtime\Block
+class Block_2060533817687515ba667052_59327111 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -76,7 +76,7 @@ echo htmlspecialchars((string)$_smarty_tpl->getValue('profile')->getBiography(),
 } else { ?>vuoto<?php }?></p>
             <?php if ($_smarty_tpl->getValue('isFollowed') !== null) {?>
                 <div class="mt-2">
-                    <button class="btn btn-follow <?php if ($_smarty_tpl->getValue('isFollowed')) {?>btn-primary<?php } else { ?>btn-outline-primary<?php }?>"
+                    <button class="btn btn-follow <?php if ($_smarty_tpl->getValue('isFollowed')) {?>btn-danger<?php } else { ?>btn-outline-danger<?php }?>"
                             data-action="<?php if ($_smarty_tpl->getValue('isFollowed')) {?>unfollow<?php } else { ?>follow<?php }?>"
                             data-profile-id="<?php echo $_smarty_tpl->getValue('profile')->getIdUser();?>
 ">
@@ -244,7 +244,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block "body"} */
 /* {block 'script'} */
-class Block_10448278456871a59e336b14_00636512 extends \Smarty\Runtime\Block
+class Block_157860922687515ba6a7c26_50491624 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

@@ -223,7 +223,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
             </div>
             <div class="modal-body">
-                <input type="hidden" name="field" value="biography">
+                <input type="hidden" name="field" value="bio">
                 <textarea class="form-control" name="value" rows="4">{$profile->getBiography()|escape}</textarea>
             </div>
             <div class="modal-footer">

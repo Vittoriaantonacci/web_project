@@ -499,6 +499,28 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function removeRecipe(\ERecipe $recipe): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeRecipe', [$recipe]);
+
+        parent::removeRecipe($recipe);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeMealPlan(\EMealPlan $mealPlan): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeMealPlan', [$mealPlan]);
+
+        parent::removeMealPlan($mealPlan);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function removeSavedMealPlan(\EMealPlan $mealPlan): void
     {
 

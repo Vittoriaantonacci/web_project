@@ -4,31 +4,42 @@
  * This class was created because the types of users in the application are different.
  */
 
-
-/*
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity]
-#[ORM\Table(name: "mod")]
+#[ORM\Table(name: "moderators")]
 
 class EMod extends EUser{
 
     #[ORM\Column(type: "string")]
-    protected string $role;
+    private string $role;
     
     #[ORM\Column(type: "string")]
-    protected string $permission;
-
-
-    public string $discr = "moderator";
+    private string $permission;
 
     private static string $entity = EMod::class;
 
-    public static function getEntity(): string { return self::$entity; }
- }
+    /** CONSTRUCTOR */
+    public function __construct($name, $surname, $birthDate, $gender, $email, $password, $username) {
+        parent::__construct($name, $surname, $birthDate, $gender, $email, $password, $username);
+        $this->role = "moderator";
+        $this->permission = "moderate";
+    }
 
-*/
+    /** GETTERS */
+    public static function getEntity(): string { return self::$entity; }
+
+    public function getRole(): string { return $this->role; }
+
+    public function getPermission(): string { return $this->permission; }
+
+
+    /** SETTERS */
+    public function setRole(string $role): void { $this->role = $role; }
+
+    public function setPermission(string $permission): void { $this->permission = $permission; }
+}
+

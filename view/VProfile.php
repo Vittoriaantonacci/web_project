@@ -27,4 +27,8 @@ class VProfile {
         $this->smarty->display('visit_profile.tpl');
     }
 
+    public function profileFilter() {
+        $this->smarty->display('profile_filter.tpl');
+    }
+
 }

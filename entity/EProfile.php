@@ -19,8 +19,6 @@
  */
 
 
-require_once('vendor/autoload.php');
-require_once('EUser.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -148,7 +146,7 @@ class EProfile extends EUser {
 
     public function setProPic(?EImage $pro_pic): void { $this->image = $pro_pic; }
 
-    public function setBiography(string $biography): void { $this->biography = $biography; }
+    public function setBio(string $biography): void { $this->biography = $biography; }
 
     public function setInfo(string $info): void { $this->info = $info; }
 
@@ -212,6 +210,18 @@ class EProfile extends EUser {
     public function removePost(EPost $post): void {
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
+        }
+    }
+
+    public function removeRecipe(ERecipe $recipe): void {
+        if ($this->recipes->contains($recipe)) {
+            $this->recipes->removeElement($recipe);
+        }
+    }
+
+    public function removeMealPlan(EMealPlan $mealPlan): void {
+        if ($this->mealPlans->contains($mealPlan)) {
+            $this->mealPlans->removeElement($mealPlan);
         }
     }
 

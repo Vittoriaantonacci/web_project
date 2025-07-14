@@ -16,8 +16,6 @@
  * - ingredients: a set of ingredients (EMeal) that compose the recipe;
  */
 
-
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -137,6 +135,13 @@ class ERecipe {
             $this->image = $image;
             $image->setRecipe($this);
     }
+
+    public function removeImage(): void {
+        if ($this->image !== null) {
+            $this->image->setRecipe(null);
+            $this->image = null;
+        }
+    }
     
     public function addIngredient(EMeal $ingredient): void {
         if (!$this->ingredients->contains($ingredient)){
@@ -147,6 +152,7 @@ class ERecipe {
     public function removeIngredient(EMeal $ingredient): void {
         if ($this->ingredients->contains($ingredient)) {
             $this->ingredients->removeElement($ingredient);
+            $ingredient->removeRecipe($this);
         }
     }
 }

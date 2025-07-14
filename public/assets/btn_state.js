@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 } else if (button.classList.contains('btn-follow')) {
                     if (action === 'follow') {
-                        updateButton(button, '👤 Seguito', 'btn-success', 'btn-outline-success', 'removeFollow');
+                        updateButton(button, '👤 Seguito', 'btn-danger', 'btn-outline-danger', 'removeFollow');
                     } else {
-                        updateButton(button, '➕ Segui', 'btn-outline-success', 'btn-success', 'addFollow');
+                        updateButton(button, '➕ Segui', 'btn-outline-danger', 'btn-danger', 'addFollow');
                     }
                 }
             } else {

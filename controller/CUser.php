@@ -68,14 +68,19 @@ class CUser {
         }
     }
 
-    public static function isAdmin() {
+    /**
+     * check if the user is an admin
+     * @return boolean | void
+     */
+    public static function isAdminOrMod() {
         if (!CUser::isLogged()) {
             return false;
         }
         $userId = USession::getInstance()->get('user');
         $user = FPersistentManager::getInstance()->getUserById($userId);
-        if ($user->getIsAdmin()) {
-            return true;
+        if ($user->getEntity() === EMod::getEntity()) {
+            header('Location: /recipeek/User/dashboard');
+            exit;
         }
         return false;
     }
@@ -147,13 +152,15 @@ class CUser {
         
             if ($user !== null) {
                 if (password_verify(UHTTPMethods::post('password'), $user->getPassword())) {
-                    if ($user->getIsBanned()) {
+                    if ($user::getEntity() === EProfile::getEntity() && $user->getIsBanned()) {
                         $view->login("Account banned.");
                     } else {
                         if (USession::status() == PHP_SESSION_NONE) {
                             USession::getInstance();
                         }
                         USession::set('user', $user->getIdUser());
+                        CUser::isAdminOrMod();
+
                         header('Location: /recipeek/User/homePage');
                         exit;
                     }
@@ -211,6 +218,31 @@ class CUser {
 
 
     /** -------------------- LOADING INFO METHODS --------------------  */
+
+    public static function dashboard($profileId = null) {
+        //CUser::checkValation();
+
+        //$userId = USession::getInstance()->get('user');
+        $userId = 1;
+
+        $mod = FPersistentManager::getInstance()->getUserById($userId);
+
+        $view = new VUser();
+        if ($profileId === null) {
+            $view->dashboard($mod, null);
+            exit;
+        } else {
+            $profile = FPersistentManager::getInstance()->getUserById($profileId);
+            if ($profile === null) {
+                CError::showError('Profilo non trovato');
+                exit;
+            }
+            $view->dashboard($mod, $profile);
+            exit;
+        }
+        CError::showError('Errore nel caricamento del profilo', 404);
+        exit;
+    }
 
     public static function homePage(){
         CUser::checkValation();
@@ -289,6 +321,30 @@ class CUser {
             'mealPlans' => $mealPlanArray
         ];
 
+        header('Content-Type: application/json');
+        echo json_encode($result);
+        exit;
+    }
+
+    public static function userfilter_api() {
+        $pm = FPersistentManager::getInstance();
+
+        $input = UHTTPMethods::post('category');
+        
+        $users = $pm->getFilteredUsers($input);
+
+        $result = [
+            'users' => array_map(function ($user) {
+                return [
+                    'id' => $user->getIdUser(),
+                    'username' => $user->getUsername(),
+                    'name' => $user->getName(),
+                    'surname' => $user->getSurname(),
+                    'propic' => $user->getProPic() !== null ? '/recipeek/public/uploads/propic/' + $user->getProPic()->getImagePath() : '/recipeek/public/default/profile_ph.png',
+                ];
+            }, $users)
+        ];
+        
         header('Content-Type: application/json');
         echo json_encode($result);
         exit;

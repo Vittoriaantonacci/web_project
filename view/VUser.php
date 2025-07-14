@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\Common\Collections\Collection;
+
 class VUser{
 
     private $smarty;
@@ -39,5 +41,11 @@ class VUser{
 
     public function subscribe() {
         $this->smarty->display('subscribe.tpl');
+    }
+
+    public function dashboard(EMod $mod, ?EProfile $profile) {
+        $this->smarty->assign('profile', $profile);
+        $this->smarty->assign('mod', $mod);
+        $this->smarty->display('dashboard.tpl');
     }
 }

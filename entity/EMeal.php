@@ -11,7 +11,6 @@
  */
 
 
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -85,6 +84,13 @@ class EMeal{
         if (!$this->recipes->contains($recipe)) {
             $this->recipes->add($recipe);
             $recipe->addIngredient($this);
+        }
+    }
+
+    public function removeRecipe(ERecipe $recipe): void {
+        if ($this->recipes->contains($recipe)) {
+            $this->recipes->removeElement($recipe);
+            $recipe->removeIngredient($this);
         }
     }
 

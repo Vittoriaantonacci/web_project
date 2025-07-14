@@ -42,7 +42,7 @@ body {
 }
 .nav-link:hover {
   background-color: rgba(201, 193, 248, 0.66);
-  color: #8affc1;
+  color: #51c295;
   border-radius: 1rem;
 }
 .card .text-muted {
@@ -111,7 +111,7 @@ body {
 .form-control,
 .form-select {
   background-color: #2a2a2a !important;
-  color: #f0f0f0 !important;
+  color: #e0e0e0 !important;
   border: 1px solid #444 !important;
 }
 
@@ -123,13 +123,13 @@ textarea::placeholder {
 /* Select dropdown leggibile */
 .form-select option {
   background-color: #2a2a2a;
-  color: #f0f0f0;
+  color: #e0e0e0;
 }
 
 /* Card container */
 .card {
   background-color: #1e1e1e !important;
-  color: #f0f0f0;
+  color: #e0e0e0;
   border: none;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
@@ -139,7 +139,7 @@ textarea::placeholder {
 
 /* Header delle card personalizzati */
 .card-header {
-  color: #ffffff !important;
+  color: #e0e0e0 !important;
   font-weight: 600;
 }
 
@@ -149,11 +149,7 @@ textarea::placeholder {
 }
 
 .card-header.bg-secondary {
-  background-color: #6ee7b7 !important; /* Verde chiaro */
-}
-
-.card-header.bg-success {
-  background-color: #6ee7b7 !important; /* Verde chiaro */
+  background-color: #51c295 !important; /* Verde chiaro */
 }
 
 /* Pulsanti */
@@ -163,17 +159,28 @@ textarea::placeholder {
 }
 
 .btn-outline-danger {
-  color: #ff6b6b;
-  border-color: #ff6b6b;
+  color: #e2708b;
+  border-color: #e2708b;
 }
 .btn-outline-danger:hover {
-  background-color: #ff6b6b;
+  background-color: #e2708b;
   color: #121212;
 }
 
+.btn-danger {
+  background-color: #e2708b;
+  border-color: #e2708b;
+  color: #121212;
+}
+.btn-danger:hover {
+  background-color: #e2708b;
+  border-color: #e2708b;
+  color: #e0e0e0;
+}
+
 .btn-outline-primary{
-  border-color: #8affc1;
-  color: #8affc1;
+  border-color: #51c295;
+  color: #51c295;
 }
 .btn-outline-primary:hover {
   background-color: #9b8aff;
@@ -181,14 +188,14 @@ textarea::placeholder {
 }
 
 .btn-primary {
-  background-color: #8affc1;
-  border-color: #8affc1;
+  background-color: #51c295;
+  border-color: #51c295;
   color: #121212;
 }
 .btn-primary:hover {
   background-color: #9b8aff;
   border-color: #9b8aff;
-  color: #fff;
+  color: #e0e0e0;
 }
 
 .btn-outline-secondary {
@@ -196,7 +203,7 @@ textarea::placeholder {
   color: #9b8aff;
 }
 .btn-outline-secondary:hover {
-  background-color: #8affc1;
+  background-color: #51c295;
   color: #121212;
 }
 
@@ -206,9 +213,9 @@ textarea::placeholder {
   color: #121212;
 }
 .btn-secondary:hover {
-  background-color: #8affc1;
-  border-color: #8affc1;
-  color: #fff;
+  background-color: #51c295;
+  border-color: #51c295;
+  color: #e0e0e0;
 }
 
 /* Button tab_btn behavior */
@@ -218,9 +225,9 @@ textarea::placeholder {
     color: #9b8aff;
 }
 .tab-btn.btn-secondary:hover {
-    background-color: #8affc1;
-    border-color: #8affc1;
-    color: #fff;
+    background-color: #51c295;
+    border-color: #51c295;
+    color: #e0e0e0;
 }
 
 .tab-btn.active.btn-secondary {
@@ -229,25 +236,25 @@ textarea::placeholder {
     color: #121212;
 }
 .tab-btn.active.btn-secondary:hover {
-    background-color: #8affc1;
-    border-color: #8affc1;
+    background-color: #51c295;
+    border-color: #51c295;
     color: #121212;
 }
 
 .tab-btn.btn-primary {
     background-color: transparent;
-    border-color: #8affc1;
-    color: #8affc1;
+    border-color: #51c295;
+    color: #51c295;
 }
 .tab-btn.btn-primary:hover {
     background-color: #9b8aff;
     border-color: #9b8aff;
-    color: #fff;
+    color: #e0e0e0;
 }
 
 .tab-btn.active.btn-primary {
-    background-color: #8affc1;
-    border-color: #8affc1;
+    background-color: #51c295;
+    border-color: #51c295;
     color: #121212;
 }
 .tab-btn.active.btn-primary:hover {

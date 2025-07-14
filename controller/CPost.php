@@ -134,6 +134,21 @@ class CPost {
         }
     }
 
+    public static function removePost($profileId = null) {
+        $idPost = UHTTPMethods::post('postId');
+        $idUser = $profileId ? $profileId : USession::getInstance()->get('user');
+
+        FPersistentManager::getInstance()->removePost($idPost, $idUser);
+
+        if ($profileId !== null) {
+            header('Location: /recipeek/User/dashboard/' . $profileId);
+            exit;
+        }
+
+        header('Location: /recipeek/User/homePage');
+        exit;
+    }
+
 
 
 }

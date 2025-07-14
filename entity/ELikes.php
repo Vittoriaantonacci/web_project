@@ -8,8 +8,6 @@
  * - dateLike: the date and time when the like was made.
  */
 
-
-require_once('vendor/autoload.php');
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

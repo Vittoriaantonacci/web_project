@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-12 01:25:53
+/* Smarty version 5.5.1, created on 2025-07-14 16:32:35
   from 'file:new_recipe.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_68719d81dc2692_32162620',
+  'unifunc' => 'content_68751503b30667_21777106',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b44a8eb59faff828c5043d2cda0cf61c0417acdd' => 
     array (
       0 => 'new_recipe.tpl',
-      1 => 1752275902,
+      1 => 1752503238,
       2 => 'file',
     ),
   ),
@@ -20,25 +20,25 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_68719d81dc2692_32162620 (\Smarty\Template $_smarty_tpl) {
+function content_68751503b30667_21777106 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_139585636668719d81dbbc99_38469229', 'body');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_116655226868751503b1a116_86240612', 'body');
 ?>
 
 
 <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_62600129268719d81dc2240_08029234', 'script');
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_30844056268751503b2fdd6_46963700', 'script');
 ?>
 
 <?php $_smarty_tpl->getInheritance()->endChild($_smarty_tpl, 'layout.tpl', $_smarty_current_dir);
 }
 /* {block 'body'} */
-class Block_139585636668719d81dbbc99_38469229 extends \Smarty\Runtime\Block
+class Block_116655226868751503b1a116_86240612 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
@@ -108,7 +108,7 @@ $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/li
 
         <!-- Parte 3: Ingredienti, infos, immagine -->
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">Ingredienti e dettagli</div>
+            <div class="card-header bg-primary text-white">Ingredienti e dettagli</div>
             <div class="card-body">
                 <label for="ingredients" class="form-label">Ingredienti</label>
                 <div id="ingredient-list-ingredients" class="ingredient-list">
@@ -132,7 +132,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                         <button type="button" class="btn btn-outline-danger" onclick="this.parentNode.remove()">Rimuovi</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
+                <button type="button" class="btn btn-outline-danger mt-2" onclick="addIngredient('ingredients')">Aggiungi ingrediente</button>
 
                 <div class="mb-3">
                     <label for="infos" class="form-label">Procedimento</label>
@@ -147,7 +147,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
         </div>
 
         <div class="text-end">
-            <button type="submit" class="btn btn-primary">Crea ricetta</button>
+            <button type="submit" class="btn btn-danger">➕ Crea ricetta</button>
         </div>
     </form>
     <!-- Modal per caricamento ingredienti via API -->
@@ -172,7 +172,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 }
 /* {/block 'body'} */
 /* {block 'script'} */
-class Block_62600129268719d81dc2240_08029234 extends \Smarty\Runtime\Block
+class Block_30844056268751503b2fdd6_46963700 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

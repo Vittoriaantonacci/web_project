@@ -114,6 +114,25 @@ class CMealPlan {
 
         FPersistentManager::getInstance()->removeSavedMealPlan($userId, $mealPlanId);
     }
+
+    /**
+     * Remove a meal plan
+     */
+    public static function removeMealPlan($profileId) {
+        $mealPlanId = UHTTPMethods::post('mealPlanId');
+        $idUser = $profileId ? $profileId : USession::getInstance()->get('user');
+
+        FPersistentManager::getInstance()->removeMealPlan($mealPlanId, $idUser);
+
+        if ($profileId !== null) {
+            header('Location: /recipeek/User/dashboard/' . $profileId);
+            exit;
+        }
+
+        header('Location: /recipeek/User/homePage');
+        exit;
+    }
+
 }
 
  

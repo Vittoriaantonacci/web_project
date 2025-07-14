@@ -36,7 +36,7 @@ class FPersistentManager{
         return FEntityManager::getInstance()->saveObj($obj);
     }
 
-    private static function delete($obj) {
+    public static function delete($obj) {
         return FEntityManager::getInstance()->deleteObj($obj);
     }
 
@@ -181,7 +181,9 @@ class FPersistentManager{
      * @return mixed|null
      */
     public static function getUserByUsername($username) {
-        if(FEntityManager::getInstance()->existWithAttribute(EUser::class, "username", $username)) {
+        if(FEntityManager::getInstance()->existWithAttribute(EMod::class, "username", $username)) {
+            return FEntityManager::getInstance()->getObjByValue(EMod::getEntity(), 'username', $username);
+        }else if(FEntityManager::getInstance()->existWithAttribute(EProfile::class, "username", $username)) {
             return FEntityManager::getInstance()->getObjByValue(EProfile::getEntity(), 'username', $username);
         }else{
             return null;
@@ -210,6 +212,11 @@ class FPersistentManager{
     public static function createUser($name, $surname, $birthDate, $gender, $email, $password, $username){
         $newUser = new EProfile($name, $surname, (new DateTime($birthDate)), $gender, $email, $password, $username);
         return FEntityManager::getInstance()->saveObj($newUser); 
+    }
+
+    public static function createMod($name, $surname, $birthDate, $gender, $email, $password, $username) {
+        $newMod = new EMod($name, $surname, (new DateTime($birthDate)), $gender, $email, $password, $username);
+        return FEntityManager::getInstance()->saveObj($newMod);
     }
 
 
@@ -292,8 +299,14 @@ class FPersistentManager{
         return $allMealPlans;
     }
 
+    public static function getLikeNumber() {
+        $likes = FEntityManager::getInstance()->getObjList(ELikes::getEntity(), "idLike", null);
+        return count($likes);
+    }
 
-    
+    public static function getFilteredUsers($input) {
+        return FEntityManager::getInstance()->getObjListByStrPattern(EUser::getEntity(), "username", $input);
+    }
 
     /** -------------------- USE CASE METHODS: BUTTON METHODS -------------------- */
 
@@ -534,6 +547,40 @@ class FPersistentManager{
         self::saveUser($user);
     }
 
+    public static function removePost($idPost, $idUser) {
+        $post = self::getPostById($idPost);
+        $user = self::getUserById($idUser);
+
+        if ($post == null || $user == null) return false;
+            
+        $user->removePost($post);
+        self::saveUser($user);
+        self::delete($post);
+    }
+
+    public static function removeRecipe($idRecipe, $idUser) {
+        $recipe = self::getRecipeById($idRecipe);
+        $user = self::getUserById($idUser);
+
+        if ($recipe == null || $user == null) return false;
+
+        //$user->removeRecipe($recipe);
+        //self::saveUser($user);
+        self::delete($recipe);
+    }
+
+    public static function removeMealPlan($idMealPlan, $idUser) {
+        $mealPlan = self::getMealPlanById($idMealPlan);
+        $user = self::getUserById($idUser);
+
+        if ($mealPlan == null || $user == null) return false;
+
+        $user->removeMealPlan($mealPlan);
+        self::saveUser($user);
+        self::delete($mealPlan);
+    }
+
+    
     
 
 }
