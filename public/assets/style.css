@@ -41,8 +41,7 @@ body {
   font-weight: bold;
 }
 .nav-link:hover {
-  background-color: rgba(201, 193, 248, 0.66);
-  color: #51c295;
+  color: #d19671;
   border-radius: 1rem;
 }
 .card .text-muted {
@@ -159,22 +158,22 @@ textarea::placeholder {
 }
 
 .btn-outline-danger {
-  color: #e2708b;
-  border-color: #e2708b;
+  color: #d19671;
+  border-color: #d19671;
 }
 .btn-outline-danger:hover {
-  background-color: #e2708b;
+  background-color: #d19671;
   color: #121212;
 }
 
 .btn-danger {
-  background-color: #e2708b;
-  border-color: #e2708b;
+  background-color: #d19671;
+  border-color: #d19671;
   color: #121212;
 }
 .btn-danger:hover {
-  background-color: #e2708b;
-  border-color: #e2708b;
+  background-color: #d19671;
+  border-color: #d19671;
   color: #e0e0e0;
 }
 

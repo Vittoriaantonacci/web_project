@@ -31,11 +31,11 @@
             </p>
             <p data-bs-toggle="modal" data-bs-target="#editBioModal" style="cursor:pointer;"><strong>Biografia:</strong> {if $profile->getBiography()}{$profile->getBiography()|escape}{else}vuoto{/if}</p>
             <div class="mt-3">
-                <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                <button class="btn btn-outline-danger me-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                     Modifica Password
                 </button>
                 {if !$profile->getIsVip()}
-                    <a href="/recipeek/User/subscribe" class="btn btn-primary">
+                    <a href="/recipeek/User/subscribe" class="btn btn-danger">
                         Abbonati
                     </a>
                 {/if}
