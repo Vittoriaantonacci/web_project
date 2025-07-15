@@ -9,7 +9,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="/recipeek/User/heckout" method="POST" id="payment-form" class="card p-4 shadow">
+            <form action="/recipeek/User/subCheckout" method="POST" id="payment-form" class="card p-4 shadow">
                 <h4 class="mb-3">Scegli il tuo piano</h4>
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="radio" name="plan" id="monthly" value="monthly" checked>

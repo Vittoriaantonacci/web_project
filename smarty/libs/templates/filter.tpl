@@ -15,6 +15,10 @@
                 <option value="secondo">Secondo</option>
                 <option value="dolce">Dolce</option>
                 <option value="bevanda">Bevanda</option>
+                <option value="Dieta">Dieta</option>
+                <option value="Mantenimento">Mantenimento</option>
+                <option value="Ipercalorica">Ipercalorica</option>
+                <option value="Ipocalorica">Ipocalorica</option>
                 {if $isVip}
                     <option value="antipasto #Fit">Antipasto #Fit</option>
                     <option value="primo #Fit">Primo #Fit</option>
@@ -25,6 +29,10 @@
                     <option value="salsa #Fit">Salsa #Fit</option>
                     <option value="snack #Fit">Snack #Fit</option>
                     <option value="colazione #Fit">Colazione #Fit</option>
+                    <option value="Massa muscolare #Fit">Massa muscolare #Fit</option>
+                    <option value="Cut #Fit">Cut #Fit</option>
+                    <option value="Ipercalorica #Fit">Ipercalorica #Fit</option>
+                    <option value="Ipocalorica #Fit">Ipocalorica #Fit</option>
                 {/if}
             </select>
         </form>

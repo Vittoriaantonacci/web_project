@@ -27,21 +27,15 @@
             <label for="category" class="form-label">Categoria</label>
             <select class="form-select" id="category" name="category" required>
                 <option value="" disabled selected>Seleziona una categoria</option>
-                <option value="antipasto">Antipasto</option>
-                <option value="primo">Primo</option>
-                <option value="secondo">Secondo</option>
-                <option value="dolce">Dolce</option>
-                <option value="bevanda">Bevanda</option>
+                <option value="Dieta">Dieta</option>
+                <option value="Mantenimento">Mantenimento</option>
+                <option value="Ipercalorica">Ipercalorica</option>
+                <option value="Ipocalorica">Ipocalorica</option>
                 {if $isVip}
-                    <option value="antipasto #Fit">Antipasto #Fit</option>
-                    <option value="primo #Fit">Primo #Fit</option>
-                    <option value="secondo #Fit">Secondo #Fit</option>
-                    <option value="dolce #Fit">Dolce #Fit</option>
-                    <option value="bevanda #Fit">Bevanda #Fit</option>
-                    <option value="contorno #Fit">Contorno #Fit</option>
-                    <option value="salsa #Fit">Salsa #Fit</option>
-                    <option value="snack #Fit">Snack #Fit</option>
-                    <option value="colazione #Fit">Colazione #Fit</option>
+                    <option value="Massa muscolare #Fit">Massa muscolare #Fit</option>
+                    <option value="Cut #Fit">Cut #Fit</option>
+                    <option value="Ipercalorica #Fit">Ipercalorica #Fit</option>
+                    <option value="Ipocalorica #Fit">Ipocalorica #Fit</option>
                 {/if}
             </select>
         </div>

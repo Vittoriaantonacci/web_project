@@ -41,7 +41,7 @@ class EServing {
     #[ORM\Column(type: "float")]
     private float $fat;
     
-    #[ORM\OneToOne(inversedBy: "serving", targetEntity: EMeal::class)]
+    #[ORM\OneToOne(inversedBy: "serving", targetEntity: EMeal::class, cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name: "meal_id", referencedColumnName: "idMeal")]
     private ?EMeal $meal = null;
 

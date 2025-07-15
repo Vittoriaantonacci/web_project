@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.5.1, created on 2025-07-14 16:47:46
+/* Smarty version 5.5.1, created on 2025-07-15 11:19:13
   from 'file:dashboard.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.5.1',
-  'unifunc' => 'content_687518929322c1_37818673',
+  'unifunc' => 'content_68761d1141e901_05492558',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5764003b32170f72a1113a482066730d9c0e99fe' => 
     array (
       0 => 'dashboard.tpl',
-      1 => 1752499169,
+      1 => 1752571151,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_687518929322c1_37818673 (\Smarty\Template $_smarty_tpl) {
+function content_68761d1141e901_05492558 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
 ?>
@@ -31,7 +31,7 @@ $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="/recipeek/public/default/logo.png" />
   <title><?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_191055277268751892913e09_07854971', "title");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_75658834068761d113f5583_59791525', "title");
 ?>
 </title>
 
@@ -50,7 +50,6 @@ $_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_1910552772687
 </h3>
         <div>
           <a href="/recipeek/Mod/dashboard" class="btn btn-outline-secondary me-2">Dashboard</a>
-          <a href="/recipeek/Mod/analytics" class="btn btn-outline-primary me-2">Analisi</a>
           <a href="/recipeek/User/logout" class="btn btn-outline-danger">Logout</a>
         </div>
       </div>
@@ -190,7 +189,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 </html>
     <?php }
 /* {block "title"} */
-class Block_191055277268751892913e09_07854971 extends \Smarty\Runtime\Block
+class Block_75658834068761d113f5583_59791525 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/Applications/XAMPP/xamppfiles/htdocs/recipeek/smarty/libs/templates';

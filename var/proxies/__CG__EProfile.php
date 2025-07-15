@@ -356,12 +356,12 @@ class EProfile extends \EProfile implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setBiography(string $biography): void
+    public function setBio(string $biography): void
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBiography', [$biography]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBio', [$biography]);
 
-        parent::setBiography($biography);
+        parent::setBio($biography);
     }
 
     /**

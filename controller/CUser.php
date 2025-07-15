@@ -106,7 +106,7 @@ class CUser {
 
     /** -------------------- LOGIN & REGISTRATION METHODS -------------------- */
 
-    // This methos is used to show login page and to handle the session
+    // This method is used to show login page and to handle the session
     public static function login() {
         if(USession::isset('user')){
             // If the user is already logged in, redirect to the home page
@@ -122,7 +122,7 @@ class CUser {
         $view->login();
     }
 
-    // This methos is used to register a new user in database when the user fills the registration form
+    // This method is used to register a new user in database when the user fills the registration form
     // if the user is already registered, it will redirect to the login page with an error message, otherwise it will create the user and redirect to the login page
     public static function register() {
         $view = new VUser();
@@ -143,7 +143,7 @@ class CUser {
         $view->login("Sorry, the username or the email already exists.", "register"); // uername or email already exists
     }
 
-    // this methos is used to check the login credentials of the user when the user submits the login form
+    // this method is used to check the login credentials of the user when the user submits the login form
     public static function checkLogin() {
         try {
             $view = new VUser();
@@ -154,6 +154,7 @@ class CUser {
                 if (password_verify(UHTTPMethods::post('password'), $user->getPassword())) {
                     if ($user::getEntity() === EProfile::getEntity() && $user->getIsBanned()) {
                         $view->login("Account banned.");
+                        exit;
                     } else {
                         if (USession::status() == PHP_SESSION_NONE) {
                             USession::getInstance();
@@ -330,7 +331,7 @@ class CUser {
         $pm = FPersistentManager::getInstance();
 
         $input = UHTTPMethods::post('category');
-        
+
         $users = $pm->getFilteredUsers($input);
 
         $result = [
@@ -340,7 +341,7 @@ class CUser {
                     'username' => $user->getUsername(),
                     'name' => $user->getName(),
                     'surname' => $user->getSurname(),
-                    'propic' => $user->getProPic() !== null ? '/recipeek/public/uploads/propic/' + $user->getProPic()->getImagePath() : '/recipeek/public/default/profile_ph.png',
+                    'propic' => $user->getProPic() !== null ? '/recipeek/public/uploads/propic/' . $user->getProPic()->getImagePath() : '/recipeek/public/default/profile_ph.png',
                 ];
             }, $users)
         ];

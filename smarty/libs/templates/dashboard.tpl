@@ -20,7 +20,6 @@
         <h3 class="mb-0">Moderatore: {$mod->getUsername()}</h3>
         <div>
           <a href="/recipeek/Mod/dashboard" class="btn btn-outline-secondary me-2">Dashboard</a>
-          <a href="/recipeek/Mod/analytics" class="btn btn-outline-primary me-2">Analisi</a>
           <a href="/recipeek/User/logout" class="btn btn-outline-danger">Logout</a>
         </div>
       </div>
